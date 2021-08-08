@@ -23,28 +23,85 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="磨刀不误砍柴功，读完硕士再打工">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="链表160. 相交链表难度：简单 给你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表没有交点，返回 null 。 图示两个链表在节点 c1 开始相交：  题目数据 保证 整个链式结构中不存在环。 注意，函数返回结果后，链表必须 保持其原始结构 。 示例 1：  12345输入：intersectVal &#x3D; 8, listA &#x3D; [4,1,8,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构">
+<meta property="og:url" content="http://example.com/2021/08/08/1.%E9%93%BE%E8%A1%A8/index.html">
 <meta property="og:site_name" content="磨刀不误砍柴功，读完硕士再打工">
+<meta property="og:description" content="链表160. 相交链表难度：简单 给你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表没有交点，返回 null 。 图示两个链表在节点 c1 开始相交：  题目数据 保证 整个链式结构中不存在环。 注意，函数返回结果后，链表必须 保持其原始结构 。 示例 1：  12345输入：intersectVal &#x3D; 8, listA &#x3D; [4,1,8,">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_1.png">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_2.png">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_3.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/e86e947c8b87ac723b9c858cd3834f9a93bcc6c5e884e41117ab803d205ef662-%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/02/19/rev1ex1.jpg">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/02/19/rev1ex2.jpg">
+<meta property="og:image" content="https://pic.leetcode-cn.com/7d8712af4fbb870537607b1dd95d66c248eb178db4319919c32d9304ee85b602-%E8%BF%AD%E4%BB%A3.gif">
+<meta property="og:image" content="https://pic.leetcode-cn.com/8f03740e93c8a0ecff54a57a25a710ab82574faf99b3efb8ddd2b6eea1d78d49-1.JPG">
+<meta property="og:image" content="https://pic.leetcode-cn.com/aebc5e3ef0a6b942473a7c61f4de22e268cbfbe549ff1a6ad5d3eef7c667f875-2.JPG">
+<meta property="og:image" content="https://pic.leetcode-cn.com/4c160db670c00f7467c1dae3b22ac117b84c0ba00690ca30708fabcdd5ff35b1-3.JPG">
+<meta property="og:image" content="https://pic.leetcode-cn.com/95da97748c8a006b5b827d13154bd2202bed5c2b9d779bea6467473d16fd7d66-4.JPG">
+<meta property="og:image" content="https://pic.leetcode-cn.com/bbc75893b050a8c482178029bd239bd75c75e6a58a4a16fb9270b13044e4ddf3-5.JPG">
+<meta property="og:image" content="https://pic.leetcode-cn.com/9eda023eab4ecc76af90211626f77b695a4874b451084f8e2545717347815006-6.JPG">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1829f246e991d3e27aa3dce9b18ab88282a1bd34a5363969eb5730fe74cf8fbf-7.JPG">
+<meta property="og:image" content="https://pic.leetcode-cn.com/3380338ba4b563c37199b07058d35fde9f9600d3112ef0b074e5986c2f4510e1-8.JPG">
+<meta property="og:image" content="https://pic.leetcode-cn.com/db831df3a7db0fc405a4dc8293bfc92ba6bba6cb1719613a4e8ab7afdf2a53dd-9.JPG">
+<meta property="og:image" content="https://pic.leetcode-cn.com/db7d85400d03237909fc904d52b71cf721dee82af47686756400fdf4d1f07493-10.JPG">
+<meta property="og:image" content="https://pic.leetcode-cn.com/549d1ed958285f378aea9a0db3a603253c83aff5439a76c0b8c35f2e237b9f4b-12.JPG">
+<meta property="og:image" content="https://pic.leetcode-cn.com/9683a6f2e465086ca1a9bcdb6b4cce9cdcc86da3269e1009867368923c76363d-13.JPG">
+<meta property="og:image" content="https://pic.leetcode-cn.com/9ef5549e7ff4b4748e0ff295ee37d3e172e7b910b397aa8718110b4779a9f689-14.JPG">
+<meta property="og:image" content="https://pic.leetcode-cn.com/074dcf7c17ba256aedbf4ba10d101ce93ed5425a6a1aa6d296a79be7bd65fc30-15.JPG">
+<meta property="og:image" content="https://pic.leetcode-cn.com/f6d200f6b154e8b4e9cf86c26e90c0e71af048fd4dac2f9a35eb8c9dc93bfa15-16.JPG">
+<meta property="og:image" content="https://pic.leetcode-cn.com/3b5504463012d23800d78e50948d1623cf405e32072cd1c630c71636a318d002-17.JPG">
+<meta property="og:image" content="https://pic.leetcode-cn.com/8c474aaee63b49b4cf981637039f65a41d70979a79fec22257576cfbcfb8c4c6-18.JPG">
+<meta property="og:image" content="https://pic.leetcode-cn.com/5eaed6c73d6dec3c3dc7728fda178711ff1a6a558ddf8f2a1946adf22525a44c-19.JPG">
+<meta property="og:image" content="https://pic.leetcode-cn.com/dacd1bf55dec5c8b38d0904f26e472e2024fc8bee4ea46e3aa676f340ba1eb9d-%E9%80%92%E5%BD%92.gif">
+<meta property="og:image" content="https://pic.leetcode-cn.com/f89c9e095d414b8366dd7d490508ba9c99d6c93953b4429168af262169f18e83-%E5%B9%BB%E7%81%AF%E7%89%876.jpg">
+<meta property="og:image" content="https://pic.leetcode-cn.com/485dbe9ad44ab7b05e01c46a1bc1718187a01f8a9fe8331f497e7011f9508b57-%E5%B9%BB%E7%81%AF%E7%89%877.jpg">
+<meta property="og:image" content="https://pic.leetcode-cn.com/04550182527e6570d9d04f2eeae330848b83d3ff13b23ea4153410210586dc85-%E5%B9%BB%E7%81%AF%E7%89%878.jpg">
+<meta property="og:image" content="https://pic.leetcode-cn.com/950f6edfb553cbeec65ce3c9679dd8d3401fd1837ad9eb16989217bf83f30e58-%E5%B9%BB%E7%81%AF%E7%89%8710.jpg">
+<meta property="og:image" content="https://pic.leetcode-cn.com/dcd5bef9b8ff3de98e9533da7da3a8411643bbef9bc5e1a576085b4403197649-%E5%B9%BB%E7%81%AF%E7%89%8711.jpg">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1d6aaab3d9a42c20420fb6087e520ea05bd6d0789213f228481e55891b847b1e-%E5%B9%BB%E7%81%AF%E7%89%8712.jpg">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/10/03/merge_ex1.jpg">
+<meta property="og:image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fs2.sinaimg.cn%2Fmw690%2F006Tiah4zy7dwacE4z751%26690&refer=http%3A%2F%2Fs2.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1629272494&t=3887a34bb0f2562d0a5ed0bc53bdab64">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/01/04/list1.jpg">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/01/04/list2.jpg">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/users/guanpengchn/avatar_1580451118.png?x-oss-process=image/resize,h_38,w_38/format,webp">
+<meta property="og:image" content="https://pic.leetcode-cn.com/c61a88b9fe012a9b85b842f4a12a5310c96b462ea4801e6227fc6a04aa140351-frame_00001.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/87a5f06f4a257e5970af228ea0c37b1b1513d5b53770da8d409616a5fd9afaa5-frame_00002.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/b8f2dae3ca21a552bff2e2486f2f838f78aaa505066113c4453900ae182edbd3-frame_00003.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/10/03/remove_ex1.jpg">
+<meta property="og:image" content="c:/Users/Wanan/AppData/Roaming/Typora/typora-user-images/image-20210719165432927.png">
+<meta property="og:image" content="https://assets.leetcode-cn.com/solution-static/19/p3.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/10/03/swap_ex1.jpg">
+<meta property="og:image" content="https://assets.leetcode-cn.com/solution-static/24/6.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1626420025-fZfzMX-image.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1612843418-hDCiPe-image.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1612843430-WwISBz-image.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/1612843449-czpjTW-image.png">
+<meta property="og:image" content="https://assets.leetcode-cn.com/solution-static/328/1.png">
+<meta property="article:published_time" content="2021-08-08T05:48:16.000Z">
+<meta property="article:modified_time" content="2021-08-08T05:52:27.371Z">
 <meta property="article:author" content="LoverDXL">
+<meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2021/08/08/1.%E9%93%BE%E8%A1%A8/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>磨刀不误砍柴功，读完硕士再打工</title>
+  <title>数据结构 | 磨刀不误砍柴功，读完硕士再打工</title>
   
 
 
@@ -182,9 +239,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -200,10 +258,9 @@
       <meta itemprop="name" content="磨刀不误砍柴功，读完硕士再打工">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/08/1.%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">数据结构</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          数据结构
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -229,7 +286,10 @@
                 </span>
             </span>
 
-          <br>
+          
+                <span>&emsp;</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span>
+                <span class="post-meta-item-text">阅读次数：</span>
+                <span id="busuanzi_value_page_pv"></span><br>
             <span class="post-meta-item" title="本文字数">
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
@@ -254,7 +314,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h1><h4 id="160-相交链表"><a href="#160-相交链表" class="headerlink" title="160. 相交链表"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/">160. 相交链表</a></h4><p>难度：简单</p>
+        <h1 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h1><h4 id="160-相交链表"><a href="#160-相交链表" class="headerlink" title="160. 相交链表"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/">160. 相交链表</a></h4><p>难度：简单</p>
 <p>给你两个单链表的头节点 <code>headA</code> 和 <code>headB</code> ，请你找出并返回两个单链表相交的起始节点。如果两个链表没有交点，返回 <code>null</code> 。</p>
 <p>图示两个链表在节点 <code>c1</code> 开始相交<strong>：</strong></p>
 <p><a target="_blank" rel="noopener" href="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png"><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png" alt="img"></a></p>
@@ -652,375 +712,33 @@
 </li>
 </ul>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/06/%E7%AE%97%E6%B3%95/%E5%8F%8C%E6%8C%87%E9%92%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.jpg">
-      <meta itemprop="name" content="LoverDXL">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="磨刀不误砍柴功，读完硕士再打工">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/06/%E7%AE%97%E6%B3%95/%E5%8F%8C%E6%8C%87%E9%92%88/" class="post-title-link" itemprop="url">双指针</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-06 21:38:22" itemprop="dateCreated datePublished" datetime="2021-08-06T21:38:22+08:00">2021-08-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-07 11:26:49" itemprop="dateModified" datetime="2021-08-07T11:26:49+08:00">2021-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="167-两数之和-II-输入有序数组"><a href="#167-两数之和-II-输入有序数组" class="headerlink" title="167. 两数之和 II - 输入有序数组"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/">167. 两数之和 II - 输入有序数组</a></h4><p>难度:简单</p>
-<p>给定一个已按照 <strong>升序排列</strong> 的整数数组 <code>numbers</code> ，请你从数组中找出两个数满足相加之和等于目标数 <code>target</code> 。</p>
-<p>函数应该以长度为 <code>2</code> 的整数数组的形式返回这两个数的下标值<em>。</em><code>numbers</code> 的下标 <strong>从 1 开始计数</strong> ，所以答案数组应当满足 <code>1 &lt;= answer[0] &lt; answer[1] &lt;= numbers.length</code> 。</p>
-<p>你可以假设每个输入只对应唯一的答案，而且你不可以重复使用相同的元素。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：numbers = [2,7,11,15], target = 9</span><br><span class="line">输出：[1,2]</span><br><span class="line">解释：2 与 7 之和等于目标数 9 。因此 index1 = 1, index2 = 2 。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：numbers = [2,3,4], target = 6</span><br><span class="line">输出：[1,3]</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：numbers = [-1,0], target = -1</span><br><span class="line">输出：[1,2]</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>2 &lt;= numbers.length &lt;= 3 * 104</code></li>
-<li><code>-1000 &lt;= numbers[i] &lt;= 1000</code></li>
-<li><code>numbers</code> 按 <strong>递增顺序</strong> 排列</li>
-<li><code>-1000 &lt;= target &lt;= 1000</code></li>
-<li>仅存在一个有效答案</li>
-</ul>
-<p><strong>解析：</strong></p>
-<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/solution/liang-shu-zhi-he-ii-shu-ru-you-xu-shu-zu-by-leet-2/">两数之和 II - 输入有序数组 - 两数之和 II - 输入有序数组 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] numbers, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="keyword">if</span>(numbers == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">int</span> i  = <span class="number">0</span>, j = numbers.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;j)&#123;</span><br><span class="line">            <span class="keyword">int</span> sum = numbers[i] + numbers[j];</span><br><span class="line">            <span class="keyword">if</span>(sum == target)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i+<span class="number">1</span>,j+<span class="number">1</span>&#125;;</span><br><span class="line">            &#125; </span><br><span class="line">              </span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(sum &gt; target)&#123;</span><br><span class="line">                j--;</span><br><span class="line">            &#125; </span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="633-平方数之和"><a href="#633-平方数之和" class="headerlink" title="633. 平方数之和"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sum-of-square-numbers/">633. 平方数之和</a></h4><p>难度:中等</p>
-<p>给定一个非负整数 <code>c</code> ，你要判断是否存在两个整数 <code>a</code> 和 <code>b</code>，使得 <code>a2 + b2 = c</code> 。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：c = 5</span><br><span class="line">输出：true</span><br><span class="line">解释：1 * 1 + 2 * 2 = 5</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：c = 3</span><br><span class="line">输出：false</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：c = 4</span><br><span class="line">输出：true</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 4：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：c = 2</span><br><span class="line">输出：true</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 5：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：c = 1</span><br><span class="line">输出：true</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>0 &lt;= c &lt;= 231 - 1</code></li>
-</ul>
-<p><strong>解析：</strong></p>
-<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sum-of-square-numbers/solution/shuang-zhi-zhen-de-ben-zhi-er-wei-ju-zhe-ebn3/">为什么双指针不会错过正确答案？双指针的本质。 - 平方数之和 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">judgeSquareSum</span><span class="params">(<span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i  = <span class="number">0</span>, j = (<span class="keyword">int</span>)Math.sqrt(c);<span class="comment">//从double转为int 需要强转</span></span><br><span class="line">        <span class="keyword">while</span>(i &lt;= j)&#123;</span><br><span class="line">            <span class="keyword">int</span> sum  = i * i + j * j;</span><br><span class="line">            <span class="keyword">if</span>(sum == c)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(sum &gt; c)&#123;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">             </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="345-反转字符串中的元音字母"><a href="#345-反转字符串中的元音字母" class="headerlink" title="345. 反转字符串中的元音字母"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-vowels-of-a-string/">345. 反转字符串中的元音字母</a></h4><p>难度:简单</p>
-<p>编写一个函数，以字符串作为输入，反转该字符串中的元音字母。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：&quot;hello&quot;</span><br><span class="line">输出：&quot;holle&quot;</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：&quot;leetcode&quot;</span><br><span class="line">输出：&quot;leotcede&quot;</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li>元音字母不包含字母 “y” 。</li>
-</ul>
-<p><strong>解析;</strong></p>
-<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/17ebd4ccaad189dd486211b3e18e20287541acf35cb203dd510aef61bfcdc301/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f61376362383432332d383935642d343937352d386566382d3636326130303239633737322e706e67"><img src="https://camo.githubusercontent.com/17ebd4ccaad189dd486211b3e18e20287541acf35cb203dd510aef61bfcdc301/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f61376362383432332d383935642d343937352d386566382d3636326130303239633737322e706e67" alt="img"></a></p>
-<p>使用双指针，一个指针从头向尾遍历，一个指针从尾到头遍历，当两个指针都遍历到元音字符时，交换这两个元音字符。</p>
-<p>为了快速判断一个字符是不是元音字符，我们将全部元音字符添加到集合 HashSet 中，从而以 O(1) 的时间复杂度进行该操作。</p>
-<ul>
-<li>时间复杂度为 O(N)：只需要遍历所有元素一次</li>
-<li>空间复杂度 O(1)：只需要使用两个额外变量</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/8bed07b0617ab2350feddf81b28b3a3c3e6a6d69adcbbde555576514a3ac50c6/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f65663235666637632d306636332d343230642d386233302d6561666265656133356431312e676966"><img src="https://camo.githubusercontent.com/8bed07b0617ab2350feddf81b28b3a3c3e6a6d69adcbbde555576514a3ac50c6/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f65663235666637632d306636332d343230642d386233302d6561666265656133356431312e676966" alt="img"></a></p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> Arrays.asList()该方法是将数组转化成List集合的方法。</span><br><span class="line"></span><br><span class="line"> List<span class="xml"><span class="tag">&lt;<span class="name">String</span>&gt;</span></span> list = Arrays.asList(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;);</span><br><span class="line"></span><br><span class="line">注意：</span><br><span class="line"></span><br><span class="line">（1）该方法适用于对象型数据的数组（String、Integer...）</span><br><span class="line"></span><br><span class="line">（2）该方法不建议使用于基本数据类型的数组（byte,short,int,long,float,double,boolean）</span><br><span class="line"></span><br><span class="line">（3）该方法将数组与List列表链接起来：当更新其一个时，另一个自动更新</span><br><span class="line"></span><br><span class="line">（4）不支持add()、remove()、clear()等方法</span><br></pre></td></tr></table></figure>
+        
 
 
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> HashSet&lt;Character&gt; vowels = <span class="keyword">new</span> HashSet&lt;&gt;( <span class="comment">//这里HashSet也可以换成List</span></span><br><span class="line">        Arrays.asList(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;i&#x27;</span>, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;u&#x27;</span>, <span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;E&#x27;</span>, <span class="string">&#x27;I&#x27;</span>, <span class="string">&#x27;O&#x27;</span>, <span class="string">&#x27;U&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">reverseVowels</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (s == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = s.length() - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span>[] result = <span class="keyword">new</span> <span class="keyword">char</span>[s.length()];</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= j) &#123;</span><br><span class="line">        <span class="keyword">char</span> ci = s.charAt(i);</span><br><span class="line">        <span class="keyword">char</span> cj = s.charAt(j);</span><br><span class="line">        <span class="keyword">if</span> (!vowels.contains(ci)) &#123;</span><br><span class="line">            result[i++] = ci;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!vowels.contains(cj)) &#123;</span><br><span class="line">            result[j--] = cj;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            result[i++] = cj;</span><br><span class="line">            result[j--] = ci;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="680-验证回文字符串-Ⅱ"><a href="#680-验证回文字符串-Ⅱ" class="headerlink" title="680. 验证回文字符串 Ⅱ"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-palindrome-ii/">680. 验证回文字符串 Ⅱ</a></h4><p>难度:简单</p>
-<p>给定一个非空字符串 <code>s</code>，<strong>最多</strong>删除一个字符。判断是否能成为回文字符串。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: s = &quot;aba&quot;</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: s = &quot;abca&quot;</span><br><span class="line">输出: true</span><br><span class="line">解释: 你可以删除c字符。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: s = &quot;abc&quot;</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示:</strong></p>
-<ul>
-<li><code>1 &lt;= s.length &lt;= 105</code></li>
-<li><code>s</code> 由小写英文字母组成</li>
-</ul>
-<p><strong>解析</strong>：</p>
-<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-palindrome-ii/solution/yan-zheng-hui-wen-zi-fu-chuan-ii-by-leetcode-solut/">验证回文字符串 Ⅱ - 验证回文字符串 Ⅱ - 力扣（LeetCode） (leetcode-cn.com)</a></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">validPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span> ,j = s.length()-<span class="number">1</span>;i&lt;j;i++,j--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(i) != s.charAt(j))&#123;</span><br><span class="line">                <span class="keyword">return</span> isPalindrome(s,i+<span class="number">1</span>,j) || isPalindrome(s,i,j-<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(String s , <span class="keyword">int</span> i ,<span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;j)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(i++) != s.charAt(j--))&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="88-合并两个有序数组"><a href="#88-合并两个有序数组" class="headerlink" title="88. 合并两个有序数组"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-sorted-array/">88. 合并两个有序数组</a></h4><p>难度:简单</p>
-<p>给你两个有序整数数组 <code>nums1</code> 和 <code>nums2</code>，请你将 <code>nums2</code> 合并到 <code>nums1</code> 中<em>，</em>使 <code>nums1</code> 成为一个有序数组。</p>
-<p>初始化 <code>nums1</code> 和 <code>nums2</code> 的元素数量分别为 <code>m</code> 和 <code>n</code> 。你可以假设 <code>nums1</code> 的空间大小等于 <code>m + n</code>，这样它就有足够的空间保存来自 <code>nums2</code> 的元素。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3</span><br><span class="line">输出：[1,2,2,3,5,6]</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums1 = [1], m = 1, nums2 = [], n = 0</span><br><span class="line">输出：[1]</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>nums1.length == m + n</code></li>
-<li><code>nums2.length == n</code></li>
-<li><code>0 &lt;= m, n &lt;= 200</code></li>
-<li><code>1 &lt;= m + n &lt;= 200</code></li>
-<li><code>-109 &lt;= nums1[i], nums2[i] &lt;= 109</code></li>
-</ul>
-<p><strong>解析：</strong></p>
-<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-sorted-array/solution/hua-jie-suan-fa-88-he-bing-liang-ge-you-xu-shu-zu-/">画解算法：88. 合并两个有序数组 - 合并两个有序数组 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span> m, <span class="keyword">int</span>[] nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> index1 = m-<span class="number">1</span>,index2 = n -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> mergeIndex = m+n-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(index2 &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(index1 &lt; <span class="number">0</span>)&#123;</span><br><span class="line">                nums1[mergeIndex--] = nums2[index2--];</span><br><span class="line">            <span class="comment">//以下index2&lt;0 这个判断可写可不写    </span></span><br><span class="line">            <span class="comment">//&#125;else if(index2 &lt; 0)&#123;</span></span><br><span class="line">                <span class="comment">// nums1[mergeIndex--] = nums1[index1--];    </span></span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(nums1[index1] &gt; nums2[index2])&#123;</span><br><span class="line">                nums1[mergeIndex--] = nums1[index1--];</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                nums1[mergeIndex--] = nums2[index2--];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="141-环形链表"><a href="#141-环形链表" class="headerlink" title="141. 环形链表"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/linked-list-cycle/">141. 环形链表</a></h4><p>难度:简单</p>
-<p>给定一个链表，判断链表中是否有环。</p>
-<p>如果链表中有某个节点，可以通过连续跟踪 <code>next</code> 指针再次到达，则链表中存在环。 为了表示给定链表中的环，我们使用整数 <code>pos</code> 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 <code>pos</code> 是 <code>-1</code>，则在该链表中没有环。<strong>注意：<code>pos</code> 不作为参数进行传递</strong>，仅仅是为了标识链表的实际情况。</p>
-<p>如果链表中存在环，则返回 <code>true</code> 。 否则，返回 <code>false</code> 。</p>
-<p><strong>进阶：</strong></p>
-<p>你能用 *O(1)*（即，常量）内存解决此问题吗？</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [3,2,0,-4], pos = 1</span><br><span class="line">输出：true</span><br><span class="line">解释：链表中有一个环，其尾部连接到第二个节点。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test2.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2], pos = 0</span><br><span class="line">输出：true</span><br><span class="line">解释：链表中有一个环，其尾部连接到第一个节点。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test3.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1], pos = -1</span><br><span class="line">输出：false</span><br><span class="line">解释：链表中没有环。</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li>链表中节点的数目范围是 <code>[0, 104]</code></li>
-<li><code>-105 &lt;= Node.val &lt;= 105</code></li>
-<li><code>pos</code> 为 <code>-1</code> 或者链表中的一个 <strong>有效索引</strong> 。</li>
-</ul>
-<p><strong>解析：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123;</span></span><br><span class="line"><span class="comment"> *         val = x;</span></span><br><span class="line"><span class="comment"> *         next = null;</span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        ListNode slow = head,fast = head;</span><br><span class="line">        <span class="keyword">while</span>( fast != <span class="keyword">null</span> &amp;&amp; fast.next!= <span class="keyword">null</span>)&#123;</span><br><span class="line">            </span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">            <span class="keyword">if</span>(slow == fast) <span class="keyword">return</span> <span class="keyword">true</span>; <span class="comment">// 先移动再判断，避免两个都在head还没移动的情况</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>解题思路</strong></p>
-<p>此题可以定义一个fast和slow两个引用，先开始让他们都指向头节点。然后让fast一次性走2步，slow一次性走一步，如果他们可以相遇，则证明链表有环。不让fast一次性走更多步的原因是，虽然可能相遇更快点，但也有可能相遇更慢，或者永远也相遇不了，这样的话不太稳定。因此我们选择让fast这个快引用一次走2步！</p>
-<p><strong>代码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int x) &#123;</span><br><span class="line"> *         val = x;</span><br><span class="line"> *         next = null;</span><br><span class="line"> *     &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public boolean hasCycle(ListNode head) &#123;</span><br><span class="line">        ListNode fast=head;</span><br><span class="line">        ListNode slow=head;//定义快慢引用</span><br><span class="line">        while(fast!=null&amp;&amp;fast.next!=null)&#123;</span><br><span class="line">            //fast!=null要写在前面，这样由于短路与的特性，当前面为真时后面的条件就不执行了，就不会空指针异常了</span><br><span class="line">            fast=fast.next.next;</span><br><span class="line">            slow=slow.next;</span><br><span class="line">            if(fast==slow)&#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="524-通过删除字母匹配到字典里最长单词"><a href="#524-通过删除字母匹配到字典里最长单词" class="headerlink" title="524. 通过删除字母匹配到字典里最长单词"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-word-in-dictionary-through-deleting/">524. 通过删除字母匹配到字典里最长单词</a></h4><p>难度：中等</p>
-<p>给你一个字符串 <code>s</code> 和一个字符串数组 <code>dictionary</code> 作为字典，找出并返回字典中最长的字符串，该字符串可以通过删除 <code>s</code> 中的某些字符得到。</p>
-<p>如果答案不止一个，返回长度最长且字典序最小的字符串。如果答案不存在，则返回空字符串。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;abpcplea&quot;, dictionary = [&quot;ale&quot;,&quot;apple&quot;,&quot;monkey&quot;,&quot;plea&quot;]</span><br><span class="line">输出：&quot;apple&quot;</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;abpcplea&quot;, dictionary = [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]</span><br><span class="line">输出：&quot;a&quot;</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= s.length &lt;= 1000</code></li>
-<li><code>1 &lt;= dictionary.length &lt;= 1000</code></li>
-<li><code>1 &lt;= dictionary[i].length &lt;= 1000</code></li>
-<li><code>s</code> 和 <code>dictionary[i]</code> 仅由小写英文字母组成</li>
-</ul>
-<p><strong>解析：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">findLongestWord</span><span class="params">(String s, List&lt;String&gt; dictionary)</span> </span>&#123;</span><br><span class="line">        String longestWord = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span>(String target : dictionary)&#123;</span><br><span class="line">            <span class="keyword">int</span> l1 = longestWord.length(),l2 = target.length();</span><br><span class="line">            <span class="comment">//   java中的compareto方法，返回参与比较的前后两个字符串的asc码的差值</span></span><br><span class="line">            <span class="comment">/// 获取长度最长且字典顺序最小的字符串</span></span><br><span class="line">            <span class="keyword">if</span>(l1 &gt; l2 || (l1==l2) &amp;&amp; longestWord.compareTo(target) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(isSubstr(s,target))&#123;</span><br><span class="line">                longestWord = target;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> longestWord;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// 判断 target 是否为 s 的子序列</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isSubstr</span><span class="params">(String s,String target)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;s.length() &amp;&amp; j &lt; target.length())&#123;</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(i) == target.charAt(j))&#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> j == target.length();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/06/%E7%AE%97%E6%B3%95/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="prev" title="双指针">
+      <i class="fa fa-chevron-left"></i> 双指针
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/06/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.jpg">
-      <meta itemprop="name" content="LoverDXL">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="磨刀不误砍柴功，读完硕士再打工">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/06/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-06 09:21:26" itemprop="dateCreated datePublished" datetime="2021-08-06T09:21:26+08:00">2021-08-06</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>367</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -1073,6 +791,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">链表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#160-%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">160. 相交链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#206-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">206. 反转链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">21. 合并两个有序链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#83-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">83. 删除排序链表中的重复元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%AC-N-%E4%B8%AA%E7%BB%93%E7%82%B9"><span class="nav-number">1.0.0.5.</span> <span class="nav-text">19. 删除链表的倒数第 N 个结点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9"><span class="nav-number">1.0.0.6.</span> <span class="nav-text">24. 两两交换链表中的节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#445-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0-II"><span class="nav-number">1.0.0.7.</span> <span class="nav-text">445. 两数相加 II</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#234-%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8"><span class="nav-number">1.0.0.8.</span> <span class="nav-text">234. 回文链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#725-%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8"><span class="nav-number">1.0.0.9.</span> <span class="nav-text">725. 分隔链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#328-%E5%A5%87%E5%81%B6%E9%93%BE%E8%A1%A8"><span class="nav-number">1.0.0.10.</span> <span class="nav-text">328. 奇偶链表</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
