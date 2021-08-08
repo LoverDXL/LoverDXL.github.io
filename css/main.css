@@ -1174,7 +1174,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ffff47;
+  background: #fcff87;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2547,11 +2547,4 @@ body {
     background-image: url("https://ziyuan.lruihao.cn/images/bg_cell.png");
     background-size: cover;
   }
-}
-.main-inner {
-  margin-top: 60px;
-  padding: 60px 60px 60px 60px;
-  background: #fff;
-  opacity: 0.8;
-  min-height: 500px;
 }
