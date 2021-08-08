@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="Leetcode 题解 - 位运算 [0. 原理](https:&#x2F;&#x2F;github.com&#x2F;CyC2018&#x2F;CS-Notes&#x2F;blob&#x2F;master&#x2F;notes&#x2F;Leetcode 题解 - 位运算.md#0-原理) [1. 统计两个数的二进制表示有多少位不同](https:&#x2F;&#x2F;github.com&#x2F;CyC2018&#x2F;CS-Notes&#x2F;blob&#x2F;master&#x2F;notes&#x2F;Leetcode 题解 - 位">
+<meta property="og:type" content="article">
+<meta property="og:title" content="8.位运算">
+<meta property="og:url" content="http://example.com/2021/08/08/8-%E4%BD%8D%E8%BF%90%E7%AE%97/index.html">
+<meta property="og:site_name" content="磨刀不误砍柴功，读完硕士再打工">
+<meta property="og:description" content="Leetcode 题解 - 位运算 [0. 原理](https:&#x2F;&#x2F;github.com&#x2F;CyC2018&#x2F;CS-Notes&#x2F;blob&#x2F;master&#x2F;notes&#x2F;Leetcode 题解 - 位运算.md#0-原理) [1. 统计两个数的二进制表示有多少位不同](https:&#x2F;&#x2F;github.com&#x2F;CyC2018&#x2F;CS-Notes&#x2F;blob&#x2F;master&#x2F;notes&#x2F;Leetcode 题解 - 位">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-08T06:21:00.000Z">
+<meta property="article:modified_time" content="2021-08-08T06:26:02.067Z">
+<meta property="article:author" content="LoverDXL">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/08/08/8-%E4%BD%8D%E8%BF%90%E7%AE%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>8.位运算 | 磨刀不误砍柴功，读完硕士再打工</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<!-- 爆炸红心效果 -->
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/firework.js"></script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">磨刀不误砍柴功，读完硕士再打工</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/08/8-%E4%BD%8D%E8%BF%90%E7%AE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="LoverDXL">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="磨刀不误砍柴功，读完硕士再打工">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          8.位运算
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-08 14:21:00 / 修改时间：14:26:02" itemprop="dateCreated datePublished" datetime="2021-08-08T14:21:00+08:00">2021-08-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+                </span>
+            </span>
+
+          
+                <span>&emsp;</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span>
+                <span class="post-meta-item-text">阅读次数：</span>
+                <span id="busuanzi_value_page_pv"></span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>13k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>11 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li>Leetcode 题解 - 位运算<ul>
+<li>[0. 原理](<a target="_blank" rel="noopener" href="https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode">https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode</a> 题解 - 位运算.md#0-原理)</li>
+<li>[1. 统计两个数的二进制表示有多少位不同](<a target="_blank" rel="noopener" href="https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode">https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode</a> 题解 - 位运算.md#1-统计两个数的二进制表示有多少位不同)</li>
+<li>[2. 数组中唯一一个不重复的元素](<a target="_blank" rel="noopener" href="https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode">https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode</a> 题解 - 位运算.md#2-数组中唯一一个不重复的元素)</li>
+<li>[3. 找出数组中缺失的那个数](<a target="_blank" rel="noopener" href="https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode">https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode</a> 题解 - 位运算.md#3-找出数组中缺失的那个数)</li>
+<li>[4. 数组中不重复的两个元素](<a target="_blank" rel="noopener" href="https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode">https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode</a> 题解 - 位运算.md#4-数组中不重复的两个元素)</li>
+<li>[5. 翻转一个数的比特位](<a target="_blank" rel="noopener" href="https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode">https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode</a> 题解 - 位运算.md#5-翻转一个数的比特位)</li>
+<li>[6. 不用额外变量交换两个整数](<a target="_blank" rel="noopener" href="https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode">https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode</a> 题解 - 位运算.md#6-不用额外变量交换两个整数)</li>
+<li>[7. 判断一个数是不是 2 的 n 次方](<a target="_blank" rel="noopener" href="https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode">https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode</a> 题解 - 位运算.md#7-判断一个数是不是-2-的-n-次方)</li>
+<li>[8. 判断一个数是不是 4 的 n 次方](<a target="_blank" rel="noopener" href="https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode">https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode</a> 题解 - 位运算.md#8–判断一个数是不是-4-的-n-次方)</li>
+<li>[9. 判断一个数的位级表示是否不会出现连续的 0 和 1](<a target="_blank" rel="noopener" href="https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode">https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode</a> 题解 - 位运算.md#9-判断一个数的位级表示是否不会出现连续的-0-和-1)</li>
+<li>[10. 求一个数的补码](<a target="_blank" rel="noopener" href="https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode">https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode</a> 题解 - 位运算.md#10-求一个数的补码)</li>
+<li>[11. 实现整数的加法](<a target="_blank" rel="noopener" href="https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode">https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode</a> 题解 - 位运算.md#11-实现整数的加法)</li>
+<li>[12. 字符串数组最大乘积](<a target="_blank" rel="noopener" href="https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode">https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode</a> 题解 - 位运算.md#12-字符串数组最大乘积)</li>
+<li>[13. 统计从 0 ~ n 每个数的二进制表示中 1 的个数](<a target="_blank" rel="noopener" href="https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode">https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode</a> 题解 - 位运算.md#13-统计从-0-~-n-每个数的二进制表示中-1-的个数)</li>
+</ul>
+</li>
+</ul>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><strong>基本原理</strong></p>
+<p>0s 表示一串 0，1s 表示一串 1。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x ^ 0s = x      x &amp; 0s = 0      x | 0s = x</span><br><span class="line">x ^ 1s = ~x     x &amp; 1s = x      x | 1s = 1s</span><br><span class="line">x ^ x = 0       x &amp; x = x       x | x = x</span><br></pre></td></tr></table></figure>
+
+<p>利用 x ^ 1s = ~x 的特点，可以将一个数的位级表示翻转；利用 x ^ x = 0 的特点，可以将三个数中重复的两个数去除，只留下另一个数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1^1^2 = 2</span><br></pre></td></tr></table></figure>
+
+<p>利用 x &amp; 0s = 0 和 x &amp; 1s = x 的特点，可以实现掩码操作。一个数 num 与 mask：00111100 进行位与操作，只保留 num 中与 mask 的 1 部分相对应的位。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">01011011 &amp;</span><br><span class="line">00111100</span><br><span class="line">--------</span><br><span class="line">00011000</span><br></pre></td></tr></table></figure>
+
+<p>利用 x | 0s = x 和 x | 1s = 1s 的特点，可以实现设值操作。一个数 num 与 mask：00111100 进行位或操作，将 num 中与 mask 的 1 部分相对应的位都设置为 1。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">01011011 |</span><br><span class="line">00111100</span><br><span class="line">--------</span><br><span class="line">01111111</span><br></pre></td></tr></table></figure>
+
+<p><strong>位与运算技巧</strong></p>
+<p>n&amp;(n-1) 去除 n 的位级表示中最低的那一位 1。例如对于二进制表示 01011011，减去 1 得到 01011010，这两个数相与得到 01011010。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">01011011 &amp;</span><br><span class="line">01011010</span><br><span class="line">--------</span><br><span class="line">01011010</span><br></pre></td></tr></table></figure>
+
+<p>n&amp;(-n) 得到 n 的位级表示中最低的那一位 1。-n 得到 n 的反码加 1，也就是 -n=~n+1。例如对于二进制表示 10110100，-n 得到 01001100，相与得到 00000100。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">10110100 &amp;</span><br><span class="line">01001100</span><br><span class="line">--------</span><br><span class="line">00000100</span><br></pre></td></tr></table></figure>
+
+<p>n-(n&amp;(-n)) 则可以去除 n 的位级表示中最低的那一位 1，和 n&amp;(n-1) 效果一样。</p>
+<p><strong>移位运算</strong></p>
+<p>&gt;&gt; n 为算术右移，相当于除以 2n，例如 -7 &gt;&gt; 2 = -2。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">11111111111111111111111111111001  &gt;&gt; 2</span><br><span class="line">--------</span><br><span class="line">11111111111111111111111111111110</span><br></pre></td></tr></table></figure>
+
+<p>&gt;&gt;&gt; n 为无符号右移，左边会补上 0。例如 -7 &gt;&gt;&gt; 2 = 1073741822。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">11111111111111111111111111111001  &gt;&gt;&gt; 2</span><br><span class="line">--------</span><br><span class="line">00111111111111111111111111111111</span><br></pre></td></tr></table></figure>
+
+<p>&lt;&lt; n 为算术左移，相当于乘以 2n。-7 &lt;&lt; 2 = -28。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">11111111111111111111111111111001  &lt;&lt; 2--------11111111111111111111111111100100</span><br></pre></td></tr></table></figure>
+
+<p><strong>mask 计算</strong></p>
+<p>要获取 111111111，将 0 取反即可，~0。</p>
+<p>要得到只有第 i 位为 1 的 mask，将 1 向左移动 i-1 位即可，1&lt;&lt;(i-1) 。例如 1&lt;&lt;4 得到只有第 5 位为 1 的 mask ：00010000。</p>
+<p>要得到 1 到 i 位为 1 的 mask，(1&lt;&lt;i)-1 即可，例如将 (1&lt;&lt;4)-1 = 00010000-1 = 00001111。</p>
+<p>要得到 1 到 i 位为 0 的 mask，只需将 1 到 i 位为 1 的 mask 取反，即 ~((1&lt;&lt;i)-1)。</p>
+<p><strong>Java 中的位操作</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">static int Integer.bitCount();           // 统计 1 的数量static int Integer.highestOneBit();      // 获得最高位static String toBinaryString(int i);     // 转换为二进制表示的字符串</span><br></pre></td></tr></table></figure>
+
+<h4 id="461-汉明距离"><a href="#461-汉明距离" class="headerlink" title="461. 汉明距离"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/hamming-distance/">461. 汉明距离</a></h4><p>难度：简单</p>
+<p>两个整数之间的 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB">汉明距离</a> 指的是这两个数字对应二进制位不同的位置的数目。</p>
+<p>给你两个整数 <code>x</code> 和 <code>y</code>，计算并返回它们之间的汉明距离。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：x = 1, y = 4输出：2解释：1   (0 0 0 1)4   (0 1 0 0)       ↑   ↑上面的箭头指出了对应二进制位不同的位置。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：x = 3, y = 1输出：1</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>0 &lt;= x, y &lt;= 231 - 1</code></li>
+</ul>
+<p><strong>解析</strong>：</p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/hamming-distance/solution/yi-ming-ju-chi-by-leetcode-solution-u1w7/">汉明距离 - 汉明距离 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hammingDistance</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;        <span class="keyword">int</span> z = x^y;        <span class="keyword">int</span> count = <span class="number">0</span>;        <span class="keyword">while</span>(z!= <span class="number">0</span>)&#123;            <span class="keyword">if</span>((z&amp;<span class="number">1</span>) == <span class="number">1</span>) count++;            z = z &gt;&gt; <span class="number">1</span>;        &#125;        <span class="keyword">return</span> count;    &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="136-只出现一次的数字"><a href="#136-只出现一次的数字" class="headerlink" title="136. 只出现一次的数字"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/single-number/">136. 只出现一次的数字</a></h4><p>难度：简单</p>
+<p>给定一个<strong>非空</strong>整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
+<p><strong>说明：</strong></p>
+<p>你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入: [2,2,1]输出: 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入: [4,1,2,1,2]输出: 4</span><br></pre></td></tr></table></figure>
+
+<p><strong>解析：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;        <span class="keyword">int</span> ret = <span class="number">0</span>;        <span class="keyword">for</span>(<span class="keyword">int</span> num : nums)&#123;            ret = num ^ ret;        &#125;        <span class="keyword">return</span> ret;    &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="268-丢失的数字"><a href="#268-丢失的数字" class="headerlink" title="268. 丢失的数字"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/missing-number/">268. 丢失的数字</a></h4><p>难度：简单</p>
+<p>给定一个包含 <code>[0, n]</code> 中 <code>n</code> 个数的数组 <code>nums</code> ，找出 <code>[0, n]</code> 这个范围内没有出现在数组中的那个数。</p>
+<p><strong>进阶：</strong></p>
+<ul>
+<li>你能否实现线性时间复杂度、仅使用额外常数空间的算法解决此问题?</li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [3,0,1]输出：2解释：n = 3，因为有 3 个数字，所以所有的数字都在范围 [0,3] 内。2 是丢失的数字，因为它没有出现在 nums 中。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [0,1]输出：2解释：n = 2，因为有 2 个数字，所以所有的数字都在范围 [0,2] 内。2 是丢失的数字，因为它没有出现在 nums 中。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [9,6,4,2,3,5,7,0,1]输出：8解释：n = 9，因为有 9 个数字，所以所有的数字都在范围 [0,9] 内。8 是丢失的数字，因为它没有出现在 nums 中。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 4：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [0]输出：1解释：n = 1，因为有 1 个数字，所以所有的数字都在范围 [0,1] 内。1 是丢失的数字，因为它没有出现在 nums 中。</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>n == nums.length</code></li>
+<li><code>1 &lt;= n &lt;= 104</code></li>
+<li><code>0 &lt;= nums[i] &lt;= n</code></li>
+<li><code>nums</code> 中的所有数字都 <strong>独一无二</strong></li>
+</ul>
+<p><strong>解析:</strong></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/missing-number/solution/que-shi-shu-zi-by-leetcode/">缺失数字 - 丢失的数字 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">missingNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;        <span class="keyword">int</span> length = nums.length;        <span class="keyword">int</span> ret = <span class="number">0</span>;        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;length;i++)&#123;            ret = ret ^ i ^ nums[i];        &#125;        <span class="keyword">return</span> ret ^ length;    &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="260-只出现一次的数字-III"><a href="#260-只出现一次的数字-III" class="headerlink" title="260. 只出现一次的数字 III"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/single-number-iii/">260. 只出现一次的数字 III</a></h4><p>难度：中等</p>
+<p>给定一个整数数组 <code>nums</code>，其中恰好有两个元素只出现一次，其余所有元素均出现两次。 找出只出现一次的那两个元素。你可以按 <strong>任意顺序</strong> 返回答案。</p>
+<p><strong>进阶：</strong>你的算法应该具有线性时间复杂度。你能否仅使用常数空间复杂度来实现？</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,2,1,3,2,5]输出：[3,5]解释：[5, 3] 也是有效的答案。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [-1,0]输出：[-1,0]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [0,1]输出：[1,0]</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>2 &lt;= nums.length &lt;= 3 * 104</code></li>
+<li><code>-231 &lt;= nums[i] &lt;= 231 - 1</code></li>
+<li>除两个只出现一次的整数外，<code>nums</code> 中的其他数字都出现两次</li>
+</ul>
+<p><strong>解析：</strong></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/single-number-iii/solution/javawei-yun-suan-jie-jue-ji-bai-liao-999-dp5b/">Java位运算解决，击败了99.94%的用户 - 只出现一次的数字 III - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="keyword">public</span> <span class="keyword">int</span>[] singleNumber(<span class="keyword">int</span>[] nums) &#123;        <span class="keyword">int</span> diff = <span class="number">0</span>;        <span class="keyword">for</span>(<span class="keyword">int</span> num : nums) diff ^= num;        diff = diff &amp; -diff;<span class="comment">//得到最右一位        int[] ret = new int[2];        for(int num : nums)&#123;            if((diff &amp; num) == 0 )&#123;//根据最右一位来判断两个出现一次且不同的数                ret[0] ^= num;            &#125;else&#123;                ret[1] ^= num;            &#125;        &#125;        return ret;       &#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h4 id="190-颠倒二进制位"><a href="#190-颠倒二进制位" class="headerlink" title="190. 颠倒二进制位"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-bits/">190. 颠倒二进制位</a></h4><p>难度：简单</p>
+<p>颠倒给定的 32 位无符号整数的二进制位。</p>
+<p><strong>提示：</strong></p>
+<ul>
+<li>请注意，在某些语言（如 Java）中，没有无符号整数类型。在这种情况下，输入和输出都将被指定为有符号整数类型，并且不应影响您的实现，因为无论整数是有符号的还是无符号的，其内部的二进制表示形式都是相同的。</li>
+<li>在 Java 中，编译器使用<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%A1%A5%E7%A0%81/5295284">二进制补码</a>记法来表示有符号整数。因此，在上面的 <strong>示例 2</strong> 中，输入表示有符号整数 <code>-3</code>，输出表示有符号整数 <code>-1073741825</code>。</li>
+</ul>
+<p><strong>进阶</strong>:<br>如果多次调用这个函数，你将如何优化你的算法？</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入: 00000010100101000001111010011100输出: 00111001011110000010100101000000解释: 输入的二进制串 00000010100101000001111010011100 表示无符号整数 43261596，     因此返回 964176192，其二进制表示形式为 00111001011110000010100101000000。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：11111111111111111111111111111101输出：10111111111111111111111111111111解释：输入的二进制串 11111111111111111111111111111101 表示无符号整数 4294967293，     因此返回 3221225471 其二进制表示形式为 10111111111111111111111111111111 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 00000010100101000001111010011100输出：964176192 (00111001011110000010100101000000)解释：输入的二进制串 00000010100101000001111010011100 表示无符号整数 43261596，     因此返回 964176192，其二进制表示形式为 00111001011110000010100101000000。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 11111111111111111111111111111101输出：3221225471 (10111111111111111111111111111111)解释：输入的二进制串 11111111111111111111111111111101 表示无符号整数 4294967293，     因此返回 3221225471 其二进制表示形式为 10111111111111111111111111111111 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>输入是一个长度为 <code>32</code> 的二进制字符串</li>
+</ul>
+<p><strong>解析：</strong></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-bits/solution/4chong-jie-jue-fang-shi-tu-wen-xiang-jie-fsgg/">4种解决方式，图文详解 - 颠倒二进制位 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<p>普通循环：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="comment">// you need treat n as an unsigned value    public int reverseBits(int n) &#123;        int res  = 0;        for(int i = 0;i&lt;32;i++)&#123;            res &lt;&lt;= 1;            res += (n&amp;1);            n &gt;&gt;= 1;        &#125;        return res;                    &#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>因为题目是给的32位</p>
+<p>分治：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-bits/solution/yi-tu-kan-dong-fen-zhi-fang-fa-qiu-jie-b-rbx9/">一图看懂分治方法求解 - 颠倒二进制位 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">reverseBits</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;        n = (n &gt;&gt;&gt; <span class="number">16</span>) | (n &lt;&lt; <span class="number">16</span>);        n = ((n &amp; <span class="number">0xff00ff00</span>) &gt;&gt;&gt; <span class="number">8</span>) | ((n &amp; <span class="number">0x00ff00ff</span>) &lt;&lt; <span class="number">8</span>);        n = ((n &amp; <span class="number">0xf0f0f0f0</span>) &gt;&gt;&gt; <span class="number">4</span>) | ((n &amp; <span class="number">0x0f0f0f0f</span>) &lt;&lt; <span class="number">4</span>);        n = ((n &amp; <span class="number">0xcccccccc</span>) &gt;&gt;&gt; <span class="number">2</span>) | ((n &amp; <span class="number">0x33333333</span>) &lt;&lt; <span class="number">2</span>);        n = ((n &amp; <span class="number">0xaaaaaaaa</span>) &gt;&gt;&gt; <span class="number">1</span>) | ((n &amp; <span class="number">0x55555555</span>) &lt;&lt; <span class="number">1</span>);        <span class="keyword">return</span> n;    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-不用额外变量交换两个整数"><a href="#6-不用额外变量交换两个整数" class="headerlink" title="6. 不用额外变量交换两个整数"></a>6. 不用额外变量交换两个整数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = a ^ b;b = a ^ b;a = a ^ b;</span><br></pre></td></tr></table></figure>
+
+<h4 id="231-2-的幂"><a href="#231-2-的幂" class="headerlink" title="231. 2 的幂"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/power-of-two/">231. 2 的幂</a></h4><p>难度：简单</p>
+<p>给你一个整数 <code>n</code>，请你判断该整数是否是 2 的幂次方。如果是，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
+<p>如果存在一个整数 <code>x</code> 使得 <code>n == 2x</code> ，则认为 <code>n</code> 是 2 的幂次方。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 1输出：true解释：20 = 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 16输出：true解释：24 = 16</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 3输出：false</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 4：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 4输出：true</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 5：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 5输出：false</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>-231 &lt;= n &lt;= 231 - 1</code></li>
+</ul>
+<p><strong>进阶：</strong>你能够不使用循环/递归解决此问题吗？</p>
+<p><strong>解析：</strong></p>
+<p>二进制表示只有一个 1 存在。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPowerOfTwo</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;        <span class="keyword">return</span> n &gt; <span class="number">0</span> &amp;&amp; Integer.bitCount(n) == <span class="number">1</span>;    &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>利用 1000 &amp; 0111 == 0 这种性质，得到以下解法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public boolean isPowerOfTwo(int n) &#123;    return n &gt; 0 &amp;&amp; (n &amp; (n - 1)) == 0;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="342-4的幂"><a href="#342-4的幂" class="headerlink" title="342. 4的幂"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/power-of-four/">342. 4的幂</a></h4><p>难度：简单</p>
+<p>给定一个整数，写一个函数来判断它是否是 4 的幂次方。如果是，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
+<p>整数 <code>n</code> 是 4 的幂次方需满足：存在整数 <code>x</code> 使得 <code>n == 4x</code></p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 16输出：true</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 5输出：false</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 1输出：true</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>-231 &lt;= n &lt;= 231 - 1</code></li>
+</ul>
+<p><strong>进阶：</strong></p>
+<ul>
+<li>你能不使用循环或者递归来完成本题吗？</li>
+</ul>
+<p><strong>解析：</strong></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/power-of-four/solution/4de-mi-by-leetcode-solution-b3ya/">4的幂 - 4的幂 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPowerOfFour</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;        <span class="keyword">return</span> n &gt; <span class="number">0</span> &amp;&amp; (n &amp; (n - <span class="number">1</span>)) == <span class="number">0</span> &amp;&amp; (n &amp; <span class="number">0xaaaaaaaa</span>) == <span class="number">0</span>;    &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;    public boolean hasAlternatingBits(int n) &#123;        // 如 010101 右移一位得到 001010        // 二者异或之后得到011111  (这一步是关键,只有交替出现01，异或后才能得到结果0111111...11)        // 为了判断 异或后的结果是否满足(0111111...11)类型的结果        // 可以用如下方法，比如        // 011111 加上1 为100000        // 011111 与 100000按位相与 结果为000000 ， 也就是0;        int m = n ^ (n &gt;&gt; 1);        return (m &amp; (m + 1)) == 0;    &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="693-交替位二进制数"><a href="#693-交替位二进制数" class="headerlink" title="693. 交替位二进制数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-number-with-alternating-bits/">693. 交替位二进制数</a></h4><p>难度：简单</p>
+<p>给定一个正整数，检查它的二进制表示是否总是 0、1 交替出现：换句话说，就是二进制表示中相邻两位的数字永不相同。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 5输出：true解释：5 的二进制表示是：101</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 7输出：false解释：7 的二进制表示是：111.</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 11输出：false解释：11 的二进制表示是：1011.</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 4：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 10输出：true解释：10 的二进制表示是：1010.</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 5：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 3输出：false</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 231 - 1</code></li>
+</ul>
+<p><strong>解析：</strong></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-number-with-alternating-bits/solution/binary-number-with-alternating-bits-by-ikaruga/">【交替位二进制数】图解两行位运算 - 交替位二进制数 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasAlternatingBits</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;        <span class="comment">// 如 010101 右移一位得到 001010        // 二者异或之后得到011111  (这一步是关键,只有交替出现01，异或后才能得到结果0111111...11)        // 为了判断 异或后的结果是否满足(0111111...11)类型的结果        // 可以用如下方法，比如        // 011111 加上1 为100000        // 011111 与 100000按位相与 结果为000000 ， 也就是0;        int m = n ^ (n &gt;&gt; 1);        return (m &amp; (m + 1)) == 0;    &#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="476-数字的补数"><a href="#476-数字的补数" class="headerlink" title="476. 数字的补数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-complement/">476. 数字的补数</a></h4><p>难度：简单</p>
+<p>给你一个 <strong>正</strong> 整数 <code>num</code> ，输出它的补数。补数是对该数的二进制表示取反。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：num = 5输出：2解释：5 的二进制表示为 101（没有前导零位），其补数为 010。所以你需要输出 2 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：num = 1输出：0解释：1 的二进制表示为 1（没有前导零位），其补数为 0。所以你需要输出 0 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>给定的整数 <code>num</code> 保证在 32 位带符号整数的范围内。</li>
+<li><code>num &gt;= 1</code></li>
+<li>你可以假定二进制数不包含前导零位。</li>
+<li>本题与 1009 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/complement-of-base-10-integer/">https://leetcode-cn.com/problems/complement-of-base-10-integer/</a> 相同</li>
+</ul>
+<p><strong>解析：</strong></p>
+<p>方法一：</p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-complement/solution/yi-huo-by-im-me/">抑或 - 数字的补数 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;<span class="keyword">public</span>:    <span class="function"><span class="keyword">int</span> <span class="title">findComplement</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;        <span class="keyword">int</span> tmp = <span class="number">1</span>;        <span class="keyword">while</span> (tmp &lt; num)        &#123;            tmp &lt;&lt;= <span class="number">1</span>;            tmp += <span class="number">1</span>;        &#125;        <span class="keyword">return</span> (tmp^num);    &#125;&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>方法二：</p>
+<p>可以利用 Java 的 Integer.highestOneBit() 方法来获得含有首 1 的数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findComplement</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;        <span class="keyword">if</span>(num == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;        <span class="keyword">int</span> mask = Integer.highestOneBit(num);<span class="comment">//比如5的二进制是101 那么调用highestOneBit()看最高位 即 100        mask = (mask &lt;&lt; 1) -1 ;               //此时左移一位即 1000  再减一 得到 0111        return num ^ mask;                    //所以0101 ^ 0111 = 010    &#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JDK的解析返回具有至多单个 1 位的 int 值，在指定的 int 值中最高位（最左边）的 1 位的位置。如果指定的值在其二进制补码表示形式中不具有 1 位，即它等于零，则返回零。简单的说法如果一个数是0, 则返回0；如果是负数, 则返回 -2147483648：【1000,0000,0000,0000,0000,0000,0000,0000】(二进制表示的数)；如果是正数, 返回的则是跟它最靠近的比它小的2的N次方比如 17：二进制是【0000,0000,0000,0000,0000,0000,0001,0001】highestOneBit(17)返回的是最高位的1个1, 其它全是0 的二进制数：【0000,0000,0000,0000,0000,0000,0001,0000】，其实就是16。</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h4 id="371-两整数之和"><a href="#371-两整数之和" class="headerlink" title="371. 两整数之和"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sum-of-two-integers/">371. 两整数之和</a></h4><p>难度：中等</p>
+<p><strong>不使用</strong>运算符 <code>+</code> 和 <code>-</code> ，计算两整数 <code>a</code> 、<code>b</code> 之和。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入: a = 1, b = 2输出: 3</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入: a = -2, b = 3输出: 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>解析：</strong></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sum-of-two-integers/solution/wei-yun-suan-xiang-jie-yi-ji-zai-python-zhong-xu-y/">位运算详解以及在 Python 中需要的特殊处理 - 两整数之和 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<p>a ^ b 表示没有考虑进位的情况下两数的和，(a &amp; b) &lt;&lt; 1 就是进位。</p>
+<p>递归会终止的原因是 (a &amp; b) &lt;&lt; 1 最右边会多一个 0，那么继续递归，进位最右边的 0 会慢慢增多，最后进位会变为 0，递归终止。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSum</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;        <span class="keyword">return</span> (b==<span class="number">0</span>) ? a : getSum(a^b,(a&amp;b) &lt;&lt; <span class="number">1</span>)   ;         &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="318-最大单词长度乘积"><a href="#318-最大单词长度乘积" class="headerlink" title="318. 最大单词长度乘积"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-product-of-word-lengths/">318. 最大单词长度乘积</a></h4><p>难度：中等</p>
+<p>给定一个字符串数组 <code>words</code>，找到 <code>length(word[i]) * length(word[j])</code> 的最大值，并且这两个单词不含有公共字母。你可以认为每个单词只包含小写字母。如果不存在这样的两个单词，返回 0。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入: [&quot;abcw&quot;,&quot;baz&quot;,&quot;foo&quot;,&quot;bar&quot;,&quot;xtfn&quot;,&quot;abcdef&quot;]输出: 16 解释: 这两个单词为 &quot;abcw&quot;, &quot;xtfn&quot;。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入: [&quot;a&quot;,&quot;ab&quot;,&quot;abc&quot;,&quot;d&quot;,&quot;cd&quot;,&quot;bcd&quot;,&quot;abcd&quot;]输出: 4 解释: 这两个单词为 &quot;ab&quot;, &quot;cd&quot;。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入: [&quot;a&quot;,&quot;aa&quot;,&quot;aaa&quot;,&quot;aaaa&quot;]输出: 0 解释: 不存在这样的两个单词。</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>2 &lt;= words.length &lt;= 1000</code></li>
+<li><code>1 &lt;= words[i].length &lt;= 1000</code></li>
+<li><code>words[i]</code> 仅包含小写字母</li>
+</ul>
+<p><strong>解析：</strong></p>
+<p>来源链接：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProduct</span><span class="params">(String[] words)</span> </span>&#123;        <span class="keyword">int</span> n  = words.length;        <span class="keyword">int</span>[] val = <span class="keyword">new</span> <span class="keyword">int</span>[n];        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;n;i++)&#123;            <span class="keyword">for</span>(<span class="keyword">char</span> c : words[i].toCharArray())&#123;                val[i] |= <span class="number">1</span>&lt;&lt;(c - <span class="string">&#x27;a&#x27;</span>);            &#125;        &#125;         <span class="keyword">int</span> res = <span class="number">0</span>;        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;n;i++)&#123;            <span class="keyword">for</span>(<span class="keyword">int</span> j = i +<span class="number">1</span>;j &lt; n;j++)&#123;                <span class="keyword">if</span>((val[i] &amp; val[j]) == <span class="number">0</span>)&#123;                    res = Math.max(res,words[i].length() * words[j].length());                &#125;            &#125;        &#125;        <span class="keyword">return</span> res;           &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>详细解释版</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** * 解决方案： * 1. int的位数是32位，小写字母是26位，可以将小写字母的数字映射到比特位的对应的位置上（如z为26则映射到右到左第26位比特位为1），对应的字符串对应着32位比特位中的数个1，重复的字符不影响，因为只需要判断字符存在于另一字符串与否 * 2. 当str1与str2对应的32位比特，进行与运算，如为0说明没有对应字符位双方都为1，则可保存【最大单词长度乘积】 * 方法一：位运算——与运算 * Java：97% 65% * 复杂度：O(n^2) O(n) */</span><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProduct</span><span class="params">(String[] words)</span> </span>&#123;        <span class="keyword">int</span> n = words.length;        <span class="keyword">int</span>[] bitWords = <span class="keyword">new</span> <span class="keyword">int</span>[n];        <span class="comment">//(1)遍历每个word：将每个word对应的字符映射到bit上，如z为从右往左数第26位        for (int i = 0; i &lt; n; i++) &#123;            String word = words[i];            //存放bit的32位整数容器            int bitWord = 0;            //(1.1)遍历每个字母，放入bitWord中            for (int j = 0; j &lt; word.length(); j++) &#123;                bitWord |= (1 &lt;&lt; (word.charAt(j) - &#x27;a&#x27;));            &#125;            //(1.2)将bitWord放入bitWords数组中            bitWords[i] = bitWord;        &#125;        int res = 0;        //(2)暴力循环：当i与j对应的word进行&quot;与运算&quot;时，如果结果==0，则说明不存在相同字母        for (int i = 0; i &lt; n; i++) &#123;            for (int j = i; j &lt; n; j++) &#123;                //(2.1)不存在相同字母才进行计算                if ((bitWords[i]&amp;bitWords[j])==0) &#123;                    //(2.2)保存最大值                    res = Math.max(res, words[i].length() * words[j].length());                &#125;            &#125;        &#125;        return res;    &#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p><strong>解析：</strong></p>
+<p>官方解析链接：</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/counting-bits/solution/bi-te-wei-ji-shu-by-leetcode-solution-0t1i/">比特位计数 - 比特位计数 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/counting-bits/solution/hen-qing-xi-de-si-lu-by-duadua/">清晰的思路 - 比特位计数 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="keyword">public</span> <span class="keyword">int</span>[] countBits(<span class="keyword">int</span> n) &#123;        <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">1</span>];        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n ;i++)&#123;            res[i] = res[i&amp;(i-<span class="number">1</span>)] + <span class="number">1</span>;        &#125;        <span class="keyword">return</span> res;    &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>思路</strong></p>
+<p>对于所有的数字，只有两类：</p>
+<ol>
+<li>奇数：二进制表示中，奇数一定比前面那个偶数多一个 1，因为多的就是最低位的 1。</li>
+</ol>
+<ul>
+<li>```<pre><code>举例：    0 = 0       1 = 1   2 = 10      3 = 11
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1. 偶数：二进制表示中，偶数中 1 的个数一定和除以 2 之后的那个数一样多。因为最低位是 0，除以 2 就是右移一位，也就是把那个 0 抹掉而已，所以 1 的个数是不变的。</span><br><span class="line"></span><br><span class="line">- ```</span><br><span class="line">      举例：   2 = 10       4 = 100       8 = 1000   3 = 11       6 = 110       12 = 1100</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>另外，0 的 1 个数为 0，于是就可以根据奇偶性开始遍历计算了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="keyword">public</span> <span class="keyword">int</span>[] countBits(<span class="keyword">int</span> num) &#123;      <span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[num + <span class="number">1</span>];      <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= num; i++)&#123;        <span class="keyword">if</span> ((i &amp; <span class="number">1</span>) == <span class="number">0</span>)&#123; <span class="comment">//奇数          result[i] = result[i &gt;&gt; 1];        &#125;else &#123;          result[i] = result[i - 1] + 1;        &#125;      &#125;      return result;    &#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/08/7-%E5%9B%BE/" rel="prev" title="7.图">
+      <i class="fa fa-chevron-left"></i> 7.图
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#461-%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB"><span class="nav-number">1.0.1.</span> <span class="nav-text">461. 汉明距离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#136-%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97"><span class="nav-number">1.0.2.</span> <span class="nav-text">136. 只出现一次的数字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#268-%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97"><span class="nav-number">1.0.3.</span> <span class="nav-text">268. 丢失的数字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#260-%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97-III"><span class="nav-number">1.0.4.</span> <span class="nav-text">260. 只出现一次的数字 III</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#190-%E9%A2%A0%E5%80%92%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BD%8D"><span class="nav-number">1.0.5.</span> <span class="nav-text">190. 颠倒二进制位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E4%B8%8D%E7%94%A8%E9%A2%9D%E5%A4%96%E5%8F%98%E9%87%8F%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E6%95%B4%E6%95%B0"><span class="nav-number">1.0.6.</span> <span class="nav-text">6. 不用额外变量交换两个整数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#231-2-%E7%9A%84%E5%B9%82"><span class="nav-number">1.0.7.</span> <span class="nav-text">231. 2 的幂</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#342-4%E7%9A%84%E5%B9%82"><span class="nav-number">1.0.8.</span> <span class="nav-text">342. 4的幂</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#693-%E4%BA%A4%E6%9B%BF%E4%BD%8D%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%95%B0"><span class="nav-number">1.0.9.</span> <span class="nav-text">693. 交替位二进制数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#476-%E6%95%B0%E5%AD%97%E7%9A%84%E8%A1%A5%E6%95%B0"><span class="nav-number">1.0.10.</span> <span class="nav-text">476. 数字的补数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#371-%E4%B8%A4%E6%95%B4%E6%95%B0%E4%B9%8B%E5%92%8C"><span class="nav-number">1.0.11.</span> <span class="nav-text">371. 两整数之和</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#318-%E6%9C%80%E5%A4%A7%E5%8D%95%E8%AF%8D%E9%95%BF%E5%BA%A6%E4%B9%98%E7%A7%AF"><span class="nav-number">1.0.12.</span> <span class="nav-text">318. 最大单词长度乘积</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LoverDXL"
+      src="/images/1.jpg">
+  <p class="site-author-name" itemprop="name">LoverDXL</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/LoverDXL" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;LoverDXL" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LoverDXL</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">132k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:01</span>
+</div>
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/6/2021 12:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = " Runing "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + "小 时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共53.9k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <span class="site-uv" title="总访客量">
+    我的第<span id="busuanzi_value_site_uv"></span>位朋友, 
+  </span>
+
+  <span class="site-pv" title="总访问量">
+    经过<span id="busuanzi_value_site_pv"></span>次回眸与你相遇
+  </span>
+</div>
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+ 
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>
