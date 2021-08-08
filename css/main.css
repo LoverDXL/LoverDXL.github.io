@@ -1174,7 +1174,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #5977ff;
+  background: #f4393d;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2547,4 +2547,20 @@ body {
     background-image: url("https://ziyuan.lruihao.cn/images/bg_cell.png");
     background-size: cover;
   }
+}
+.post {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  padding: 25px;
+  -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
+  -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
+}
+.site-meta {
+  background: #0684bd;
+}
+.brand {
+  color: #4dfc23;
+}
+.site-subtitle {
+  color: #4dfc23;
 }
