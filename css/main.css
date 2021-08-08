@@ -1174,7 +1174,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #f63bff;
+  background: #e31cb1;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2536,7 +2536,7 @@ ul.breadcrumb li + li:last-child {
   margin-top: 16px;
 }
 body {
-  background: url("https://desk.zol.com.cn/bizhi/9438_114847_2.html");
+  background: url("https://source.unsplash.com/random/2560x1600");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: 50% 50%;
