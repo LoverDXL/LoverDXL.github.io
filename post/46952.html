@@ -20,19 +20,19 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"loverdxl.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="104. 二叉树的最大深度难度：简单 给定一个二叉树，找出其最大深度。 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。 说明: 叶子节点是指没有子节点的节点。 示例：给定二叉树 [3,9,20,null,null,15,7]， 12345  3 &#x2F; \9  20  &#x2F;  \ 15   7  返回它的最大深度 3 。 解析： 12345678910111213141516171819202">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2.树">
-<meta property="og:url" content="https://loverdxl.github.io/post/46952.html">
+<meta property="og:url" content="http://example.com/post/46952.html">
 <meta property="og:site_name" content="新的一天，每时每分每秒都应该学习">
 <meta property="og:description" content="104. 二叉树的最大深度难度：简单 给定一个二叉树，找出其最大深度。 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。 说明: 叶子节点是指没有子节点的节点。 示例：给定二叉树 [3,9,20,null,null,15,7]， 12345  3 &#x2F; \9  20  &#x2F;  \ 15   7  返回它的最大深度 3 。 解析： 12345678910111213141516171819202">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2020/10/06/balance_1.jpg">
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2020/10/06/balance_2.jpg">
-<meta property="og:image" content="https://loverdxl.github.io/post/46952/Users/Wanan/AppData/Roaming/Typora/typora-user-images/image-20210712194752699.png">
+<meta property="og:image" content="http://example.com/post/46952/Users/Wanan/AppData/Roaming/Typora/typora-user-images/image-20210712194752699.png">
 <meta property="og:image" content="https://assets.leetcode-cn.com/solution-static/110/1_1.png">
 <meta property="og:image" content="https://assets.leetcode-cn.com/solution-static/110/2_1.png">
 <meta property="og:image" content="https://pic.leetcode-cn.com/f39419c0fd3b3225a643ac4f40a1289c93cb03a6fb07a0be9e763c732a49b47d-543.jpg">
@@ -70,15 +70,15 @@
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2018/12/14/binarytree.png">
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2018/12/14/binarytree.png">
 <meta property="og:image" content="https://pic.leetcode-cn.com/1599885247-rxcHcZ-Picture1.png">
-<meta property="og:image" content="https://loverdxl.github.io/post/46952/Users/Wanan/AppData/Roaming/Typora/typora-user-images/image-20210717103919744.png">
+<meta property="og:image" content="http://example.com/post/46952/Users/Wanan/AppData/Roaming/Typora/typora-user-images/image-20210717103919744.png">
 <meta property="og:image" content="https://pic.leetcode-cn.com/1599885247-mgYjRv-Picture2.png">
-<meta property="og:image" content="https://loverdxl.github.io/post/46952/Users/Wanan/AppData/Roaming/Typora/typora-user-images/image-20210717103714732.png">
+<meta property="og:image" content="http://example.com/post/46952/Users/Wanan/AppData/Roaming/Typora/typora-user-images/image-20210717103714732.png">
 <meta property="og:image" content="https://pic.leetcode-cn.com/1599885247-KpxUys-Picture3.png">
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2021/02/18/btree1.jpg">
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2021/02/18/btree.jpg">
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2020/09/21/sum_tree_1.jpg">
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2020/09/21/sum_tree_2.jpg">
-<meta property="og:image" content="https://loverdxl.github.io/post/46952/Users/Wanan/AppData/Roaming/Typora/typora-user-images/image-20210718112957683.png">
+<meta property="og:image" content="http://example.com/post/46952/Users/Wanan/AppData/Roaming/Typora/typora-user-images/image-20210718112957683.png">
 <meta property="og:image" content="https://camo.githubusercontent.com/3ec9c694c17accef4fac75d04366dc0aac133fd904e451578417b3eb57b61944/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f35633633386435392d643461652d346261342d616434342d3830626463333066333864642e6a7067">
 <meta property="article:published_time" content="2021-08-08T06:02:29.000Z">
 <meta property="article:modified_time" content="2021-08-10T13:47:59.973Z">
@@ -87,7 +87,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/10/06/balance_1.jpg">
 
-<link rel="canonical" href="https://loverdxl.github.io/post/46952.html">
+<link rel="canonical" href="http://example.com/post/46952.html">
 
 
 <script id="page-configurations">
@@ -245,7 +245,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://loverdxl.github.io/post/46952.html">
+    <link itemprop="mainEntityOfPage" href="http://example.com/post/46952.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/1.jpg">
