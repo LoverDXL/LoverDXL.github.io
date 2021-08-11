@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/post/62688.html">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/10/Mysql/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/1.jpg">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/post/62688.html" class="post-title-link" itemprop="url">Mysql</a>
+            <a href="/2021/08/10/Mysql/" class="post-title-link" itemprop="url">Mysql</a>
         </h2>
 
         <div class="post-meta">
@@ -260,7 +260,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/post/60304.html">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/10/%E7%AE%97%E6%B3%95/%E9%80%92%E5%BD%92%E6%80%9D%E8%B7%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/1.jpg">
@@ -274,7 +274,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/post/60304.html" class="post-title-link" itemprop="url">递归思路</a>
+            <a href="/2021/08/10/%E7%AE%97%E6%B3%95/%E9%80%92%E5%BD%92%E6%80%9D%E8%B7%AF/" class="post-title-link" itemprop="url">递归思路</a>
         </h2>
 
         <div class="post-meta">
@@ -342,7 +342,7 @@
 <h2 id="递归解题三部曲"><a href="#递归解题三部曲" class="headerlink" title="递归解题三部曲"></a><strong>递归解题三部曲</strong></h2><p>何为递归？程序反复调用自身即是递归。</p>
 <p>我自己在刚开始解决递归问题的时候，总是会去纠结这一层函数做了什么，它调用自身后的下一层函数又做了什么…然后就会觉得实现一个递归解法十分复杂，根本就无从下手。</p>
 <p>相信很多初学者和我一样，这是一个思维误区，一定要走出来。既然递归是一个反复调用自身的过程，这就说明它每一级的功能都是一样的，<strong>因此我们只需要关注一级递归的解决过程即可。</strong></p>
-<p><img src="/post/60304/blog\source_posts\算法\递归思路\1.png" alt="1"></p>
+<p><img src="/.com//blog\source_posts\算法\递归思路\1.png" alt="1"></p>
 <p>如上图所示，我们需要关心的主要是以下三点：</p>
 <ol>
 <li>整个递归的终止条件。</li>
@@ -364,7 +364,7 @@
 <li><strong>找返回值。</strong> 应该返回什么？题目求的是树的最大深度，我们需要从每一级得到的信息自然是当前这一级对应的树的最大深度，因此我们的返回值应该是当前树的最大深度，这一步可以结合第三步来看。</li>
 <li><strong>本级递归应该做什么。</strong> 首先，还是强调要走出之前的思维误区，递归后我们眼里的树一定是这个样子的，看下图。此时就三个节点：root、root.left、root.right，其中根据第二步，root.left和root.right分别记录的是root的左右子树的最大深度。那么本级递归应该做什么就很明确了，自然就是在root的左右子树中选择较大的一个，再加上1就是以root为根的子树的最大深度了，然后再返回这个深度即可。</li>
 </ol>
-<p><img src="/post/60304/blog\source_posts\算法\递归思路\2.png" alt="2"></p>
+<p><img src="/.com//blog\source_posts\算法\递归思路\2.png" alt="2"></p>
 <p>具体Java代码如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxDepth(TreeNode root) &#123;</span><br><span class="line">        //终止条件：当树为空时结束递归，并返回当前深度0</span><br><span class="line">        if(root == null)&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        //root的左、右子树的最大深度</span><br><span class="line">        int leftDepth = maxDepth(root.left);</span><br><span class="line">        int rightDepth = maxDepth(root.right);</span><br><span class="line">        //返回的是左右子树的最大深度+1</span><br><span class="line">        return Math.max(leftDepth, rightDepth) + 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -378,7 +378,7 @@
 <li><strong>找返回值。</strong> 我们希望向上一级递归返回什么信息？由于我们的目的是两两交换链表中相邻的节点，因此自然希望交换给上一级递归的是已经完成交换处理，即已经处理好的链表。</li>
 <li><strong>本级递归应该做什么。</strong> 结合第二步，看下图！由于只考虑本级递归，所以这个链表在我们眼里其实也就三个节点：head、head.next、已处理完的链表部分。而本级递归的任务也就是交换这3个节点中的前两个节点，就很easy了。</li>
 </ol>
-<p><img src="/post/60304/blog\source_posts\算法\递归思路\3.png" alt="3"></p>
+<p><img src="/.com//blog\source_posts\算法\递归思路\3.png" alt="3"></p>
 <p>附上Java代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode swapPairs(ListNode head) &#123;</span><br><span class="line">      	//终止条件：链表只剩一个节点或者没节点了，没得交换了。返回的是已经处理好的链表</span><br><span class="line">        if(head == null || head.next == null)&#123;</span><br><span class="line">            return head;</span><br><span class="line">        &#125;</span><br><span class="line">      	//一共三个节点:head, next, swapPairs(next.next)</span><br><span class="line">      	//下面的任务便是交换这3个节点中的前两个节点</span><br><span class="line">        ListNode next = head.next;</span><br><span class="line">        head.next = swapPairs(next.next);</span><br><span class="line">        next.next = head;</span><br><span class="line">      	//根据第二步：返回给上一级的是当前已经完成交换后，即处理好了的链表部分</span><br><span class="line">        return next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -425,7 +425,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/post/49834.html">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/10/%E7%AE%97%E6%B3%95/3-%E8%B4%AA%E5%BF%83%E6%80%9D%E6%83%B3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/1.jpg">
@@ -439,7 +439,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/post/49834.html" class="post-title-link" itemprop="url">3.贪心思想</a>
+            <a href="/2021/08/10/%E7%AE%97%E6%B3%95/3-%E8%B4%AA%E5%BF%83%E6%80%9D%E6%83%B3/" class="post-title-link" itemprop="url">3.贪心思想</a>
         </h2>
 
         <div class="post-meta">
@@ -497,7 +497,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/post/23869.html">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/10/%E7%AE%97%E6%B3%95/2-%E6%8E%92%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/1.jpg">
@@ -511,7 +511,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/post/23869.html" class="post-title-link" itemprop="url">2.排序</a>
+            <a href="/2021/08/10/%E7%AE%97%E6%B3%95/2-%E6%8E%92%E5%BA%8F/" class="post-title-link" itemprop="url">2.排序</a>
         </h2>
 
         <div class="post-meta">
@@ -675,7 +675,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/post/5243.html">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/8-%E4%BD%8D%E8%BF%90%E7%AE%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/1.jpg">
@@ -689,7 +689,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/post/5243.html" class="post-title-link" itemprop="url">8.位运算</a>
+            <a href="/2021/08/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/8-%E4%BD%8D%E8%BF%90%E7%AE%97/" class="post-title-link" itemprop="url">8.位运算</a>
         </h2>
 
         <div class="post-meta">
