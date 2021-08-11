@@ -188,6 +188,402 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/post/6179.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="CodeRoad">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="新的一天，每时每分每秒都应该学习">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/6179.html" class="post-title-link" itemprop="url">6.数组与矩阵</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-08 14:17:23" itemprop="dateCreated datePublished" datetime="2021-08-08T14:17:23+08:00">2021-08-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-10 21:47:59" itemprop="dateModified" datetime="2021-08-10T21:47:59+08:00">2021-08-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>13k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>12 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="283-移动零"><a href="#283-移动零" class="headerlink" title="283. 移动零"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/move-zeroes/">283. 移动零</a></h4><p>难度：简单</p>
+<p>给定一个数组 <code>nums</code>，编写一个函数将所有 <code>0</code> 移动到数组的末尾，同时保持非零元素的相对顺序。</p>
+<p><strong>示例:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [0,1,0,3,12]</span><br><span class="line">输出: [1,3,12,0,0]</span><br></pre></td></tr></table></figure>
+
+<p><strong>说明</strong>:</p>
+<ol>
+<li>必须在原数组上操作，不能拷贝额外的数组。</li>
+<li>尽量减少操作次数。</li>
+</ol>
+<p><strong>解析：</strong></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/move-zeroes/solution/dong-hua-yan-shi-283yi-dong-ling-by-wang_ni_ma/">动画演示 283.移动零 - 移动零 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">moveZeroes</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> idx = <span class="number">0</span> ;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> num : nums)&#123;</span><br><span class="line">            <span class="keyword">if</span>(num != <span class="number">0</span>)&#123;</span><br><span class="line">                nums[idx++] = num;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(idx &lt; nums.length)&#123;</span><br><span class="line">            nums[idx++] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="566-重塑矩阵"><a href="#566-重塑矩阵" class="headerlink" title="566. 重塑矩阵"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reshape-the-matrix/">566. 重塑矩阵</a></h4><p>难度：简单</p>
+<p>在MATLAB中，有一个非常有用的函数 <code>reshape</code>，它可以将一个矩阵重塑为另一个大小不同的新矩阵，但保留其原始数据。</p>
+<p>给出一个由二维数组表示的矩阵，以及两个正整数<code>r</code>和<code>c</code>，分别表示想要的重构的矩阵的行数和列数。</p>
+<p>重构后的矩阵需要将原始矩阵的所有元素以相同的<strong>行遍历顺序</strong>填充。</p>
+<p>如果具有给定参数的<code>reshape</code>操作是可行且合理的，则输出新的重塑矩阵；否则，输出原始矩阵。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入: </span><br><span class="line">nums = </span><br><span class="line">[[1,2],</span><br><span class="line"> [3,4]]</span><br><span class="line">r = 1, c = 4</span><br><span class="line">输出: </span><br><span class="line">[[1,2,3,4]]</span><br><span class="line">解释:</span><br><span class="line">行遍历nums的结果是 [1,2,3,4]。新的矩阵是 1 * 4 矩阵, 用之前的元素值一行一行填充新矩阵。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入: </span><br><span class="line">nums = </span><br><span class="line">[[1,2],</span><br><span class="line"> [3,4]]</span><br><span class="line">r = 2, c = 4</span><br><span class="line">输出: </span><br><span class="line">[[1,2],</span><br><span class="line"> [3,4]]</span><br><span class="line">解释:</span><br><span class="line">没有办法将 2 * 2 矩阵转化为 2 * 4 矩阵。 所以输出原矩阵。</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>给定矩阵的宽和高范围在 [1, 100]。</li>
+<li>给定的 r 和 c 都是正数。</li>
+</ol>
+<p><strong>解析;</strong></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reshape-the-matrix/solution/zhong-su-ju-zhen-by-leetcode-solution-gt0g/">重塑矩阵 - 重塑矩阵 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[][] matrixReshape(<span class="keyword">int</span>[][] mat, <span class="keyword">int</span> r, <span class="keyword">int</span> c) &#123;</span><br><span class="line">        <span class="keyword">int</span> m = mat.length;</span><br><span class="line">        <span class="keyword">int</span> n = mat[<span class="number">0</span>].length;</span><br><span class="line">        <span class="keyword">if</span>(m*n != r*c) <span class="keyword">return</span> mat;</span><br><span class="line">        <span class="keyword">int</span>[][] reshapeMat = <span class="keyword">new</span> <span class="keyword">int</span>[r][c];</span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ;i&lt;r;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j&lt;c;j++)&#123;</span><br><span class="line">                reshapeMat[i][j] = mat[index/n][index % n];<span class="comment">//相当于把二维数组映射为一维数组，然后再映射回二维数组</span></span><br><span class="line">                index++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> reshapeMat;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="485-最大连续-1-的个数"><a href="#485-最大连续-1-的个数" class="headerlink" title="485. 最大连续 1 的个数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/max-consecutive-ones/">485. 最大连续 1 的个数</a></h4><p>难度：简单</p>
+<p>给定一个二进制数组， 计算其中最大连续 1 的个数。</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：[1,1,0,1,1,1]</span><br><span class="line">输出：3</span><br><span class="line">解释：开头的两位和最后的三位都是连续 1 ，所以最大连续 1 的个数是 3.</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>输入的数组只包含 <code>0</code> 和 <code>1</code> 。</li>
+<li>输入数组的长度是正整数，且不超过 10,000。</li>
+</ul>
+<p><strong>解析：</strong></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/max-consecutive-ones/solution/zui-da-lian-xu-1de-ge-shu-by-leetcode-so-252a/">最大连续1的个数 - 最大连续 1 的个数 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMaxConsecutiveOnes</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>,cur = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> num : nums)&#123;</span><br><span class="line">            cur = num == <span class="number">0</span>? <span class="number">0</span> : (cur +<span class="number">1</span>);</span><br><span class="line">            max = Math.max(max,cur);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="240-搜索二维矩阵-II"><a href="#240-搜索二维矩阵-II" class="headerlink" title="240. 搜索二维矩阵 II"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/search-a-2d-matrix-ii/">240. 搜索二维矩阵 II</a></h4><p>难度：中等</p>
+<p>编写一个高效的算法来搜索 <code>*m* x *n*</code> 矩阵 <code>matrix</code> 中的一个目标值 <code>target</code> 。该矩阵具有以下特性：</p>
+<ul>
+<li>每行的元素从左到右升序排列。</li>
+<li>每列的元素从上到下升序排列。</li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/11/25/searchgrid2.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：matrix = [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], target = 5</span><br><span class="line">输出：true</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/11/25/searchgrid.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：matrix = [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], target = 20</span><br><span class="line">输出：false</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>m == matrix.length</code></li>
+<li><code>n == matrix[i].length</code></li>
+<li><code>1 &lt;= n, m &lt;= 300</code></li>
+<li><code>-109 &lt;= matix[i][j] &lt;= 109</code></li>
+<li>每行的所有元素从左到右升序排列</li>
+<li>每列的所有元素从上到下升序排列</li>
+<li><code>-109 &lt;= target &lt;= 109</code></li>
+</ul>
+<p><strong>解析：</strong></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/search-a-2d-matrix-ii/solution/sou-suo-er-wei-ju-zhen-ii-by-leetcode-2/">搜索二维矩阵 II - 搜索二维矩阵 II - 力扣（LeetCode） (leetcode-cn.com)</a> 方法四</p>
+<p>这里是对“方法四”的“如何选出发点”的补充：</p>
+<ul>
+<li>选左上角，往右走和往下走都增大，不能选</li>
+<li>选右下角，往上走和往左走都减小，不能选</li>
+<li>选左下角，往右走增大，往上走减小，可选</li>
+<li>选右上角，往下走增大，往左走减小，可选</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">searchMatrix</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 以右上角的数字为准，跟target比较，决定是排除列还是行</span></span><br><span class="line">        <span class="keyword">int</span> m = matrix.length, n = matrix[<span class="number">0</span>].length;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = n - <span class="number">1</span>;   <span class="comment">// 从第一行，最后一列开始搜索</span></span><br><span class="line">        <span class="keyword">while</span> (i &gt;= <span class="number">0</span> &amp;&amp; j &gt;= <span class="number">0</span> &amp;&amp; i &lt; m &amp;&amp; j &lt; n) &#123;</span><br><span class="line">            <span class="keyword">int</span> num = matrix[i][j];</span><br><span class="line">            <span class="keyword">if</span> (num == target) &#123;   <span class="comment">// 第1种情况: 查找成功</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (num &gt; target) &#123;  <span class="comment">// 第2种情况: 当前列的元素都比目标大，可排除当前列</span></span><br><span class="line">                j--;    <span class="comment">// 排除当前列</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;    <span class="comment">// 第3种情况: 当前行的元素都比目标小，可排除当前行</span></span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自己写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">searchMatrix</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(matrix == <span class="keyword">null</span> || matrix.length==<span class="number">0</span> || matrix[<span class="number">0</span>].length == <span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">int</span> m = matrix.length,n = matrix[<span class="number">0</span>].length;</span><br><span class="line">        <span class="keyword">int</span> row = <span class="number">0</span> ,col = n-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(row &lt; m &amp;&amp; col &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(matrix[row][col] == target) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>((target &lt; matrix[row][col])) col--;</span><br><span class="line">            <span class="keyword">else</span> row++;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;       </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h4 id="378-有序矩阵中第-K-小的元素"><a href="#378-有序矩阵中第-K-小的元素" class="headerlink" title="378. 有序矩阵中第 K 小的元素"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/">378. 有序矩阵中第 K 小的元素</a></h4><p>难度：中等</p>
+<p>给你一个 <code>n x n</code> 矩阵 <code>matrix</code> ，其中每行和每列元素均按升序排序，找到矩阵中第 <code>k</code> 小的元素。<br>请注意，它是 <strong>排序后</strong> 的第 <code>k</code> 小元素，而不是第 <code>k</code> 个 <strong>不同</strong> 的元素。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：matrix = [[1,5,9],[10,11,13],[12,13,15]], k = 8</span><br><span class="line">输出：13</span><br><span class="line">解释：矩阵中的元素为 [1,5,9,10,11,12,13,13,15]，第 8 小元素是 13</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：matrix = [[-5]], k = 1</span><br><span class="line">输出：-5</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>n == matrix.length</code></li>
+<li><code>n == matrix[i].length</code></li>
+<li><code>1 &lt;= n &lt;= 300</code></li>
+<li><code>-109 &lt;= matrix[i][j] &lt;= 109</code></li>
+<li>题目数据 <strong>保证</strong> <code>matrix</code> 中的所有行和列都按 <strong>非递减顺序</strong> 排列</li>
+<li><code>1 &lt;= k &lt;= n2</code></li>
+</ul>
+<p><strong>解析</strong></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/solution/378java-er-fen-fa-tu-jie-you-xian-dui-lie-liang-ch/">378.java 二分法（图解）/优先队列 两种方法详解 - 有序矩阵中第 K 小的元素 - 力扣（LeetCode） (leetcode-cn.com)</a> 方法二</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">kthSmallest</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = matrix.length;</span><br><span class="line">        <span class="keyword">int</span> left = matrix[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> right = matrix[n-<span class="number">1</span>][n-<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right)&#123;<span class="comment">//这里一般题目二分查找是left &lt;= right 但该题是为了返回左边界</span></span><br><span class="line">            <span class="keyword">int</span> mid = left + ((right - left)&gt;&gt;<span class="number">1</span>);<span class="comment">//等同于(left + right-left + left)/2 即防止left + right 溢出</span></span><br><span class="line">            <span class="keyword">if</span>(check(matrix,mid,k,n))&#123;</span><br><span class="line">                right = mid;</span><br><span class="line">            &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span>[][] matrix,<span class="keyword">int</span> mid,<span class="keyword">int</span> k,<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = n-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//第n-1行第0列  从左下角出发</span></span><br><span class="line">        <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&gt;=<span class="number">0</span> &amp;&amp; j &lt; n)&#123;</span><br><span class="line">            <span class="keyword">if</span>(matrix[i][j] &lt;= mid)&#123;</span><br><span class="line">                num += i+<span class="number">1</span>;<span class="comment">//该行前面的数都是小于mid的数，+1是因为加上本身也属于</span></span><br><span class="line">                j++;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                i--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> num&gt;=k;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关于<strong>二分查找返回的left一定在矩阵中</strong>这个问题, 写一点个人的理解.<br>可以参考34. 在排序数组中查找元素的第一个和最后一个位置.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/">https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">我们先看check函数.check函数的目的是统计矩阵里小等于mid的元素数目count. 再判断count和k的关系.因为mid = (l + r) / <span class="number">2</span>这种划分方法是把矩阵划分成了[left , mid] 与[mid + <span class="number">1</span>, right]两部分. 当 count &lt; k 时, 说明mid太小了, 我们应该在[mid + <span class="number">1</span>, right] 这个范围里查找. 否则在[left, mid]范围里查找.</span><br><span class="line">如果存在一个不在矩阵中的数a满足条件, 因为a不在矩阵中,那count统计的元素肯定都是小于a的, 那一定存在一个比a小且在矩阵中的数b满足条件,即从小于a的数变成了小于等于b的数 .等用题目中的例子,x = <span class="number">13</span> 和x = <span class="number">14</span> 都满足小于等于x的元素数目等于<span class="number">8</span>, 对<span class="number">14</span>来说统计的都是小于它的数, 而对<span class="number">13</span>来说统计的都是小于等于它的数. 问题来了, 那为何取到的不是<span class="number">14</span>而是<span class="number">13</span>呢?</span><br><span class="line"></span><br><span class="line">因为我们取mid的取法是 mid = (left + right) / <span class="number">2</span>, 当left &lt; right时, mid 永远 取不到right, 想要mid取到right ,只有left == right. 但循环条件是 <span class="keyword">while</span>(left &lt; right),当 left == right时循环已经终止. 所以我们得到会是一个左边界. 还是用题目中的例子, 假设left = <span class="number">13</span>, right = <span class="number">14</span> 则 mid = (<span class="number">13</span> + <span class="number">14</span>) / <span class="number">2</span> = <span class="number">13</span></span><br></pre></td></tr></table></figure>
+
+<p>另一种解法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">kthSmallest</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m = matrix.length, n = matrix[<span class="number">0</span>].length;</span><br><span class="line">    <span class="keyword">int</span> lo = matrix[<span class="number">0</span>][<span class="number">0</span>], hi = matrix[m - <span class="number">1</span>][n - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">while</span> (lo &lt;= hi) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = lo + (hi - lo) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n &amp;&amp; matrix[i][j] &lt;= mid; j++) &#123;</span><br><span class="line">                cnt++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (cnt &lt; k) lo = mid + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> hi = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> lo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="645-错误的集合"><a href="#645-错误的集合" class="headerlink" title="645. 错误的集合"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/set-mismatch/">645. 错误的集合</a></h4><p>难度：简单</p>
+<p>集合 <code>s</code> 包含从 <code>1</code> 到 <code>n</code> 的整数。不幸的是，因为数据错误，导致集合里面某一个数字复制了成了集合里面的另外一个数字的值，导致集合 <strong>丢失了一个数字</strong> 并且 <strong>有一个数字重复</strong> 。</p>
+<p>给定一个数组 <code>nums</code> 代表了集合 <code>S</code> 发生错误后的结果。</p>
+<p>请你找出重复出现的整数，再找到丢失的整数，将它们以数组的形式返回。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,2,2,4]</span><br><span class="line">输出：[2,3]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,1]</span><br><span class="line">输出：[1,2]</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>2 &lt;= nums.length &lt;= 104</code></li>
+<li><code>1 &lt;= nums[i] &lt;= 104</code></li>
+</ul>
+<p><strong>解析：</strong></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/set-mismatch/solution/gong-shui-san-xie-yi-ti-san-jie-ji-shu-s-vnr9/">【宫水三叶】一题三解：「计数」&amp;「数学」&amp;「桶排序」 - 错误的集合 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/set-mismatch/solution/javasan-chong-jie-fa-by-wwwhang-bqky/">Java三种解法 hash 鸽巢原理 原地算法 - 错误的集合 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] findErrorNums(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt; nums.length;i++)&#123;</span><br><span class="line">            <span class="keyword">while</span>(nums[i] != i+<span class="number">1</span> &amp;&amp; nums[i] != nums[nums[i]-<span class="number">1</span>])&#123;</span><br><span class="line">                swap(nums,i,nums[i]-<span class="number">1</span>);<span class="comment">//这里i与nums[i] -1 都是索引  即对于每一个数字nums[i]：移动到nums[nums[i] - 1]。这样，每个数字都可以移动到正确的地方。</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line">         <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ;i&lt; nums.length;i++)&#123;</span><br><span class="line">             <span class="keyword">if</span>(nums[i] != i +<span class="number">1</span>)&#123;</span><br><span class="line">                 <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;nums[i],i+<span class="number">1</span>&#125;;</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">null</span>;              </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] nums,<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp = nums[i];</span><br><span class="line">        nums[i] = nums[j];</span><br><span class="line">        nums[j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/users/yukkkino/avatar_1616732979.png" alt="Yukkkino"></p>
+<p><strong>解释</strong></p>
+<ol>
+<li>因为集合s包含1到n的整数，那么数组中的某个元素值恒等于索引值+1。可以使用计数，把每个元素出现的次数记录下来，遍历次数数组一遍即可知道哪些数字出现了，哪些没出现。</li>
+<li>有一个常用的方法是，将元素 i + 1 存放到数组下标索引 i 中去，即做一个索引到元素值的映射（i -&gt; i + 1）。 那么我们就需要满足这样性质的数组：</li>
+</ol>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nums[i] = i+<span class="number">1</span>    →    i = nums[i]−<span class="number">1</span>    →    nums[i] = nums[nums[i]−<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>因此，要先对数组做一下处理，把每个元素i移动到数组下标i-1的地方去。 最后，每一个元素都交换到了它对应的位置，那必然会导致某个索引i，不满足nums[i]=i+1，这个nums[i] 就是我们要找的重复数。当nums[i] 是重复数时，根据数组的性质， 索引i存放的元素为i+1，但此时存放着的是重复数，所以缺少的数字就是i+1。</p>
+<h4 id="287-寻找重复数"><a href="#287-寻找重复数" class="headerlink" title="287. 寻找重复数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-the-duplicate-number/">287. 寻找重复数</a></h4><p>难度：中等</p>
+<p>给定一个包含 <code>n + 1</code> 个整数的数组 <code>nums</code> ，其数字都在 <code>1</code> 到 <code>n</code> 之间（包括 <code>1</code> 和 <code>n</code>），可知至少存在一个重复的整数。</p>
+<p>假设 <code>nums</code> 只有 <strong>一个重复的整数</strong> ，找出 <strong>这个重复的数</strong> 。</p>
+<p>你设计的解决方案必须不修改数组 <code>nums</code> 且只用常量级 <code>O(1)</code> 的额外空间。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,3,4,2,2]</span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [3,1,3,4,2]</span><br><span class="line">输出：3</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,1]</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 4：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,1,2]</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 105</code></li>
+<li><code>nums.length == n + 1</code></li>
+<li><code>1 &lt;= nums[i] &lt;= n</code></li>
+<li><code>nums</code> 中 <strong>只有一个整数</strong> 出现 <strong>两次或多次</strong> ，其余整数均只出现 <strong>一次</strong></li>
+</ul>
+<p><strong>进阶：</strong></p>
+<ul>
+<li>如何证明 <code>nums</code> 中至少存在一个重复的数字?</li>
+<li>你可以设计一个线性级时间复杂度 <code>O(n)</code> 的解决方案吗？</li>
+</ul>
+<p><strong>解析</strong>：</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-the-duplicate-number/solution/er-fen-fa-si-lu-ji-dai-ma-python-by-liweiwei1419/">使用二分法查找一个有范围的整数（结合抽屉原理） - 寻找重复数 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findDuplicate</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// int n = nums;</span></span><br><span class="line">        <span class="comment">// int[] cnts = new int[n+1];</span></span><br><span class="line">        <span class="comment">// int sum = 0,set = 0;</span></span><br><span class="line">        <span class="comment">// for(int num : nums)&#123;</span></span><br><span class="line">        <span class="comment">//     sum += num;</span></span><br><span class="line">        <span class="comment">//     if(cnts[num] == 0) set += num;</span></span><br><span class="line">        <span class="comment">//     cnts[num] = 1; </span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">        <span class="comment">// return  sum -set;</span></span><br><span class="line">        <span class="comment">// 以上方法不行 不通过案例 输入：[2,2,2,2,2] 输出：8 预期结果：2</span></span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">1</span>,h = nums.length-<span class="number">1</span>;<span class="comment">//这里是1到n的数</span></span><br><span class="line">        <span class="keyword">while</span>(l&lt;=h)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = l + (h -l)/<span class="number">2</span>;<span class="comment">//这里注意不能写成1+(h-l)&gt;&gt;1,要写成l+((h-l)&gt;&gt;1)</span></span><br><span class="line">            <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt; nums.length;i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[i] &lt;= mid) cnt++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(cnt &gt; mid) h = mid-<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> l = mid +<span class="number">1</span>; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> l;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>二分查找知识讲解：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kyoner/p/11080078.html">详解二分查找算法 - murphy_gb - 博客园 (cnblogs.com)</a></p>
+<p><strong>快慢指针代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findDuplicate</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> fast = <span class="number">0</span>, slow = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">            fast = nums[nums[fast]];<span class="comment">// fast每次走两步</span></span><br><span class="line">            slow = nums[slow];<span class="comment">// slow每次走一步</span></span><br><span class="line">        &#125;<span class="keyword">while</span> (fast != slow);<span class="comment">// 直至二者相遇，即fast比slow多走了一圈，slow走了一圈，fast走了两圈，逻辑上不会走第三圈</span></span><br><span class="line"></span><br><span class="line">        fast = <span class="number">0</span>;<span class="comment">// 节约空间</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (fast != slow)&#123;<span class="comment">// 直到二者相遇</span></span><br><span class="line">            fast = nums[fast];</span><br><span class="line">            slow = nums[slow];</span><br><span class="line">            <span class="comment">// 二者皆移动一次</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> slow;<span class="comment">// 即我们找到的起点，重复的点</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>快慢指针证明</p>
+<p>![img](file:///C:\Users\Wanan\Documents\Tencent Files\1210435820\Image\C2C\NN{FAG@]0GG6Y~TGE0XYWNH.png)</p>
+<h4 id="667-优美的排列-II"><a href="#667-优美的排列-II" class="headerlink" title="667. 优美的排列 II"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/beautiful-arrangement-ii/">667. 优美的排列 II</a></h4><p>难度：中等</p>
+<p>给你两个整数 <code>n</code> 和 <code>k</code> ，请你构造一个答案列表 <code>answer</code> ，该列表应当包含从 <code>1</code> 到 <code>n</code> 的 <code>n</code> 个不同正整数，并同时满足下述条件：</p>
+<ul>
+<li>假设该列表是 <code>answer = [a1, a2, a3, ... , an]</code> ，那么列表 <code>[|a1 - a2|, |a2 - a3|, |a3 - a4|, ... , |an-1 - an|]</code> 中应该有且仅有 <code>k</code> 个不同整数。</li>
+</ul>
+<p>返回列表 <code>answer</code> 。如果存在多种答案，只需返回其中 <strong>任意一种</strong> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 3, k = 1</span><br><span class="line">输出：[1, 2, 3]</span><br><span class="line">解释：[1, 2, 3] 包含 3 个范围在 1-3 的不同整数，并且 [1, 1] 中有且仅有 1 个不同整数：1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 3, k = 2</span><br><span class="line">输出：[1, 3, 2]</span><br><span class="line">解释：[1, 3, 2] 包含 3 个范围在 1-3 的不同整数，并且 [2, 1] 中有且仅有 2 个不同整数：1 和 2</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= k &lt; n &lt;= 104</code></li>
+</ul>
+<p> <strong>解析：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] constructArray(<span class="keyword">int</span> n, <span class="keyword">int</span> k) &#123;</span><br><span class="line">        <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        res[<span class="number">0</span>] = <span class="number">1</span> ;</span><br><span class="line">        <span class="comment">//让前k+1个元素构造出 k 个不同的差值 ，序列为 1,k+1,2,k,3,k-1,...,k/2,k/2+1</span></span><br><span class="line">        <span class="comment">//比如这里n=6，k=3 那么前4个元素构造成3个不同的差值  即前四个元素为 1 4 2 3  差值为 3 2 1</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i  =<span class="number">1</span> ,val = k;i&lt;=k;i++,val--)&#123;</span><br><span class="line">            res[i] = i%<span class="number">2</span>==<span class="number">1</span> ? res[i-<span class="number">1</span>] + val : res[i-<span class="number">1</span>] - val;</span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">        <span class="comment">//构造后面n-(k+1)个元素 这里接着上面的  1 4 2 3 添加 5 6  构造成 1 4 2 3 5 6</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = k+<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">            res[i] = i+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;<span class="comment">//返回数组   这道题感觉是一个找规律的题  找不出来不必纠结</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h4 id="697-数组的度"><a href="#697-数组的度" class="headerlink" title="697. 数组的度"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/degree-of-an-array/">697. 数组的度</a></h4><p>难度：简单</p>
+<p>给定一个非空且只包含非负数的整数数组 <code>nums</code>，数组的度的定义是指数组里任一元素出现频数的最大值。</p>
+<p>你的任务是在 <code>nums</code> 中找到与 <code>nums</code> 拥有相同大小的度的最短连续子数组，返回其长度。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：[1, 2, 2, 3, 1]</span><br><span class="line">输出：2</span><br><span class="line">解释：</span><br><span class="line">输入数组的度是2，因为元素1和2的出现频数最大，均为2.</span><br><span class="line">连续子数组里面拥有相同度的有如下所示:</span><br><span class="line">[1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2], [2, 2, 3], [2, 2]</span><br><span class="line">最短连续子数组[2, 2]的长度为2，所以返回2.</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：[1,2,2,3,1,4,2]</span><br><span class="line">输出：6</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>nums.length</code> 在1到 50,000 区间范围内。</li>
+<li><code>nums[i]</code> 是一个在 0 到 49,999 范围内的整数。</li>
+</ul>
+<p><strong>解析</strong>：</p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/degree-of-an-array/solution/yi-ci-shu-zu-bian-li-ha-xi-biao-by-dong-d9lvg/">一次数组遍历 + 哈希表 - 数组的度 - 力扣（LeetCode） (leetcode-cn.com)</a> 方法二</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findShortestSubArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = nums.length,maxCount = <span class="number">0</span>,minWindow = <span class="number">0</span>;</span><br><span class="line">        Map&lt;Integer,<span class="keyword">int</span>[]&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ;i &lt; len;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span>[] pair = map.get(nums[i]);<span class="comment">// pair数组 表示 pair[0]记录每个元素第一次出现的位置，pair[1]表示当前出现了几次</span></span><br><span class="line">            <span class="keyword">if</span>(pair == <span class="keyword">null</span>)&#123;</span><br><span class="line">                pair = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i,<span class="number">1</span>&#125;;<span class="comment">//i 即当前出现的位置， 1表示出现次数</span></span><br><span class="line">                map.put(nums[i],pair);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                pair[<span class="number">1</span>]++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(pair[<span class="number">1</span>] &gt; maxCount)&#123;</span><br><span class="line">                maxCount = pair[<span class="number">1</span>];</span><br><span class="line">                minWindow = i - pair[<span class="number">0</span>] + <span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(pair[<span class="number">1</span>] == maxCount)&#123;</span><br><span class="line">                minWindow = Math.min(minWindow,i-pair[<span class="number">0</span>]+<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> minWindow;               </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="766-托普利茨矩阵"><a href="#766-托普利茨矩阵" class="headerlink" title="766. 托普利茨矩阵"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/toeplitz-matrix/">766. 托普利茨矩阵</a></h4><p>难度：简单</p>
+<p>给你一个 <code>m x n</code> 的矩阵 <code>matrix</code> 。如果这个矩阵是托普利茨矩阵，返回 <code>true</code> ；否则，返回 <code>false</code> <em>。</em></p>
+<p>如果矩阵上每一条由左上到右下的对角线上的元素都相同，那么这个矩阵是 <strong>托普利茨矩阵</strong> 。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/11/04/ex1.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：matrix = [[1,2,3,4],[5,1,2,3],[9,5,1,2]]</span><br><span class="line">输出：true</span><br><span class="line">解释：</span><br><span class="line">在上述矩阵中, 其对角线为: </span><br><span class="line">&quot;[9]&quot;, &quot;[5, 5]&quot;, &quot;[1, 1, 1]&quot;, &quot;[2, 2, 2]&quot;, &quot;[3, 3]&quot;, &quot;[4]&quot;。 </span><br><span class="line">各条对角线上的所有元素均相同, 因此答案是 True 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/11/04/ex2.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：matrix = [[1,2],[2,2]]</span><br><span class="line">输出：false</span><br><span class="line">解释：</span><br><span class="line">对角线 &quot;[1, 2]&quot; 上的元素不同。</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>m == matrix.length</code></li>
+<li><code>n == matrix[i].length</code></li>
+<li><code>1 &lt;= m, n &lt;= 20</code></li>
+<li><code>0 &lt;= matrix[i][j] &lt;= 99</code></li>
+</ul>
+<p><strong>进阶：</strong></p>
+<ul>
+<li>如果矩阵存储在磁盘上，并且内存有限，以至于一次最多只能将矩阵的一行加载到内存中，该怎么办？</li>
+<li>如果矩阵太大，以至于一次只能将不完整的一行加载到内存中，该怎么办？</li>
+</ul>
+<p><strong>解析</strong>:</p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/toeplitz-matrix/solution/cong-ci-pan-du-qu-cheng-ben-fen-xi-liang-f20w/">从磁盘读取成本分析两种 100% 遍历思路：按格子遍历 &amp; 按线遍历 - 托普利茨矩阵 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isToeplitzMatrix</span><span class="params">(<span class="keyword">int</span>[][] matrix)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = matrix.length,n = matrix[<span class="number">0</span>].length;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">1</span>; i &lt; m ; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j&lt;n;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(matrix[i][j] != matrix[i-<span class="number">1</span>][j-<span class="number">1</span>]) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对解析来源中的第二种方法进行修改</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isToeplitzMatrix</span><span class="params">(<span class="keyword">int</span>[][] matrix)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = matrix.length, n = matrix[<span class="number">0</span>].length;</span><br><span class="line">        <span class="keyword">int</span> row = m, col = n;</span><br><span class="line">        <span class="keyword">while</span> (col-- &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, j = col, val = matrix[i++][j++]; i &lt; m &amp;&amp; j &lt; n; i++, j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (matrix[i][j] != val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (--row &gt; <span class="number">0</span>) &#123;<span class="comment">//while循环改成--row好一点，如果是row-- 就会对题目中的示例1中 1 1 1 这条对角线访问两次</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = row, j = <span class="number">0</span>, val = matrix[i++][j++]; i &lt; m &amp;&amp; j &lt; n; i++, j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (matrix[i][j] != val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="565-数组嵌套"><a href="#565-数组嵌套" class="headerlink" title="565. 数组嵌套"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/array-nesting/">565. 数组嵌套</a></h4><p>难度：中等</p>
+<p>索引从<code>0</code>开始长度为<code>N</code>的数组<code>A</code>，包含<code>0</code>到<code>N - 1</code>的所有整数。找到最大的集合<code>S</code>并返回其大小，其中 <code>S[i] = &#123;A[i], A[A[i]], A[A[A[i]]], ... &#125;</code>且遵守以下的规则。</p>
+<p>假设选择索引为<code>i</code>的元素<code>A[i]</code>为<code>S</code>的第一个元素，<code>S</code>的下一个元素应该是<code>A[A[i]]</code>，之后是<code>A[A[A[i]]]...</code> 以此类推，不断添加直到<code>S</code>出现重复的元素。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入: A = [5,4,0,3,1,6,2]</span><br><span class="line">输出: 4</span><br><span class="line">解释: </span><br><span class="line">A[0] = 5, A[1] = 4, A[2] = 0, A[3] = 3, A[4] = 1, A[5] = 6, A[6] = 2.</span><br><span class="line"></span><br><span class="line">其中一种最长的 S[K]:</span><br><span class="line">S[0] = &#123;A[0], A[5], A[6], A[2]&#125; = &#123;5, 6, 2, 0&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ol>
+<li><code>N</code>是<code>[1, 20,000]</code>之间的整数。</li>
+<li><code>A</code>中不含有重复的元素。</li>
+<li><code>A</code>中的元素大小在<code>[0, N-1]</code>之间</li>
+</ol>
+<p><strong>解析：</strong></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/array-nesting/solution/javaqiu-jie-de-si-kao-yu-gai-jin-by-zackqf/">Java求解方法的思考与改进 - 数组嵌套 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">arrayNesting</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> count =<span class="number">0</span> ,k = i;</span><br><span class="line">            <span class="keyword">while</span>(nums[k] != -<span class="number">1</span>)&#123;<span class="comment">//知道访问到-1 说明重复访问</span></span><br><span class="line">                count++;</span><br><span class="line">                <span class="keyword">int</span> temp = nums[k];</span><br><span class="line">                nums[k] = -<span class="number">1</span>;<span class="comment">//访问过的数用-1标记</span></span><br><span class="line">                k = temp;</span><br><span class="line">            &#125;</span><br><span class="line">            res  = Math.max(res,count);</span><br><span class="line">        &#125;        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="769-最多能完成排序的块"><a href="#769-最多能完成排序的块" class="headerlink" title="769. 最多能完成排序的块"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/max-chunks-to-make-sorted/">769. 最多能完成排序的块</a></h4><p>难度：中等</p>
+<p>数组<code>arr</code>是<code>[0, 1, ..., arr.length - 1]</code>的一种排列，我们将这个数组分割成几个“块”，并将这些块分别进行排序。之后再连接起来，使得连接的结果和按升序排序后的原数组相同。</p>
+<p>我们最多能将数组分成多少块？</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入: arr = [4,3,2,1,0]</span><br><span class="line">输出: 1</span><br><span class="line">解释:</span><br><span class="line">将数组分成2块或者更多块，都无法得到所需的结果。</span><br><span class="line">例如，分成 [4, 3], [2, 1, 0] 的结果是 [3, 4, 0, 1, 2]，这不是有序的数组。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入: arr = [1,0,2,3,4]</span><br><span class="line">输出: 4</span><br><span class="line">解释:</span><br><span class="line">我们可以把它分成两块，例如 [1, 0], [2, 3, 4]。</span><br><span class="line">然而，分成 [1, 0], [2], [3], [4] 可以得到最多的块数。</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意:</strong></p>
+<ul>
+<li><code>arr</code> 的长度在 <code>[1, 10]</code> 之间。</li>
+<li><code>arr[i]</code>是 <code>[0, 1, ..., arr.length - 1]</code>的一种排列。</li>
+</ul>
+<p><strong>解析</strong>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxChunksToSorted</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line"><span class="comment">// 从前往后遍历，和排序后的数组对比，决定可分割位置的是各个无序子序列的最大元素，若子序列排序后最大元素==下标idx值，由于所有元素都在子序列范围内唯一，代表排序后子序列元素能和下标一一对应，</span></span><br><span class="line">        <span class="keyword">if</span>(arr == <span class="keyword">null</span> ) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>,max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt; arr.length;i++)&#123;</span><br><span class="line">            max = Math.max(max,arr[i]);</span><br><span class="line">            <span class="keyword">if</span>(max == i) res++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/post/59970.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1974,494 +2370,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/post/3138.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.jpg">
-      <meta itemprop="name" content="CodeRoad">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="新的一天，每时每分每秒都应该学习">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/post/3138.html" class="post-title-link" itemprop="url">1.链表</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-08 13:48:16" itemprop="dateCreated datePublished" datetime="2021-08-08T13:48:16+08:00">2021-08-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-11 15:24:21" itemprop="dateModified" datetime="2021-08-11T15:24:21+08:00">2021-08-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>16k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>15 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="160-相交链表"><a href="#160-相交链表" class="headerlink" title="160. 相交链表"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/">160. 相交链表</a></h4><p>难度：简单</p>
-<p>给你两个单链表的头节点 <code>headA</code> 和 <code>headB</code> ，请你找出并返回两个单链表相交的起始节点。如果两个链表没有交点，返回 <code>null</code> 。</p>
-<p>图示两个链表在节点 <code>c1</code> 开始相交<strong>：</strong></p>
-<p><a target="_blank" rel="noopener" href="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png"><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png" alt="img"></a></p>
-<p>题目数据 <strong>保证</strong> 整个链式结构中不存在环。</p>
-<p><strong>注意</strong>，函数返回结果后，链表必须 <strong>保持其原始结构</strong> 。</p>
-<p><strong>示例 1：</strong></p>
-<p><a target="_blank" rel="noopener" href="https://assets.leetcode.com/uploads/2018/12/13/160_example_1.png"><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_1.png" alt="img"></a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3</span><br><span class="line">输出：Intersected at &#x27;8&#x27;</span><br><span class="line">解释：相交节点的值为 8 （注意，如果两个链表相交则不能为 0）。</span><br><span class="line">从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。</span><br><span class="line">在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<p><a target="_blank" rel="noopener" href="https://assets.leetcode.com/uploads/2018/12/13/160_example_2.png"><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_2.png" alt="img"></a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1</span><br><span class="line">输出：Intersected at &#x27;2&#x27;</span><br><span class="line">解释：相交节点的值为 2 （注意，如果两个链表相交则不能为 0）。</span><br><span class="line">从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。</span><br><span class="line">在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<p><a target="_blank" rel="noopener" href="https://assets.leetcode.com/uploads/2018/12/13/160_example_3.png"><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_3.png" alt="img"></a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2</span><br><span class="line">输出：null</span><br><span class="line">解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。</span><br><span class="line">由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。</span><br><span class="line">这两个链表不相交，因此返回 null 。</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>listA</code> 中节点数目为 <code>m</code></li>
-<li><code>listB</code> 中节点数目为 <code>n</code></li>
-<li><code>0 &lt;= m, n &lt;= 3 * 104</code></li>
-<li><code>1 &lt;= Node.val &lt;= 105</code></li>
-<li><code>0 &lt;= skipA &lt;= m</code></li>
-<li><code>0 &lt;= skipB &lt;= n</code></li>
-<li>如果 <code>listA</code> 和 <code>listB</code> 没有交点，<code>intersectVal</code> 为 <code>0</code></li>
-<li>如果 <code>listA</code> 和 <code>listB</code> 有交点，<code>intersectVal == listA[skipA + 1] == listB[skipB + 1]</code></li>
-</ul>
-<p><strong>进阶：</strong>你能否设计一个时间复杂度 <code>O(n)</code> 、仅用 <code>O(1)</code> 内存的解决方案？</p>
-<p><strong>解析：</strong></p>
-<p>空间复杂度 <em>O</em>(1) 时间复杂度为 <em>O</em>(<em>n</em>)</p>
-<p>这里使用图解的方式，解释比较巧妙的一种实现。</p>
-<p>根据题目意思<br>如果两个链表相交，那么相交点之后的长度是相同的</p>
-<p>我们需要做的事情是，让两个链表从同距离末尾同等距离的位置开始遍历。这个位置只能是较短链表的头结点位置。<br>为此，我们必须消除两个链表的长度差</p>
-<ol>
-<li>指针 pA 指向 A 链表，指针 pB 指向 B 链表，依次往后遍历</li>
-<li>如果 pA 到了末尾，则 pA = headB 继续遍历</li>
-<li>如果 pB 到了末尾，则 pB = headA 继续遍历</li>
-<li>比较长的链表指针指向较短链表head时，长度差就消除了</li>
-<li>如此，只需要将最短链表遍历两次即可找到位置</li>
-</ol>
-<p>听着可能有点绕，看图最直观，链表的题目最适合看图了</p>
-<p><img src="https://pic.leetcode-cn.com/e86e947c8b87ac723b9c858cd3834f9a93bcc6c5e884e41117ab803d205ef662-%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8.png" alt="相交链表.png"></p>
-<p>代码也很简单（此处代码是参考评论区的高手的）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (headA == <span class="keyword">null</span> || headB == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line"><span class="comment">//若相交，链表A： a+c, 链表B : b+c. a+c+b+c = b+c+a+c 。则会在公共处c起点相遇。若不相交，a +b = b+a 。</span></span><br><span class="line"><span class="comment">//题解：设链表A的长度为a+c，链表B的长度为b+c，a为链表A不公共部分，b为链表B不公共部分，c为链表A、B的公共部分,将两个链表连起来，A-&gt;B和B-&gt;A，长度：a+c+b+c=b+c+a+c，若链表AB相交，则a+c+b与b+c+a就会抵消，它们就会在c处相遇；若不相交，则c为nullptr，则a+b=b+a，它们各自移动到尾部循环结束，即返回nullptr</span></span><br><span class="line">    </span><br><span class="line">    ListNode pA = headA, pB = headB;</span><br><span class="line"><span class="comment">//当pA或pB为空时，它们开始指向另一链表的头部，每次判断pA或pB是否为空进行赋值的好处是当链表AB没有公共部分时pA和pB同时为空，这样避免了死循环  (也即遍历两遍)</span></span><br><span class="line">    <span class="keyword">while</span> (pA != pB) &#123;</span><br><span class="line">        pA = pA == <span class="keyword">null</span> ? headB : pA.next;</span><br><span class="line">        pB = pB == <span class="keyword">null</span> ? headA : pB.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> pA;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>复杂度分析</p>
-<p>时间复杂度O(m+n)，其中 m 和 n 是分别是链表 headA 和headB 的长度。两个指针同时遍历两个链表，每个指针遍历两个链表各一次。</p>
-<p>空间复杂度：O(1)。</p>
-<h4 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="206. 反转链表"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-linked-list/">206. 反转链表</a></h4><p>难度简单1845</p>
-<p>给你单链表的头节点 <code>head</code> ，请你反转链表，并返回反转后的链表。</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="https://assets.leetcode.com/uploads/2021/02/19/rev1ex1.jpg" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2,3,4,5]</span><br><span class="line">输出：[5,4,3,2,1]</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<p><img src="https://assets.leetcode.com/uploads/2021/02/19/rev1ex2.jpg" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2]</span><br><span class="line">输出：[2,1]</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li>链表中节点的数目范围是 <code>[0, 5000]</code></li>
-<li><code>-5000 &lt;= Node.val &lt;= 5000</code></li>
-</ul>
-<p><strong>进阶：</strong>链表可以选用迭代或递归方式完成反转。你能否用两种方法解决这道题？</p>
-<p><strong>解析：</strong>原作者链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-linked-list/solution/dong-hua-yan-shi-206-fan-zhuan-lian-biao-by-user74/">动画演示+多种解法 206. 反转链表 - 反转链表 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
-<p><strong>利用外部空间</strong></p>
-<p>这种方式很简单，先申请一个动态扩容的数组或者容器，比如 ArrayList 这样的。<br>然后不断遍历链表，将链表中的元素添加到这个容器中。<br>再利用容器自身的 API，反转整个容器，这样就达到反转的效果了。<br>最后同时遍历容器和链表，将链表中的值改为容器中的值。<br>因为此时容器的值是：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5 4 3 2 1</span><br></pre></td></tr></table></figure>
-
-<p>链表按这个顺序重新被设置一边，就达到要求啦。<br>当然你可以可以再新创建 N 个节点，然后再返回，这样也可以达到目的。<br>这种方式很简单，但你在面试中这么做的话，面试官 100% 会追问是否有更优的方式，比如不用外部空间。所以我就不做代码和动画演示了，下面来看看如何用 <em>O</em>(1) 空间复杂度来实现这道题。</p>
-<p><strong>双指针迭代</strong></p>
-<p>我们可以申请两个指针，第一个指针叫 pre，最初是指向 null 的。<br>第二个指针 cur 指向 head，然后不断遍历 cur。<br>每次迭代到 cur，都将 cur 的 next 指向 pre，然后 pre 和 cur 前进一位。<br>都迭代完了(cur 变成 null 了)，pre 就是最后一个节点了。<br>动画演示如下：<br><img src="https://pic.leetcode-cn.com/7d8712af4fbb870537607b1dd95d66c248eb178db4319919c32d9304ee85b602-%E8%BF%AD%E4%BB%A3.gif" alt="迭代.gif"></p>
-<p>动画演示中其实省略了一个<code>tmp</code>变量，这个<code>tmp</code>变量会将<code>cur</code>的下一个节点保存起来，考虑到一张动画放太多变量会很混乱，所以我就没加了，具体详细执行过程，请点击下面的幻灯片查看。</p>
-<p><img src="https://pic.leetcode-cn.com/8f03740e93c8a0ecff54a57a25a710ab82574faf99b3efb8ddd2b6eea1d78d49-1.JPG" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/aebc5e3ef0a6b942473a7c61f4de22e268cbfbe549ff1a6ad5d3eef7c667f875-2.JPG" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/4c160db670c00f7467c1dae3b22ac117b84c0ba00690ca30708fabcdd5ff35b1-3.JPG" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/95da97748c8a006b5b827d13154bd2202bed5c2b9d779bea6467473d16fd7d66-4.JPG" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/bbc75893b050a8c482178029bd239bd75c75e6a58a4a16fb9270b13044e4ddf3-5.JPG" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/9eda023eab4ecc76af90211626f77b695a4874b451084f8e2545717347815006-6.JPG" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/1829f246e991d3e27aa3dce9b18ab88282a1bd34a5363969eb5730fe74cf8fbf-7.JPG" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/3380338ba4b563c37199b07058d35fde9f9600d3112ef0b074e5986c2f4510e1-8.JPG" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/db831df3a7db0fc405a4dc8293bfc92ba6bba6cb1719613a4e8ab7afdf2a53dd-9.JPG" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/db7d85400d03237909fc904d52b71cf721dee82af47686756400fdf4d1f07493-10.JPG" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/549d1ed958285f378aea9a0db3a603253c83aff5439a76c0b8c35f2e237b9f4b-12.JPG" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/9683a6f2e465086ca1a9bcdb6b4cce9cdcc86da3269e1009867368923c76363d-13.JPG" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/9ef5549e7ff4b4748e0ff295ee37d3e172e7b910b397aa8718110b4779a9f689-14.JPG" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/074dcf7c17ba256aedbf4ba10d101ce93ed5425a6a1aa6d296a79be7bd65fc30-15.JPG" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/f6d200f6b154e8b4e9cf86c26e90c0e71af048fd4dac2f9a35eb8c9dc93bfa15-16.JPG" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/3b5504463012d23800d78e50948d1623cf405e32072cd1c630c71636a318d002-17.JPG" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/8c474aaee63b49b4cf981637039f65a41d70979a79fec22257576cfbcfb8c4c6-18.JPG" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/5eaed6c73d6dec3c3dc7728fda178711ff1a6a558ddf8f2a1946adf22525a44c-19.JPG" alt="img"></p>
-<p>代码实现：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;	<span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseList</span><span class="params">(ListNode head)</span> </span>&#123;		<span class="comment">//申请节点，pre和 cur，pre指向null		ListNode pre = null;		ListNode cur = head;		ListNode tmp = null;		while(cur!=null) &#123;			//记录当前节点的下一个节点			tmp = cur.next;			//然后将当前节点指向pre			cur.next = pre;			//pre和cur节点都前进一位			pre = cur;			cur = tmp;		&#125;		return pre;	&#125;&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>递归解法</strong></p>
-<p>这题有个很骚气的递归解法，递归解法很不好理解，这里最好配合代码和动画一起理解。<br>递归的两个条件：</p>
-<ol>
-<li>终止条件是当前节点或者下一个节点==null</li>
-<li>在函数内部，改变节点的指向，也就是 head 的下一个节点指向 head 递归函数那句</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head.next.next = head</span><br></pre></td></tr></table></figure>
-
-<p>很不好理解，其实就是 head 的下一个节点指向head。<br>递归函数中每次返回的 cur 其实只最后一个节点，在递归函数内部，改变的是当前节点的指向。<br>动画演示如下：<br><img src="https://pic.leetcode-cn.com/dacd1bf55dec5c8b38d0904f26e472e2024fc8bee4ea46e3aa676f340ba1eb9d-%E9%80%92%E5%BD%92.gif" alt="递归.gif"></p>
-<p><strong>幻灯片演示</strong></p>
-<p>感谢<a target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zhuuuu-2/">@zhuuuu-2</a>的建议，递归的解法光看动画比较容易理解，但真到了代码层面理解起来可能会有些困难，我补充了下递归调用的详细执行过程。</p>
-<p>以<code>1-&gt;2-&gt;3-&gt;4-&gt;5</code>这个链表为例，整个递归调用的执行过程，对应到代码层面(用java做示范)是怎么执行的，以及递归的调用栈都列出来了，请点击下面的幻灯片查看吧。</p>
-<p><img src="https://pic.leetcode-cn.com/f89c9e095d414b8366dd7d490508ba9c99d6c93953b4429168af262169f18e83-%E5%B9%BB%E7%81%AF%E7%89%876.jpg" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/485dbe9ad44ab7b05e01c46a1bc1718187a01f8a9fe8331f497e7011f9508b57-%E5%B9%BB%E7%81%AF%E7%89%877.jpg" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/04550182527e6570d9d04f2eeae330848b83d3ff13b23ea4153410210586dc85-%E5%B9%BB%E7%81%AF%E7%89%878.jpg" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/950f6edfb553cbeec65ce3c9679dd8d3401fd1837ad9eb16989217bf83f30e58-%E5%B9%BB%E7%81%AF%E7%89%8710.jpg" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/dcd5bef9b8ff3de98e9533da7da3a8411643bbef9bc5e1a576085b4403197649-%E5%B9%BB%E7%81%AF%E7%89%8711.jpg" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/1d6aaab3d9a42c20420fb6087e520ea05bd6d0789213f228481e55891b847b1e-%E5%B9%BB%E7%81%AF%E7%89%8712.jpg" alt="img"></p>
-<p>代码实现：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//解释reverseList: head=1    reverseList: head=2	    reverseList: head=3		    reverseList:head=4			    reverseList:head=5 					终止返回				cur = 5				4.next.next-&gt;4，即5-&gt;4			cur=5			3.next.next-&gt;3，即4-&gt;3		cur = 5		2.next.next-&gt;2，即3-&gt;2	cur = 5	1.next.next-&gt;1，即2-&gt;1		最后返回cur</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;	<span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseList</span><span class="params">(ListNode head)</span> </span>&#123;		<span class="comment">//递归终止条件是当前为空，或者下一个节点为空		if(head==null || head.next==null) &#123;			return head;		&#125;		//这里的cur就是最后一个节点		ListNode cur = reverseList(head.next);		//这里请配合动画演示理解		//如果链表是 1-&gt;2-&gt;3-&gt;4-&gt;5，那么此时的cur就是5		//而head是4，head的下一个是5，下下一个是空		//所以head.next.next 就是5-&gt;4		head.next.next = head;		//防止链表循环，需要将head.next设置为空		head.next = null;		//每层递归函数都返回cur，也就是最后一个节点		return cur;	&#125;&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="21-合并两个有序链表"><a href="#21-合并两个有序链表" class="headerlink" title="21. 合并两个有序链表"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-two-sorted-lists/">21. 合并两个有序链表</a></h4><p>难度简单</p>
-<p>将两个升序链表合并为一个新的 <strong>升序</strong> 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 </p>
-<p><strong>示例 1：</strong></p>
-<p><img src="https://assets.leetcode.com/uploads/2020/10/03/merge_ex1.jpg" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：l1 = [1,2,4], l2 = [1,3,4]输出：[1,1,2,3,4,4]</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：l1 = [], l2 = []输出：[]</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：l1 = [], l2 = [0]输出：[0]</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li>两个链表的节点数目范围是 <code>[0, 50]</code></li>
-<li><code>-100 &lt;= Node.val &lt;= 100</code></li>
-<li><code>l1</code> 和 <code>l2</code> 均按 <strong>非递减顺序</strong> 排列</li>
-</ul>
-<p><strong>解析：</strong>解题链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-two-sorted-lists/solution/he-bing-liang-ge-you-xu-lian-biao-by-leetcode-solu/">合并两个有序链表 - 合并两个有序链表 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
-<p><strong>递归：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">解释：<span class="comment">//(1,1):代表第一次进入递归函数，并且从第一个口进入，并且记录进入前链表的状态merge(1,1): 1-&gt;4-&gt;5-&gt;null, 1-&gt;2-&gt;3-&gt;6-&gt;null    merge(2,2): 4-&gt;5-&gt;null, 1-&gt;2-&gt;3-&gt;6-&gt;null    	merge(3,2): 4-&gt;5-&gt;null, 2-&gt;3-&gt;6-&gt;null    		merge(4,2): 4-&gt;5-&gt;null, 3-&gt;6-&gt;null    			merge(5,1): 4-&gt;5-&gt;null, 6-&gt;null    				merge(6,1): 5-&gt;null, 6-&gt;null    					merge(7): null, 6-&gt;null    					return l2    				l1.next --- 5-&gt;6-&gt;null, return l1    			l1.next --- 4-&gt;5-&gt;6-&gt;null, return l1    		l2.next --- 3-&gt;4-&gt;5-&gt;6-&gt;null, return l2    	l2.next --- 2-&gt;3-&gt;4-&gt;5-&gt;6-&gt;null, return l2    l2.next --- 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;6-&gt;null, return l2l1.next --- 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;6-&gt;null, return l1</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="function"><span class="keyword">public</span> ListNode <span class="title">mergeTwoLists</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;        <span class="keyword">if</span> (l1 == <span class="keyword">null</span>) &#123;            <span class="keyword">return</span> l2;        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (l2 == <span class="keyword">null</span>) &#123;            <span class="keyword">return</span> l1;        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (l1.val &lt; l2.val) &#123;            l1.next = mergeTwoLists(l1.next, l2);            <span class="keyword">return</span> l1;        &#125; <span class="keyword">else</span> &#123;            l2.next = mergeTwoLists(l1, l2.next);            <span class="keyword">return</span> l2;        &#125;    &#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>复杂度分析</strong></p>
-<ul>
-<li><p>时间复杂度：O(n+m)，其中 n 和 m 分别为两个链表的长度。因为每次调用递归都会去掉 l1 或者 l2 的头节点（直到至少有一个链表为空），函数 mergeTwoList 至多只会递归调用每个节点一次。因此，时间复杂度取决于合并后的链表长度，即O(n+m)。</p>
-</li>
-<li><p>空间复杂度：O(n+m)，其中 n 和 m 分别为两个链表的长度。递归调用 mergeTwoLists 函数时需要消耗栈空间，栈空间的大小取决于递归调用的深度。结束递归调用时 mergeTwoLists 函数最多调用 n+m 次，因此空间复杂度为O(n+m)。</p>
-</li>
-</ul>
-<p><strong>迭代：</strong></p>
-<p><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fs2.sinaimg.cn%2Fmw690%2F006Tiah4zy7dwacE4z751%26690&refer=http%3A%2F%2Fs2.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1629272494&t=3887a34bb0f2562d0a5ed0bc53bdab64" alt="img"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="function"><span class="keyword">public</span> ListNode <span class="title">mergeTwoLists</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;        ListNode prehead = <span class="keyword">new</span> ListNode(-<span class="number">1</span>)<span class="comment">//新建哑节点（伪头节点），值为-1，哑节点不是头节点，是新造的一个伪头节点，但是它存储的地址和头节点一样        ListNode prev = prehead;//之所以赋值给prev  这里prev可以当作游标往后移动，否则最后返回prev就不对        while (l1 != null &amp;&amp; l2 != null) &#123;            if (l1.val &lt;= l2.val) &#123;                prev.next = l1;                l1 = l1.next;            &#125; else &#123;                prev.next = l2;                l2 = l2.next;            &#125;            prev = prev.next;        &#125;        // 合并后 l1 和 l2 最多只有一个还未被合并完，我们直接将链表末尾指向未合并完的链表即可        prev.next = l1 == null ? l2 : l1;        return prehead.next;//下一节点地址。相当于头节点     &#125;&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>复杂度分析</p>
-<p>时间复杂度：O(n+m)，其中 n 和 m 分别为两个链表的长度。因为每次循环迭代中，l1 和 l2 只有一个元素会被放进合并链表中， 因此 while 循环的次数不会超过两个链表的长度之和。所有其他操作的时间复杂度都是常数级别的，因此总的时间复杂度为 O(n+m)。</p>
-<p>空间复杂度：O(1)。我们只需要常数的空间存放若干变量。</p>
-<h4 id="83-删除排序链表中的重复元素"><a href="#83-删除排序链表中的重复元素" class="headerlink" title="83. 删除排序链表中的重复元素"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/">83. 删除排序链表中的重复元素</a></h4><p>难度简单608</p>
-<p>存在一个按升序排列的链表，给你这个链表的头节点 <code>head</code> ，请你删除所有重复的元素，使每个元素 <strong>只出现一次</strong> 。</p>
-<p>返回同样按升序排列的结果链表。</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="https://assets.leetcode.com/uploads/2021/01/04/list1.jpg" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,1,2]输出：[1,2]</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<p><img src="https://assets.leetcode.com/uploads/2021/01/04/list2.jpg" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,1,2,3,3]输出：[1,2,3]</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li>链表中节点数目在范围 <code>[0, 300]</code> 内</li>
-<li><code>-100 &lt;= Node.val &lt;= 100</code></li>
-<li>题目数据保证链表已经按升序排列</li>
-</ul>
-<p><strong>解析：</strong></p>
-<p><strong>递归</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** * Definition for singly-linked list. * public class ListNode &#123; *     int val; *     ListNode next; *     ListNode() &#123;&#125; *     ListNode(int val) &#123; this.val = val; &#125; *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125; * &#125; */</span><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="function"><span class="keyword">public</span> ListNode <span class="title">deleteDuplicates</span><span class="params">(ListNode head)</span> </span>&#123;        <span class="keyword">if</span>(head == <span class="keyword">null</span> || head.next==<span class="keyword">null</span>) <span class="keyword">return</span> head;        head.next = deleteDuplicates(head.next);        <span class="keyword">return</span>  head.val == head.next.val ? head.next:head;           &#125;&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/users/guanpengchn/avatar_1580451118.png?x-oss-process=image/resize,h_38,w_38/format,webp" alt="img"></p>
-<p><strong>思路</strong></p>
-<ul>
-<li>标签：链表</li>
-<li>指定 cur 指针指向头部 head</li>
-<li>当 cur 和 cur.next 的存在为循环结束条件，当二者有一个不存在时说明链表没有去重复的必要了</li>
-<li>当 cur.val 和 cur.next.val 相等时说明需要去重，则将 cur 的下一个指针指向下一个的下一个，这样就能达到去重复的效果</li>
-<li>如果不相等则 cur 移动到下一个位置继续循环</li>
-<li>时间复杂度：<em>O</em>(<em>n</em>)</li>
-</ul>
-<p><strong>代码</strong></p>
-<ul>
-<li><strong>迭代</strong></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/** * Definition for singly-linked list. * public class ListNode &#123; *     int val; *     ListNode next; *     ListNode(int x) &#123; val = x; &#125; * &#125; */class Solution &#123;    public ListNode deleteDuplicates(ListNode head) &#123;                ListNode cur = head;        while(cur != null &amp;&amp; cur.next != null) &#123;//因为测试的时候的链表可能给的[] 所以cur!=null的判定也要给上~            if(cur.val == cur.next.val) &#123;                //因为是升序排列 所以也只可能是挨着的二位相同辽~                cur.next = cur.next.next;//删除重复的辣个cur.next            &#125;            else &#123;                cur = cur.next;//cur继续前移            &#125;        &#125;        return head;//返回结果链表    &#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>画解</strong></p>
-<p><img src="https://pic.leetcode-cn.com/c61a88b9fe012a9b85b842f4a12a5310c96b462ea4801e6227fc6a04aa140351-frame_00001.png" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/87a5f06f4a257e5970af228ea0c37b1b1513d5b53770da8d409616a5fd9afaa5-frame_00002.png" alt="img"></p>
-<p><img src="https://pic.leetcode-cn.com/b8f2dae3ca21a552bff2e2486f2f838f78aaa505066113c4453900ae182edbd3-frame_00003.png" alt="img"></p>
-<p><strong>复杂度分析</strong></p>
-<ul>
-<li>时间复杂度：<em>O</em>(<em>n</em>)，其中 <em>n</em> 是链表的长度。</li>
-<li>空间复杂度：<em>O</em>(1)。</li>
-</ul>
-<h4 id="19-删除链表的倒数第-N-个结点"><a href="#19-删除链表的倒数第-N-个结点" class="headerlink" title="19. 删除链表的倒数第 N 个结点"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/">19. 删除链表的倒数第 N 个结点</a></h4><p>难度中等1457</p>
-<p>给你一个链表，删除链表的倒数第 <code>n</code> 个结点，并且返回链表的头结点。</p>
-<p><strong>进阶：</strong>你能尝试使用一趟扫描实现吗？</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="https://assets.leetcode.com/uploads/2020/10/03/remove_ex1.jpg" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2,3,4,5], n = 2输出：[1,2,3,5]</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1], n = 1输出：[]</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2], n = 1输出：[1]</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li>链表中结点的数目为 <code>sz</code></li>
-<li><code>1 &lt;= sz &lt;= 30</code></li>
-<li><code>0 &lt;= Node.val &lt;= 100</code></li>
-<li><code>1 &lt;= n &lt;= sz</code></li>
-</ul>
-<p><strong>解析：</strong></p>
-<p><img src="/post/3138/Users/Wanan\AppData\Roaming\Typora\typora-user-images\image-20210719165432927.png" alt="image-20210719165432927"></p>
-<p><img src="https://assets.leetcode-cn.com/solution-static/19/p3.png" alt="p3"></p>
-<p><strong>官方代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="function"><span class="keyword">public</span> ListNode <span class="title">removeNthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> n)</span> </span>&#123;        ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>, head);        ListNode first = head;        ListNode second = dummy;        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;            first = first.next;        &#125;        <span class="keyword">while</span> (first != <span class="keyword">null</span>) &#123;            first = first.next;            second = second.next;        &#125;        second.next = second.next.next;        ListNode ans = dummy.next;        <span class="keyword">return</span> ans;    &#125;&#125;因为要删除该节点，所以要移动到该节点的前一个才能删除，所以循环结束条件为 start.next != <span class="keyword">null</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>自己代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** * Definition for singly-linked list. * public class ListNode &#123; *     int val; *     ListNode next; *     ListNode() &#123;&#125; *     ListNode(int val) &#123; this.val = val; &#125; *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125; * &#125; */</span><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="function"><span class="keyword">public</span> ListNode <span class="title">removeNthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> n)</span> </span>&#123;        ListNode fast = head;        <span class="keyword">while</span>(n-- &gt;<span class="number">0</span>)&#123;            fast = fast.next;        &#125;        <span class="keyword">if</span>(fast == <span class="keyword">null</span>)  <span class="keyword">return</span> head.next;<span class="comment">//如果fast == null  说明fast经过以为遍历到了最后一个节点的后一位，此时n = 链表长度，说明要删除的是第一个节点。        ListNode slow = head;        while(fast.next != null)&#123;//因为要删除该节点，所以要移动到该节点的前一个才能删除，所以循环结束条件为 fast.next != null            fast = fast.next;            slow = slow.next;        &#125;        slow.next = slow.next.next;        return head;    &#125;&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>复杂度分析</strong></p>
-<ul>
-<li>时间复杂度：<em>O</em>(<em>L</em>)，其中 <em>L</em> 是链表的长度。</li>
-<li>空间复杂度：<em>O</em>(1)。</li>
-</ul>
-<h4 id="24-两两交换链表中的节点"><a href="#24-两两交换链表中的节点" class="headerlink" title="24. 两两交换链表中的节点"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/swap-nodes-in-pairs/">24. 两两交换链表中的节点</a></h4><p>难度中等973</p>
-<p>给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。</p>
-<p><strong>你不能只是单纯的改变节点内部的值</strong>，而是需要实际的进行节点交换。</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="https://assets.leetcode.com/uploads/2020/10/03/swap_ex1.jpg" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2,3,4]输出：[2,1,4,3]</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：head = []输出：[]</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1]输出：[1]</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li>链表中节点的数目在范围 <code>[0, 100]</code> 内</li>
-<li><code>0 &lt;= Node.val &lt;= 100</code></li>
-</ul>
-<p><strong>进阶：</strong>你能在不修改链表节点值的情况下解决这个问题吗?（也就是说，仅修改节点本身。）</p>
-<p><strong>解析：</strong></p>
-<p><strong>方法二：迭代</strong></p>
-<p><strong>思路与算法</strong></p>
-<p>也可以通过迭代的方式实现两两交换链表中的节点。</p>
-<p>创建哑结点 <code>dummyHead</code>，令 <code>dummyHead.next = head</code>。令 <code>temp</code> 表示当前到达的节点，初始时 <code>temp = dummyHead</code>。每次需要交换 <code>temp</code> 后面的两个节点。</p>
-<p>如果 <code>temp</code> 的后面没有节点或者只有一个节点，则没有更多的节点需要交换，因此结束交换。否则，获得 <code>temp</code> 后面的两个节点 <code>node1</code> 和 <code>node2</code>，通过更新节点的指针关系实现两两交换节点。</p>
-<p>具体而言，交换之前的节点关系是 <code>temp -&gt; node1 -&gt; node2</code>，交换之后的节点关系要变成 <code>temp -&gt; node2 -&gt; node1</code>，因此需要进行如下操作。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">temp.next = node2node1.next = node2.nextnode2.next = node1</span><br></pre></td></tr></table></figure>
-
-<p>完成上述操作之后，节点关系即变成 <code>temp -&gt; node2 -&gt; node1</code>。再令 <code>temp = node1</code>，对链表中的其余节点进行两两交换，直到全部节点都被两两交换。</p>
-<p>两两交换链表中的节点之后，新的链表的头节点是 <code>dummyHead.next</code>，返回新的链表的头节点即可。</p>
-<p><img src="https://assets.leetcode-cn.com/solution-static/24/6.png" alt="img"></p>
-<p>6 / 13</p>
-<p><strong>代码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;    public ListNode swapPairs(ListNode head) &#123;        ListNode dummyHead = new ListNode(0);//创建一个头节点        dummyHead.next = head;        ListNode temp = dummyHead;        while (temp.next != null &amp;&amp; temp.next.next != null) &#123;            ListNode node1 = temp.next;            ListNode node2 = temp.next.next;            temp.next = node2;            node1.next = node2.next;            node2.next = node1;            temp = node1;        &#125;        return dummyHead.next;    &#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>复杂度分析</strong></p>
-<ul>
-<li>时间复杂度：<em>O</em>(<em>n</em>)，其中 <em>n</em> 是链表的节点数量。需要对每个节点进行更新指针的操作。</li>
-<li>空间复杂度：<em>O</em>(1)。</li>
-</ul>
-<h4 id="445-两数相加-II"><a href="#445-两数相加-II" class="headerlink" title="445. 两数相加 II"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/add-two-numbers-ii/">445. 两数相加 II</a></h4><p>难度中等</p>
-<p>给你两个 <strong>非空</strong> 链表来代表两个非负整数。数字最高位位于链表开始位置。它们的每个节点只存储一位数字。将这两数相加会返回一个新的链表。</p>
-<p>你可以假设除了数字 0 之外，这两个数字都不会以零开头。</p>
-<p><strong>示例1：</strong></p>
-<p><img src="https://pic.leetcode-cn.com/1626420025-fZfzMX-image.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：l1 = [7,2,4,3], l2 = [5,6,4]输出：[7,8,0,7]</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：l1 = [2,4,3], l2 = [5,6,4]输出：[8,0,7]</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例3：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入：l1 = [0], l2 = [0]输出：[0]</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li>链表的长度范围为<code> [1, 100]</code></li>
-<li><code>0 &lt;= node.val &lt;= 9</code></li>
-<li>输入数据保证链表代表的数字无前导 0</li>
-</ul>
-<p><strong>进阶：</strong>如果输入链表不能修改该如何处理？换句话说，不能对列表中的节点进行翻转。</p>
-<p><strong>解析：</strong></p>
-<p>这道题可以通过使用栈来解决，我们需要构建两个栈，将两个链表中的值分别压入这两个栈中。</p>
-<p><img src="https://pic.leetcode-cn.com/1612843418-hDCiPe-image.png" alt="image.png"></p>
-<p>每次都从两个栈中各弹出一个元素，就是我们所需要的最末位元素，按照计算方式，相加取模求当前位的值，同时我们还需要记录当前位的进位。最后，我们使用获得的值，构建一个节点。</p>
-<p><img src="https://pic.leetcode-cn.com/1612843430-WwISBz-image.png" alt="image.png"></p>
-<p>我们需要使用一个指针作为头指针，指向当前节点。每次新增节点，我们只需要将新节点插入到头指针之后即可。</p>
-<p><img src="https://pic.leetcode-cn.com/1612843449-czpjTW-image.png" alt="image.png"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** * Definition for singly-linked list. * public class ListNode &#123; *     int val; *     ListNode next; *     ListNode() &#123;&#125; *     ListNode(int val) &#123; this.val = val; &#125; *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125; * &#125; */</span><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="function"><span class="keyword">public</span> ListNode <span class="title">addTwoNumbers</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;        Deque&lt;Integer&gt; stack1  =  <span class="keyword">new</span> LinkedList&lt;&gt;();        Deque&lt;Integer&gt; stack2  =  <span class="keyword">new</span> LinkedList&lt;&gt;();        <span class="keyword">while</span>(l1 != <span class="keyword">null</span>)&#123;            stack1.push(l1.val);            l1 = l1.next;        &#125;        <span class="keyword">while</span>(l2 != <span class="keyword">null</span>)&#123;            stack2.push(l2.val);            l2 = l2.next;        &#125;        ListNode head = <span class="keyword">new</span> ListNode(-<span class="number">1</span>);<span class="comment">//创建一个头节点        int carry =0;//存储进位        while(!stack1.isEmpty() || !stack2.isEmpty() || carry!=0)&#123;            int x = stack1.isEmpty() ? 0:stack1.pop();            int y = stack2.isEmpty() ? 0:stack2.pop();            int sum  = x + y + carry;            carry = sum /10;            ListNode tmp =new ListNode(sum %10);            tmp.next = head.next;//把当前节点的下一节点指向头节点的下一个节点                      head.next = tmp;//再把当前节点 变为头节点下一节点           &#125;        return head.next;    &#125;&#125;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过栈的形式：实现两个链表相加    public ListNode addTwoNumbers(ListNode l1, ListNode l2) &#123;        //创建两个栈：存放两个链表的value        Stack&lt;Integer&gt; stack1 = new Stack&lt;&gt;();      //存放l1的value        Stack&lt;Integer&gt; stack2 = new Stack&lt;&gt;();      //存放l2的value        //创建一个：指向null的结点        ListNode head = null;                   //将l1的value放入：stack1        while(l1 != null)&#123;            stack1.push(l1.val);            l1 = l1.next;        &#125;        //将l2的value放入：stack2        while(l2 != null)&#123;            stack2.push(l2.val);            l2 = l2.next;        &#125;        //自定义：循环变量        int carry = 0;               //记录：来自低位的进位        int num = 0;                 //记录两个链表相加的：value值        ListNode newNode = null;    //用于记录：新链表，创建的结点        //循环判断        while(!stack1.empty() || !stack2.empty() || carry &gt; 0)&#123;            //循环体            num = carry;           //记录来自：低位的进位， 如果没有，则为0，否则为1            num += stack1.empty() ? 0:stack1.pop();     //加上l1的栈顶value            num += stack2.empty() ? 0:stack2.pop();     //加上l2的栈顶value            //改变变量            newNode = new ListNode(num%10);            //利用头插法：插入到新链表            newNode.next = head;                        //指向第一个有效结点            head = newNode;                             //第一个有效结点：向前移动            carry = num/10;                              //记录：进位        &#125;      return head;    &#125;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="234-回文链表"><a href="#234-回文链表" class="headerlink" title="234. 回文链表"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-linked-list/">234. 回文链表</a></h4><p>难度简单1049</p>
-<p>请判断一个链表是否为回文链表。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入: 1-&gt;2输出: false</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入: 1-&gt;2-&gt;2-&gt;1输出: true</span><br></pre></td></tr></table></figure>
-
-<p><strong>进阶：</strong><br>你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？</p>
-<p><strong>方法三：快慢指针</strong><br><strong>思路</strong></p>
-<p>避免使用 O(n) 额外空间的方法就是改变输入。</p>
-<p>我们可以将链表的后半部分反转（修改链表结构），然后将前半部分和后半部分进行比较。比较完成后我们应该将链表恢复原样。虽然不需要恢复也能通过测试用例，但是使用该函数的人通常不希望链表结构被更改。</p>
-<p>该方法虽然可以将空间复杂度降到 O(1)，但是在并发环境下，该方法也有缺点。在并发环境下，函数运行时需要锁定其他线程或进程对链表的访问，因为在函数执行过程中链表会被修改。</p>
-<p><strong>算法</strong></p>
-<p>整个流程可以分为以下五个步骤：</p>
-<ol>
-<li>找到前半部分链表的尾节点。</li>
-<li>反转后半部分链表。</li>
-<li>判断是否回文。</li>
-<li>恢复链表。</li>
-<li>返回结果。</li>
-</ol>
-<p>执行步骤一，我们可以计算链表节点的数量，然后遍历链表找到前半部分的尾节点。</p>
-<p>我们也可以使用快慢指针在一次遍历中找到：慢指针一次走一步，快指针一次走两步，快慢指针同时出发。当快指针移动到链表的末尾时，慢指针恰好到链表的中间。通过慢指针将链表分为两部分。</p>
-<p>若链表有奇数个节点，则中间的节点应该看作是前半部分。</p>
-<p>步骤二可以使用「206. 反转链表」问题中的解决方法来反转链表的后半部分。</p>
-<p>步骤三比较两个部分的值，当后半部分到达末尾则比较完成，可以忽略计数情况中的中间节点。</p>
-<p>步骤四与步骤二使用的函数相同，再反转一次恢复链表本身。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** * Definition for singly-linked list. * public class ListNode &#123; *     int val; *     ListNode next; *     ListNode() &#123;&#125; *     ListNode(int val) &#123; this.val = val; &#125; *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125; * &#125; */</span><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(ListNode head)</span> </span>&#123;        <span class="keyword">if</span>(head == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;        <span class="comment">//找到前半部分链表的尾节点并反转后半部分链表        ListNode firstHalfEnd = endOfFirstHalf(head);        ListNode secondHalfStart = reverseList(firstHalfEnd.next);              //判断是否回文        ListNode p1 = head;        ListNode p2 = secondHalfStart;        boolean result = true;        while(result &amp;&amp; p2 != null)&#123; //因为链表奇数点时，奇数点属于前一链表，所以后半部分总比前半部分少, 所以判断p2是否等于null        if(p1.val != p2.val)&#123;            result =false;        &#125;        p1 = p1.next;        p2 = p2.next;        &#125;        //还原链表并返回结果        firstHalfEnd.next = reverseList(secondHalfStart);        return result;    &#125;    public ListNode endOfFirstHalf(ListNode head)&#123;        ListNode fast =head,slow = head;        while(fast.next != null &amp;&amp; fast.next.next != null)&#123;            fast = fast.next.next;            slow = slow.next;        &#125;        return slow;    &#125;    public  ListNode reverseList(ListNode head)&#123;        ListNode newHead = null;//新建的一个头节点        while(head != null)&#123;            ListNode temNode = head.next;            head.next = newHead;            newHead = head;            head = temNode;        &#125;        return newHead;    &#125; &#125;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>复杂度分析</strong></p>
-<p>时间复杂度：O(n)，其中 n 指的是链表的大小。</p>
-<p>空间复杂度：O(1)。我们只会修改原本链表中节点的指向，而在堆栈上的堆栈帧不超过 O(1)。</p>
-<h4 id="725-分隔链表"><a href="#725-分隔链表" class="headerlink" title="725. 分隔链表"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/split-linked-list-in-parts/">725. 分隔链表</a></h4><p>难度中等146</p>
-<p>给定一个头结点为 <code>root</code> 的链表, 编写一个函数以将链表分隔为 <code>k</code> 个连续的部分。</p>
-<p>每部分的长度应该尽可能的相等: 任意两部分的长度差距不能超过 1，也就是说可能有些部分为 null。</p>
-<p>这k个部分应该按照在链表中出现的顺序进行输出，并且排在前面的部分的长度应该大于或等于后面的长度。</p>
-<p>返回一个符合上述规则的链表的列表。</p>
-<p>举例： 1-&gt;2-&gt;3-&gt;4, k = 5 // 5 结果 [ [1], [2], [3], [4], null ]</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入: root = [1, 2, 3], k = 5输出: [[1],[2],[3],[],[]]解释:输入输出各部分都应该是链表，而不是数组。例如, 输入的结点 root 的 val= 1, root.next.val = 2, \root.next.next.val = 3, 且 root.next.next.next = null。第一个输出 output[0] 是 output[0].val = 1, output[0].next = null。最后一个元素 output[4] 为 null, 它代表了最后一个部分为空链表。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入: root = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], k = 3输出: [[1, 2, 3, 4], [5, 6, 7], [8, 9, 10]]解释:输入被分成了几个连续的部分，并且每部分的长度相差不超过1.前面部分的长度大于等于后面部分的长度。</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示:</strong></p>
-<ul>
-<li><code>root</code> 的长度范围： <code>[0, 1000]</code>.</li>
-<li>输入的每个节点的大小范围：<code>[0, 999]</code>.</li>
-<li><code>k</code> 的取值范围： <code>[1, 50]</code>.</li>
-</ul>
-<p> <strong>解析：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** * Definition for singly-linked list. * public class ListNode &#123; *     int val; *     ListNode next; *     ListNode() &#123;&#125; *     ListNode(int val) &#123; this.val = val; &#125; *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125; * &#125; */</span><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    <span class="keyword">public</span> ListNode[] splitListToParts(ListNode head, <span class="keyword">int</span> k) &#123;<span class="comment">//这里的head直接指向第一个有效节点的地址。与c++不一样        int N = 0;        ListNode cur = head;//避免以后找不到head        //遍历链表长度        while(cur != null)&#123;            N++;            cur = cur.next;        &#125;        int size = N/k;        int mod = N%k;        ListNode[] res = new ListNode[k];        cur = head;//重置cur 为head起点        for(int i =0;cur!=null&amp;&amp;i&lt;k;i++)&#123;//这里外循环是遍历k段链表            res[i] = cur;            int curSize = size + (mod-- &gt;0 ? 1:0);            for(int j =0;j&lt;curSize-1;j++)&#123;// 假如18个数，分为5段，那么就是4，4，4，3，3. 这里curSize = 4              //curSize-1 =3    那么从1开始遍历三次 也就是0，1，2即可。1-&gt;2-&gt;3-&gt;4有三个指针                cur = cur.next;            &#125;            //断开每部分链表            ListNode next =cur.next;            cur.next = null;            cur = next;        &#125;        return res;    &#125;&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>复杂度分析</strong></p>
-<ul>
-<li>时间复杂度：O(N+k)。N 指的是所给链表的结点数，若 k 很大，则还需要添加许多空列表。</li>
-<li>空间复杂度：O(k)，存储答案时所需的额外空格。</li>
-</ul>
-<h4 id="328-奇偶链表"><a href="#328-奇偶链表" class="headerlink" title="328. 奇偶链表"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/odd-even-linked-list/">328. 奇偶链表</a></h4><p>难度中等443</p>
-<p>给定一个单链表，把所有的奇数节点和偶数节点分别排在一起。请注意，这里的奇数节点和偶数节点指的是节点编号的奇偶性，而不是节点的值的奇偶性。</p>
-<p>请尝试使用原地算法完成。你的算法的空间复杂度应为 O(1)，时间复杂度应为 O(nodes)，nodes 为节点总数。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL输出: 1-&gt;3-&gt;5-&gt;2-&gt;4-&gt;NULL</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入: 2-&gt;1-&gt;3-&gt;5-&gt;6-&gt;4-&gt;7-&gt;NULL 输出: 2-&gt;3-&gt;6-&gt;7-&gt;1-&gt;5-&gt;4-&gt;NULL</span><br></pre></td></tr></table></figure>
-
-<p><strong>说明:</strong></p>
-<ul>
-<li>应当保持奇数节点和偶数节点的相对顺序。</li>
-<li>链表的第一个节点视为奇数节点，第二个节点视为偶数节点，以此类推。</li>
-</ul>
-<p><strong>解析：</strong></p>
-<p><img src="https://assets.leetcode-cn.com/solution-static/328/1.png" alt="fig1"></p>
-<p><strong>复杂度分析</strong></p>
-<ul>
-<li><p>时间复杂度：O(n)，其中 n 是链表的节点数。需要遍历链表中的每个节点，并更新指针。</p>
-</li>
-<li><p>空间复杂度：O(1)。只需要维护有限的指针。</p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2533,20 +2441,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -2569,7 +2477,7 @@
         <h3 class="widget-title">Tag Cloud</h3>
         <div id="myCanvasContainer" class="widget tagcloud">
             <canvas width="250" height="250" id="resCanvas" style="width=100%">
-                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li></ul>
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AF%86/" rel="tag">杂识</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li></ul>
             </canvas>
         </div>
       </div>
@@ -2605,13 +2513,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">137k</span>
+    <span title="站点总字数">141k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:04</span>
+    <span title="站点阅读时长">2:09</span>
 </div>
 
 <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
@@ -2634,7 +2542,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共55.6k字</span>
+  <span class="post-count">博客全站共58.3k字</span>
 </div>
 
         
