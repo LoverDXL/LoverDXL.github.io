@@ -23,24 +23,24 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="167. 两数之和 II - 输入有序数组难度简单560收藏分享切换为英文接收动态反馈 给定一个已按照 升序排列 的整数数组 numbers ，请你从数组中找出两个数满足相加之和等于目标数 target 。 函数应该以长度为 2 的整数数组的形式返回这两个数的下标值。numbers 的下标 从 1 开始计数 ，所以答案数组应当满足 1 &lt;&#x3D; answer[0] &lt; answer[1]">
+  <meta name="description" content="167. 两数之和 II - 输入有序数组难度：简单 给定一个已按照 升序排列 的整数数组 numbers ，请你从数组中找出两个数满足相加之和等于目标数 target 。 函数应该以长度为 2 的整数数组的形式返回这两个数的下标值。numbers 的下标 从 1 开始计数 ，所以答案数组应当满足 1 &lt;&#x3D; answer[0] &lt; answer[1] &lt;&#x3D; numbers.len">
 <meta property="og:type" content="article">
 <meta property="og:title" content="双指针">
 <meta property="og:url" content="http://example.com/post/91a7e4d1.html">
 <meta property="og:site_name" content="新的一天，每时每分每秒都应该学习">
-<meta property="og:description" content="167. 两数之和 II - 输入有序数组难度简单560收藏分享切换为英文接收动态反馈 给定一个已按照 升序排列 的整数数组 numbers ，请你从数组中找出两个数满足相加之和等于目标数 target 。 函数应该以长度为 2 的整数数组的形式返回这两个数的下标值。numbers 的下标 从 1 开始计数 ，所以答案数组应当满足 1 &lt;&#x3D; answer[0] &lt; answer[1]">
+<meta property="og:description" content="167. 两数之和 II - 输入有序数组难度：简单 给定一个已按照 升序排列 的整数数组 numbers ，请你从数组中找出两个数满足相加之和等于目标数 target 。 函数应该以长度为 2 的整数数组的形式返回这两个数的下标值。numbers 的下标 从 1 开始计数 ，所以答案数组应当满足 1 &lt;&#x3D; answer[0] &lt; answer[1] &lt;&#x3D; numbers.len">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/post/%E5%8F%8C%E6%8C%87%E9%92%88/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f61376362383432332d383935642d343937352d386566382d3636326130303239633737322e706e67">
+<meta property="og:image" content="http://example.com/post/91a7e4d1/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f61376362383432332d383935642d343937352d386566382d3636326130303239633737322e706e67">
 <meta property="og:image" content="http://example.com/post/%E5%8F%8C%E6%8C%87%E9%92%88/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f65663235666637632d306636332d343230642d386233302d6561666265656133356431312e676966">
 <meta property="og:image" content="http://example.com/post/91a7e4d1/circularlinkedlist.png">
 <meta property="og:image" content="http://example.com/post/91a7e4d1/circularlinkedlist_test2.png">
 <meta property="og:image" content="http://example.com/post/91a7e4d1/circularlinkedlist_test3.png">
 <meta property="article:published_time" content="2021-08-12T01:39:13.000Z">
-<meta property="article:modified_time" content="2021-08-12T01:47:54.137Z">
+<meta property="article:modified_time" content="2021-08-12T02:14:08.368Z">
 <meta property="article:author" content="CodeRoad">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/post/%E5%8F%8C%E6%8C%87%E9%92%88/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f61376362383432332d383935642d343937352d386566382d3636326130303239633737322e706e67">
+<meta name="twitter:image" content="http://example.com/post/91a7e4d1/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f61376362383432332d383935642d343937352d386566382d3636326130303239633737322e706e67">
 
 <link rel="canonical" href="http://example.com/post/91a7e4d1.html">
 
@@ -224,7 +224,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-08-12 09:39:13 / 修改时间：09:47:54" itemprop="dateCreated datePublished" datetime="2021-08-12T09:39:13+08:00">2021-08-12</time>
+              <time title="创建时间：2021-08-12 09:39:13 / 修改时间：10:14:08" itemprop="dateCreated datePublished" datetime="2021-08-12T09:39:13+08:00">2021-08-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,7 +268,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="167-两数之和-II-输入有序数组"><a href="#167-两数之和-II-输入有序数组" class="headerlink" title="167. 两数之和 II - 输入有序数组"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/">167. 两数之和 II - 输入有序数组</a></h4><p>难度简单560收藏分享切换为英文接收动态反馈</p>
+        <h4 id="167-两数之和-II-输入有序数组"><a href="#167-两数之和-II-输入有序数组" class="headerlink" title="167. 两数之和 II - 输入有序数组"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/">167. 两数之和 II - 输入有序数组</a></h4><p>难度：简单</p>
 <p>给定一个已按照 <strong>升序排列</strong> 的整数数组 <code>numbers</code> ，请你从数组中找出两个数满足相加之和等于目标数 <code>target</code> 。</p>
 <p>函数应该以长度为 <code>2</code> 的整数数组的形式返回这两个数的下标值<em>。</em><code>numbers</code> 的下标 <strong>从 1 开始计数</strong> ，所以答案数组应当满足 <code>1 &lt;= answer[0] &lt; answer[1] &lt;= numbers.length</code> 。</p>
 <p>你可以假设每个输入只对应唯一的答案，而且你不可以重复使用相同的元素。</p>
@@ -293,7 +293,7 @@
 <p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/solution/liang-shu-zhi-he-ii-shu-ru-you-xu-shu-zu-by-leet-2/">两数之和 II - 输入有序数组 - 两数之和 II - 输入有序数组 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] numbers, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="keyword">if</span>(numbers == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">int</span> i  = <span class="number">0</span>, j = numbers.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;j)&#123;</span><br><span class="line">            <span class="keyword">int</span> sum = numbers[i] + numbers[j];</span><br><span class="line">            <span class="keyword">if</span>(sum == target)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i+<span class="number">1</span>,j+<span class="number">1</span>&#125;;</span><br><span class="line">            &#125; </span><br><span class="line">              </span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(sum &gt; target)&#123;</span><br><span class="line">                j--;</span><br><span class="line">            &#125; </span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="633-平方数之和"><a href="#633-平方数之和" class="headerlink" title="633. 平方数之和"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sum-of-square-numbers/">633. 平方数之和</a></h4><p>难度中等297收藏分享切换为英文接收动态反馈</p>
+<h4 id="633-平方数之和"><a href="#633-平方数之和" class="headerlink" title="633. 平方数之和"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sum-of-square-numbers/">633. 平方数之和</a></h4><p>难度：中等</p>
 <p>给定一个非负整数 <code>c</code> ，你要判断是否存在两个整数 <code>a</code> 和 <code>b</code>，使得 <code>a2 + b2 = c</code> 。</p>
 <p><strong>示例 1：</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：c = 5</span><br><span class="line">输出：true</span><br><span class="line">解释：1 * 1 + 2 * 2 = 5</span><br></pre></td></tr></table></figure>
@@ -331,14 +331,15 @@
 <li>元音字母不包含字母 “y” 。</li>
 </ul>
 <p><strong>解析;</strong></p>
-<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/17ebd4ccaad189dd486211b3e18e20287541acf35cb203dd510aef61bfcdc301/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f61376362383432332d383935642d343937352d386566382d3636326130303239633737322e706e67"><img src="%E5%8F%8C%E6%8C%87%E9%92%88/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f61376362383432332d383935642d343937352d386566382d3636326130303239633737322e706e67" alt="img"></a></p>
+<img src="/post/91a7e4d1/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f61376362383432332d383935642d343937352d386566382d3636326130303239633737322e706e67" class="">
+
 <p>使用双指针，一个指针从头向尾遍历，一个指针从尾到头遍历，当两个指针都遍历到元音字符时，交换这两个元音字符。</p>
 <p>为了快速判断一个字符是不是元音字符，我们将全部元音字符添加到集合 HashSet 中，从而以 O(1) 的时间复杂度进行该操作。</p>
 <ul>
 <li>时间复杂度为 O(N)：只需要遍历所有元素一次</li>
 <li>空间复杂度 O(1)：只需要使用两个额外变量</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/8bed07b0617ab2350feddf81b28b3a3c3e6a6d69adcbbde555576514a3ac50c6/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f65663235666637632d306636332d343230642d386233302d6561666265656133356431312e676966"><img src="%E5%8F%8C%E6%8C%87%E9%92%88/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f65663235666637632d306636332d343230642d386233302d6561666265656133356431312e676966" alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/8bed07b0617ab2350feddf81b28b3a3c3e6a6d69adcbbde555576514a3ac50c6/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f65663235666637632d306636332d343230642d386233302d6561666265656133356431312e676966"><img src="%E5%8F%8C%E6%8C%87%E9%92%88/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f65663235666637632d306636332d343230642d386233302d6561666265656133356431312e676966"></a></p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> Arrays.asList()该方法是将数组转化成List集合的方法。</span><br><span class="line"></span><br><span class="line"> List<span class="xml"><span class="tag">&lt;<span class="name">String</span>&gt;</span></span> list = Arrays.asList(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;);</span><br><span class="line"></span><br><span class="line">注意：</span><br><span class="line"></span><br><span class="line">（1）该方法适用于对象型数据的数组（String、Integer...）</span><br><span class="line"></span><br><span class="line">（2）该方法不建议使用于基本数据类型的数组（byte,short,int,long,float,double,boolean）</span><br><span class="line"></span><br><span class="line">（3）该方法将数组与List列表链接起来：当更新其一个时，另一个自动更新</span><br><span class="line"></span><br><span class="line">（4）不支持add()、remove()、clear()等方法</span><br></pre></td></tr></table></figure>
 
 
@@ -399,17 +400,17 @@
 <p><strong>进阶：</strong></p>
 <p>你能用 *O(1)*（即，常量）内存解决此问题吗？</p>
 <p><strong>示例 1：</strong></p>
-<img src="/post/91a7e4d1/circularlinkedlist.png" class="" title="img">
+<img src="/post/91a7e4d1/circularlinkedlist.png" class="">
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [3,2,0,-4], pos = 1</span><br><span class="line">输出：true</span><br><span class="line">解释：链表中有一个环，其尾部连接到第二个节点。</span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 2：</strong></p>
-<img src="/post/91a7e4d1/circularlinkedlist_test2.png" class="" title="img">
+<img src="/post/91a7e4d1/circularlinkedlist_test2.png" class="">
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2], pos = 0</span><br><span class="line">输出：true</span><br><span class="line">解释：链表中有一个环，其尾部连接到第一个节点。</span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 3：</strong></p>
-<img src="/post/91a7e4d1/circularlinkedlist_test3.png" class="" title="img">
+<img src="/post/91a7e4d1/circularlinkedlist_test3.png" class="">
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1], pos = -1</span><br><span class="line">输出：false</span><br><span class="line">解释：链表中没有环。</span><br></pre></td></tr></table></figure>
 
@@ -637,7 +638,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共5k字</span>
+  <span class="post-count">博客全站共4.9k字</span>
 </div>
 
         
