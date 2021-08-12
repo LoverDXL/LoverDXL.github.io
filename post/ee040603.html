@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="新的一天，每时每分每秒都应该学习">
 <meta property="og:description" content="二分图如果可以用两种颜色对图中的节点进行着色，并且保证相邻的节点颜色不同，那么这个图就是二分图 785. 判断二分图难度：中等 存在一个 无向图 ，图中有 n 个节点。其中每个节点都有一个介于 0 到 n - 1 之间的唯一编号。给你一个二维数组 graph ，其中 graph[u] 是一个节点数组，由节点 u 的邻接节点组成。形式上，对于 graph[u] 中的每个 v ，都存在一条位于节点 u">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/post/undefined/bi2.jpg">
-<meta property="og:image" content="http://example.com/post/undefined/bi1.jpg">
-<meta property="og:image" content="http://example.com/post/undefined/1626676174-hOEVUL-image.png">
-<meta property="og:image" content="http://example.com/post/undefined/1626676179-kGxcmu-image.png">
+<meta property="og:image" content="http://example.com/post/ee040603/bi2.jpg">
+<meta property="og:image" content="http://example.com/post/ee040603/bi1.jpg">
+<meta property="og:image" content="http://example.com/post/ee040603/1626676174-hOEVUL-image.png">
+<meta property="og:image" content="http://example.com/post/ee040603/1626676179-kGxcmu-image.png">
 <meta property="article:published_time" content="2021-08-12T07:11:16.000Z">
-<meta property="article:modified_time" content="2021-08-12T07:16:40.496Z">
+<meta property="article:modified_time" content="2021-08-12T07:18:16.157Z">
 <meta property="article:author" content="CodeRoad">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/post/undefined/bi2.jpg">
+<meta name="twitter:image" content="http://example.com/post/ee040603/bi2.jpg">
 
 <link rel="canonical" href="http://example.com/post/ee040603.html">
 
@@ -223,7 +223,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-08-12 15:11:16 / 修改时间：15:16:40" itemprop="dateCreated datePublished" datetime="2021-08-12T15:11:16+08:00">2021-08-12</time>
+              <time title="创建时间：2021-08-12 15:11:16 / 修改时间：15:18:16" itemprop="dateCreated datePublished" datetime="2021-08-12T15:11:16+08:00">2021-08-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -279,12 +279,12 @@
 <p><strong>二分图</strong> 定义：如果能将一个图的节点集合分割成两个独立的子集 <code>A</code> 和 <code>B</code> ，并使图中的每一条边的两个节点一个来自 <code>A</code> 集合，一个来自 <code>B</code> 集合，就将这个图称为 <strong>二分图</strong> 。</p>
 <p>如果图是二分图，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
 <p><strong>示例 1：</strong></p>
-<img src="/post/undefined/bi2.jpg" class="" title="img">
+<img src="/post/ee040603/bi2.jpg" class="" title="img">
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：graph = [[1,2,3],[0,2],[0,1,3],[0,2]]</span><br><span class="line">输出：false</span><br><span class="line">解释：不能将节点分割成两个独立的子集，以使每条边都连通一个子集中的一个节点与另一个子集中的一个节点。</span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 2：</strong></p>
-<img src="/post/undefined/bi1.jpg" class="" title="img">
+<img src="/post/ee040603/bi1.jpg" class="" title="img">
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：graph = [[1,3],[0,2],[1,3],[0,2]]</span><br><span class="line">输出：true</span><br><span class="line">解释：可以将节点分成两组: &#123;0, 2&#125; 和 &#123;1, 3&#125; 。</span><br></pre></td></tr></table></figure>
 
@@ -389,12 +389,12 @@
 <p>给定往一棵 <code>n</code> 个节点 (节点值 <code>1～n</code>) 的树中添加一条边后的图。添加的边的两个顶点包含在 <code>1</code> 到 <code>n</code> 中间，且这条附加的边不属于树中已存在的边。图的信息记录于长度为 <code>n</code> 的二维数组 <code>edges</code> ，<code>edges[i] = [ai, bi]</code> 表示图中在 <code>ai</code> 和 <code>bi</code> 之间存在一条边。</p>
 <p>请找出一条可以删去的边，删除后可使得剩余部分是一个有着 <code>n</code> 个节点的树。如果有多个答案，则返回数组 <code>edges</code> 中最后出现的边。</p>
 <p><strong>示例 1：</strong></p>
-<img src="/post/undefined/1626676174-hOEVUL-image.png" class="" title="img">
+<img src="/post/ee040603/1626676174-hOEVUL-image.png" class="" title="img">
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: edges = [[1,2], [1,3], [2,3]]</span><br><span class="line">输出: [2,3]</span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 2：</strong></p>
-<img src="/post/undefined/1626676179-kGxcmu-image.png" class="" title="img">
+<img src="/post/ee040603/1626676179-kGxcmu-image.png" class="" title="img">
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: edges = [[1,2], [2,3], [3,4], [1,4], [1,5]]</span><br><span class="line">输出: [1,4]</span><br></pre></td></tr></table></figure>
 
