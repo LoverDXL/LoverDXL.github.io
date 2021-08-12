@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="283. 移动零难度：简单 给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。 示例: 12输入: [0,1,0,3,12]输出: [1,3,12,0,0]  说明:  必须在原数组上操作，不能拷贝额外的数组。 尽量减少操作次数。  解析： 来源链接：动画演示 283.移动零 - 移动零 - 力扣（LeetCode） (leetcode-cn.com)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数组与矩阵">
+<meta property="og:url" content="http://example.com/post/e69c405d.html">
+<meta property="og:site_name" content="新的一天，每时每分每秒都应该学习">
+<meta property="og:description" content="283. 移动零难度：简单 给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。 示例: 12输入: [0,1,0,3,12]输出: [1,3,12,0,0]  说明:  必须在原数组上操作，不能拷贝额外的数组。 尽量减少操作次数。  解析： 来源链接：动画演示 283.移动零 - 移动零 - 力扣（LeetCode） (leetcode-cn.com)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/post/undefined/searchgrid2.jpg">
+<meta property="og:image" content="http://example.com/post/undefined/searchgrid.jpg">
+<meta property="og:image" content="http://example.com/post/undefined/avatar_1616732979.png">
+<meta property="og:image" content="http://example.com/post/undefined/NN%7BFAG@%5D0GG6YTGE0XYWNH.png">
+<meta property="og:image" content="http://example.com/post/undefined/ex1.jpg">
+<meta property="og:image" content="http://example.com/post/undefined/ex2.jpg">
+<meta property="article:published_time" content="2021-08-12T07:10:59.000Z">
+<meta property="article:modified_time" content="2021-08-12T07:15:23.293Z">
+<meta property="article:author" content="CodeRoad">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/post/undefined/searchgrid2.jpg">
+
+<link rel="canonical" href="http://example.com/post/e69c405d.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数组与矩阵 | 新的一天，每时每分每秒都应该学习</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<!-- 爆炸红心效果 -->
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/firework.js"></script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">新的一天，每时每分每秒都应该学习</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/post/e69c405d.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="CodeRoad">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="新的一天，每时每分每秒都应该学习">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数组与矩阵
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-12 15:10:59 / 修改时间：15:15:23" itemprop="dateCreated datePublished" datetime="2021-08-12T15:10:59+08:00">2021-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+                </span>
+            </span>
+
+          
+                <span>&emsp;</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span>
+                <span class="post-meta-item-text">阅读次数：</span>
+                <span id="busuanzi_value_page_pv"></span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>13k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>11 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="283-移动零"><a href="#283-移动零" class="headerlink" title="283. 移动零"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/move-zeroes/">283. 移动零</a></h4><p>难度：简单</p>
+<p>给定一个数组 <code>nums</code>，编写一个函数将所有 <code>0</code> 移动到数组的末尾，同时保持非零元素的相对顺序。</p>
+<p><strong>示例:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [0,1,0,3,12]</span><br><span class="line">输出: [1,3,12,0,0]</span><br></pre></td></tr></table></figure>
+
+<p><strong>说明</strong>:</p>
+<ol>
+<li>必须在原数组上操作，不能拷贝额外的数组。</li>
+<li>尽量减少操作次数。</li>
+</ol>
+<p><strong>解析：</strong></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/move-zeroes/solution/dong-hua-yan-shi-283yi-dong-ling-by-wang_ni_ma/">动画演示 283.移动零 - 移动零 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">moveZeroes</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> idx = <span class="number">0</span> ;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> num : nums)&#123;</span><br><span class="line">            <span class="keyword">if</span>(num != <span class="number">0</span>)&#123;</span><br><span class="line">                nums[idx++] = num;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(idx &lt; nums.length)&#123;</span><br><span class="line">            nums[idx++] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="566-重塑矩阵"><a href="#566-重塑矩阵" class="headerlink" title="566. 重塑矩阵"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reshape-the-matrix/">566. 重塑矩阵</a></h4><p>难度：简单</p>
+<p>在MATLAB中，有一个非常有用的函数 <code>reshape</code>，它可以将一个矩阵重塑为另一个大小不同的新矩阵，但保留其原始数据。</p>
+<p>给出一个由二维数组表示的矩阵，以及两个正整数<code>r</code>和<code>c</code>，分别表示想要的重构的矩阵的行数和列数。</p>
+<p>重构后的矩阵需要将原始矩阵的所有元素以相同的<strong>行遍历顺序</strong>填充。</p>
+<p>如果具有给定参数的<code>reshape</code>操作是可行且合理的，则输出新的重塑矩阵；否则，输出原始矩阵。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入: </span><br><span class="line">nums = </span><br><span class="line">[[1,2],</span><br><span class="line"> [3,4]]</span><br><span class="line">r = 1, c = 4</span><br><span class="line">输出: </span><br><span class="line">[[1,2,3,4]]</span><br><span class="line">解释:</span><br><span class="line">行遍历nums的结果是 [1,2,3,4]。新的矩阵是 1 * 4 矩阵, 用之前的元素值一行一行填充新矩阵。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入: </span><br><span class="line">nums = </span><br><span class="line">[[1,2],</span><br><span class="line"> [3,4]]</span><br><span class="line">r = 2, c = 4</span><br><span class="line">输出: </span><br><span class="line">[[1,2],</span><br><span class="line"> [3,4]]</span><br><span class="line">解释:</span><br><span class="line">没有办法将 2 * 2 矩阵转化为 2 * 4 矩阵。 所以输出原矩阵。</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>给定矩阵的宽和高范围在 [1, 100]。</li>
+<li>给定的 r 和 c 都是正数。</li>
+</ol>
+<p><strong>解析;</strong></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reshape-the-matrix/solution/zhong-su-ju-zhen-by-leetcode-solution-gt0g/">重塑矩阵 - 重塑矩阵 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[][] matrixReshape(<span class="keyword">int</span>[][] mat, <span class="keyword">int</span> r, <span class="keyword">int</span> c) &#123;</span><br><span class="line">        <span class="keyword">int</span> m = mat.length;</span><br><span class="line">        <span class="keyword">int</span> n = mat[<span class="number">0</span>].length;</span><br><span class="line">        <span class="keyword">if</span>(m*n != r*c) <span class="keyword">return</span> mat;</span><br><span class="line">        <span class="keyword">int</span>[][] reshapeMat = <span class="keyword">new</span> <span class="keyword">int</span>[r][c];</span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ;i&lt;r;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j&lt;c;j++)&#123;</span><br><span class="line">                reshapeMat[i][j] = mat[index/n][index % n];<span class="comment">//相当于把二维数组映射为一维数组，然后再映射回二维数组</span></span><br><span class="line">                index++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> reshapeMat;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="485-最大连续-1-的个数"><a href="#485-最大连续-1-的个数" class="headerlink" title="485. 最大连续 1 的个数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/max-consecutive-ones/">485. 最大连续 1 的个数</a></h4><p>难度：简单</p>
+<p>给定一个二进制数组， 计算其中最大连续 1 的个数。</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：[1,1,0,1,1,1]</span><br><span class="line">输出：3</span><br><span class="line">解释：开头的两位和最后的三位都是连续 1 ，所以最大连续 1 的个数是 3.</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>输入的数组只包含 <code>0</code> 和 <code>1</code> 。</li>
+<li>输入数组的长度是正整数，且不超过 10,000。</li>
+</ul>
+<p><strong>解析：</strong></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/max-consecutive-ones/solution/zui-da-lian-xu-1de-ge-shu-by-leetcode-so-252a/">最大连续1的个数 - 最大连续 1 的个数 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMaxConsecutiveOnes</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>,cur = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> num : nums)&#123;</span><br><span class="line">            cur = num == <span class="number">0</span>? <span class="number">0</span> : (cur +<span class="number">1</span>);</span><br><span class="line">            max = Math.max(max,cur);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="240-搜索二维矩阵-II"><a href="#240-搜索二维矩阵-II" class="headerlink" title="240. 搜索二维矩阵 II"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/search-a-2d-matrix-ii/">240. 搜索二维矩阵 II</a></h4><p>难度：中等</p>
+<p>编写一个高效的算法来搜索 <code>*m* x *n*</code> 矩阵 <code>matrix</code> 中的一个目标值 <code>target</code> 。该矩阵具有以下特性：</p>
+<ul>
+<li>每行的元素从左到右升序排列。</li>
+<li>每列的元素从上到下升序排列。</li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<img src="/post/undefined/searchgrid2.jpg" class="" title="img">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：matrix = [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], target = 5</span><br><span class="line">输出：true</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<img src="/post/undefined/searchgrid.jpg" class="" title="img">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：matrix = [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], target = 20</span><br><span class="line">输出：false</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>m == matrix.length</code></li>
+<li><code>n == matrix[i].length</code></li>
+<li><code>1 &lt;= n, m &lt;= 300</code></li>
+<li><code>-109 &lt;= matix[i][j] &lt;= 109</code></li>
+<li>每行的所有元素从左到右升序排列</li>
+<li>每列的所有元素从上到下升序排列</li>
+<li><code>-109 &lt;= target &lt;= 109</code></li>
+</ul>
+<p><strong>解析：</strong></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/search-a-2d-matrix-ii/solution/sou-suo-er-wei-ju-zhen-ii-by-leetcode-2/">搜索二维矩阵 II - 搜索二维矩阵 II - 力扣（LeetCode） (leetcode-cn.com)</a> 方法四</p>
+<p>这里是对“方法四”的“如何选出发点”的补充：</p>
+<ul>
+<li>选左上角，往右走和往下走都增大，不能选</li>
+<li>选右下角，往上走和往左走都减小，不能选</li>
+<li>选左下角，往右走增大，往上走减小，可选</li>
+<li>选右上角，往下走增大，往左走减小，可选</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">searchMatrix</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 以右上角的数字为准，跟target比较，决定是排除列还是行</span></span><br><span class="line">        <span class="keyword">int</span> m = matrix.length, n = matrix[<span class="number">0</span>].length;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = n - <span class="number">1</span>;   <span class="comment">// 从第一行，最后一列开始搜索</span></span><br><span class="line">        <span class="keyword">while</span> (i &gt;= <span class="number">0</span> &amp;&amp; j &gt;= <span class="number">0</span> &amp;&amp; i &lt; m &amp;&amp; j &lt; n) &#123;</span><br><span class="line">            <span class="keyword">int</span> num = matrix[i][j];</span><br><span class="line">            <span class="keyword">if</span> (num == target) &#123;   <span class="comment">// 第1种情况: 查找成功</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (num &gt; target) &#123;  <span class="comment">// 第2种情况: 当前列的元素都比目标大，可排除当前列</span></span><br><span class="line">                j--;    <span class="comment">// 排除当前列</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;    <span class="comment">// 第3种情况: 当前行的元素都比目标小，可排除当前行</span></span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自己写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">searchMatrix</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(matrix == <span class="keyword">null</span> || matrix.length==<span class="number">0</span> || matrix[<span class="number">0</span>].length == <span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">int</span> m = matrix.length,n = matrix[<span class="number">0</span>].length;</span><br><span class="line">        <span class="keyword">int</span> row = <span class="number">0</span> ,col = n-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(row &lt; m &amp;&amp; col &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(matrix[row][col] == target) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>((target &lt; matrix[row][col])) col--;</span><br><span class="line">            <span class="keyword">else</span> row++;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;       </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h4 id="378-有序矩阵中第-K-小的元素"><a href="#378-有序矩阵中第-K-小的元素" class="headerlink" title="378. 有序矩阵中第 K 小的元素"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/">378. 有序矩阵中第 K 小的元素</a></h4><p>难度：中等</p>
+<p>给你一个 <code>n x n</code> 矩阵 <code>matrix</code> ，其中每行和每列元素均按升序排序，找到矩阵中第 <code>k</code> 小的元素。<br>请注意，它是 <strong>排序后</strong> 的第 <code>k</code> 小元素，而不是第 <code>k</code> 个 <strong>不同</strong> 的元素。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：matrix = [[1,5,9],[10,11,13],[12,13,15]], k = 8</span><br><span class="line">输出：13</span><br><span class="line">解释：矩阵中的元素为 [1,5,9,10,11,12,13,13,15]，第 8 小元素是 13</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：matrix = [[-5]], k = 1</span><br><span class="line">输出：-5</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>n == matrix.length</code></li>
+<li><code>n == matrix[i].length</code></li>
+<li><code>1 &lt;= n &lt;= 300</code></li>
+<li><code>-109 &lt;= matrix[i][j] &lt;= 109</code></li>
+<li>题目数据 <strong>保证</strong> <code>matrix</code> 中的所有行和列都按 <strong>非递减顺序</strong> 排列</li>
+<li><code>1 &lt;= k &lt;= n2</code></li>
+</ul>
+<p><strong>解析</strong></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/solution/378java-er-fen-fa-tu-jie-you-xian-dui-lie-liang-ch/">378.java 二分法（图解）/优先队列 两种方法详解 - 有序矩阵中第 K 小的元素 - 力扣（LeetCode） (leetcode-cn.com)</a> 方法二</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">kthSmallest</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = matrix.length;</span><br><span class="line">        <span class="keyword">int</span> left = matrix[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> right = matrix[n-<span class="number">1</span>][n-<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right)&#123;<span class="comment">//这里一般题目二分查找是left &lt;= right 但该题是为了返回左边界</span></span><br><span class="line">            <span class="keyword">int</span> mid = left + ((right - left)&gt;&gt;<span class="number">1</span>);<span class="comment">//等同于(left + right-left + left)/2 即防止left + right 溢出</span></span><br><span class="line">            <span class="keyword">if</span>(check(matrix,mid,k,n))&#123;</span><br><span class="line">                right = mid;</span><br><span class="line">            &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span>[][] matrix,<span class="keyword">int</span> mid,<span class="keyword">int</span> k,<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = n-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//第n-1行第0列  从左下角出发</span></span><br><span class="line">        <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&gt;=<span class="number">0</span> &amp;&amp; j &lt; n)&#123;</span><br><span class="line">            <span class="keyword">if</span>(matrix[i][j] &lt;= mid)&#123;</span><br><span class="line">                num += i+<span class="number">1</span>;<span class="comment">//该行前面的数都是小于mid的数，+1是因为加上本身也属于</span></span><br><span class="line">                j++;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                i--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> num&gt;=k;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关于<strong>二分查找返回的left一定在矩阵中</strong>这个问题, 写一点个人的理解.<br>可以参考34. 在排序数组中查找元素的第一个和最后一个位置.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/">https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">我们先看check函数.check函数的目的是统计矩阵里小等于mid的元素数目count. 再判断count和k的关系.因为mid = (l + r) / <span class="number">2</span>这种划分方法是把矩阵划分成了[left , mid] 与[mid + <span class="number">1</span>, right]两部分. 当 count &lt; k 时, 说明mid太小了, 我们应该在[mid + <span class="number">1</span>, right] 这个范围里查找. 否则在[left, mid]范围里查找.</span><br><span class="line">如果存在一个不在矩阵中的数a满足条件, 因为a不在矩阵中,那count统计的元素肯定都是小于a的, 那一定存在一个比a小且在矩阵中的数b满足条件,即从小于a的数变成了小于等于b的数 .等用题目中的例子,x = <span class="number">13</span> 和x = <span class="number">14</span> 都满足小于等于x的元素数目等于<span class="number">8</span>, 对<span class="number">14</span>来说统计的都是小于它的数, 而对<span class="number">13</span>来说统计的都是小于等于它的数. 问题来了, 那为何取到的不是<span class="number">14</span>而是<span class="number">13</span>呢?</span><br><span class="line"></span><br><span class="line">因为我们取mid的取法是 mid = (left + right) / <span class="number">2</span>, 当left &lt; right时, mid 永远 取不到right, 想要mid取到right ,只有left == right. 但循环条件是 <span class="keyword">while</span>(left &lt; right),当 left == right时循环已经终止. 所以我们得到会是一个左边界. 还是用题目中的例子, 假设left = <span class="number">13</span>, right = <span class="number">14</span> 则 mid = (<span class="number">13</span> + <span class="number">14</span>) / <span class="number">2</span> = <span class="number">13</span></span><br></pre></td></tr></table></figure>
+
+<p>另一种解法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">kthSmallest</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m = matrix.length, n = matrix[<span class="number">0</span>].length;</span><br><span class="line">    <span class="keyword">int</span> lo = matrix[<span class="number">0</span>][<span class="number">0</span>], hi = matrix[m - <span class="number">1</span>][n - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">while</span> (lo &lt;= hi) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = lo + (hi - lo) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n &amp;&amp; matrix[i][j] &lt;= mid; j++) &#123;</span><br><span class="line">                cnt++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (cnt &lt; k) lo = mid + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> hi = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> lo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="645-错误的集合"><a href="#645-错误的集合" class="headerlink" title="645. 错误的集合"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/set-mismatch/">645. 错误的集合</a></h4><p>难度：简单</p>
+<p>集合 <code>s</code> 包含从 <code>1</code> 到 <code>n</code> 的整数。不幸的是，因为数据错误，导致集合里面某一个数字复制了成了集合里面的另外一个数字的值，导致集合 <strong>丢失了一个数字</strong> 并且 <strong>有一个数字重复</strong> 。</p>
+<p>给定一个数组 <code>nums</code> 代表了集合 <code>S</code> 发生错误后的结果。</p>
+<p>请你找出重复出现的整数，再找到丢失的整数，将它们以数组的形式返回。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,2,2,4]</span><br><span class="line">输出：[2,3]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,1]</span><br><span class="line">输出：[1,2]</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>2 &lt;= nums.length &lt;= 104</code></li>
+<li><code>1 &lt;= nums[i] &lt;= 104</code></li>
+</ul>
+<p><strong>解析：</strong></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/set-mismatch/solution/gong-shui-san-xie-yi-ti-san-jie-ji-shu-s-vnr9/">【宫水三叶】一题三解：「计数」&amp;「数学」&amp;「桶排序」 - 错误的集合 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/set-mismatch/solution/javasan-chong-jie-fa-by-wwwhang-bqky/">Java三种解法 hash 鸽巢原理 原地算法 - 错误的集合 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] findErrorNums(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt; nums.length;i++)&#123;</span><br><span class="line">            <span class="keyword">while</span>(nums[i] != i+<span class="number">1</span> &amp;&amp; nums[i] != nums[nums[i]-<span class="number">1</span>])&#123;</span><br><span class="line">                swap(nums,i,nums[i]-<span class="number">1</span>);<span class="comment">//这里i与nums[i] -1 都是索引  即对于每一个数字nums[i]：移动到nums[nums[i] - 1]。这样，每个数字都可以移动到正确的地方。</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line">         <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ;i&lt; nums.length;i++)&#123;</span><br><span class="line">             <span class="keyword">if</span>(nums[i] != i +<span class="number">1</span>)&#123;</span><br><span class="line">                 <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;nums[i],i+<span class="number">1</span>&#125;;</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">null</span>;              </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] nums,<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp = nums[i];</span><br><span class="line">        nums[i] = nums[j];</span><br><span class="line">        nums[j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<img src="/post/undefined/avatar_1616732979.png" class="" title="Yukkkino">
+
+<p><strong>解释</strong></p>
+<ol>
+<li>因为集合s包含1到n的整数，那么数组中的某个元素值恒等于索引值+1。可以使用计数，把每个元素出现的次数记录下来，遍历次数数组一遍即可知道哪些数字出现了，哪些没出现。</li>
+<li>有一个常用的方法是，将元素 i + 1 存放到数组下标索引 i 中去，即做一个索引到元素值的映射（i -&gt; i + 1）。 那么我们就需要满足这样性质的数组：</li>
+</ol>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nums[i] = i+<span class="number">1</span>    →    i = nums[i]−<span class="number">1</span>    →    nums[i] = nums[nums[i]−<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>因此，要先对数组做一下处理，把每个元素i移动到数组下标i-1的地方去。 最后，每一个元素都交换到了它对应的位置，那必然会导致某个索引i，不满足nums[i]=i+1，这个nums[i] 就是我们要找的重复数。当nums[i] 是重复数时，根据数组的性质， 索引i存放的元素为i+1，但此时存放着的是重复数，所以缺少的数字就是i+1。</p>
+<h4 id="287-寻找重复数"><a href="#287-寻找重复数" class="headerlink" title="287. 寻找重复数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-the-duplicate-number/">287. 寻找重复数</a></h4><p>难度：中等</p>
+<p>给定一个包含 <code>n + 1</code> 个整数的数组 <code>nums</code> ，其数字都在 <code>1</code> 到 <code>n</code> 之间（包括 <code>1</code> 和 <code>n</code>），可知至少存在一个重复的整数。</p>
+<p>假设 <code>nums</code> 只有 <strong>一个重复的整数</strong> ，找出 <strong>这个重复的数</strong> 。</p>
+<p>你设计的解决方案必须不修改数组 <code>nums</code> 且只用常量级 <code>O(1)</code> 的额外空间。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,3,4,2,2]</span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [3,1,3,4,2]</span><br><span class="line">输出：3</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,1]</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 4：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,1,2]</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 105</code></li>
+<li><code>nums.length == n + 1</code></li>
+<li><code>1 &lt;= nums[i] &lt;= n</code></li>
+<li><code>nums</code> 中 <strong>只有一个整数</strong> 出现 <strong>两次或多次</strong> ，其余整数均只出现 <strong>一次</strong></li>
+</ul>
+<p><strong>进阶：</strong></p>
+<ul>
+<li>如何证明 <code>nums</code> 中至少存在一个重复的数字?</li>
+<li>你可以设计一个线性级时间复杂度 <code>O(n)</code> 的解决方案吗？</li>
+</ul>
+<p><strong>解析</strong>：</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-the-duplicate-number/solution/er-fen-fa-si-lu-ji-dai-ma-python-by-liweiwei1419/">使用二分法查找一个有范围的整数（结合抽屉原理） - 寻找重复数 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findDuplicate</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// int n = nums;</span></span><br><span class="line">        <span class="comment">// int[] cnts = new int[n+1];</span></span><br><span class="line">        <span class="comment">// int sum = 0,set = 0;</span></span><br><span class="line">        <span class="comment">// for(int num : nums)&#123;</span></span><br><span class="line">        <span class="comment">//     sum += num;</span></span><br><span class="line">        <span class="comment">//     if(cnts[num] == 0) set += num;</span></span><br><span class="line">        <span class="comment">//     cnts[num] = 1; </span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">        <span class="comment">// return  sum -set;</span></span><br><span class="line">        <span class="comment">// 以上方法不行 不通过案例 输入：[2,2,2,2,2] 输出：8 预期结果：2</span></span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">1</span>,h = nums.length-<span class="number">1</span>;<span class="comment">//这里是1到n的数</span></span><br><span class="line">        <span class="keyword">while</span>(l&lt;=h)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = l + (h -l)/<span class="number">2</span>;<span class="comment">//这里注意不能写成1+(h-l)&gt;&gt;1,要写成l+((h-l)&gt;&gt;1)</span></span><br><span class="line">            <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt; nums.length;i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[i] &lt;= mid) cnt++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(cnt &gt; mid) h = mid-<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> l = mid +<span class="number">1</span>; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> l;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>二分查找知识讲解：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kyoner/p/11080078.html">详解二分查找算法 - murphy_gb - 博客园 (cnblogs.com)</a></p>
+<p><strong>快慢指针代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findDuplicate</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> fast = <span class="number">0</span>, slow = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">            fast = nums[nums[fast]];<span class="comment">// fast每次走两步</span></span><br><span class="line">            slow = nums[slow];<span class="comment">// slow每次走一步</span></span><br><span class="line">        &#125;<span class="keyword">while</span> (fast != slow);<span class="comment">// 直至二者相遇，即fast比slow多走了一圈，slow走了一圈，fast走了两圈，逻辑上不会走第三圈</span></span><br><span class="line"></span><br><span class="line">        fast = <span class="number">0</span>;<span class="comment">// 节约空间</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (fast != slow)&#123;<span class="comment">// 直到二者相遇</span></span><br><span class="line">            fast = nums[fast];</span><br><span class="line">            slow = nums[slow];</span><br><span class="line">            <span class="comment">// 二者皆移动一次</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> slow;<span class="comment">// 即我们找到的起点，重复的点</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>快慢指针证明</p>
+<img src="/post/undefined/NN%7BFAG@%5D0GG6YTGE0XYWNH.png" class="" title="img">
+
+<h4 id="667-优美的排列-II"><a href="#667-优美的排列-II" class="headerlink" title="667. 优美的排列 II"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/beautiful-arrangement-ii/">667. 优美的排列 II</a></h4><p>难度：中等</p>
+<p>给你两个整数 <code>n</code> 和 <code>k</code> ，请你构造一个答案列表 <code>answer</code> ，该列表应当包含从 <code>1</code> 到 <code>n</code> 的 <code>n</code> 个不同正整数，并同时满足下述条件：</p>
+<ul>
+<li>假设该列表是 <code>answer = [a1, a2, a3, ... , an]</code> ，那么列表 <code>[|a1 - a2|, |a2 - a3|, |a3 - a4|, ... , |an-1 - an|]</code> 中应该有且仅有 <code>k</code> 个不同整数。</li>
+</ul>
+<p>返回列表 <code>answer</code> 。如果存在多种答案，只需返回其中 <strong>任意一种</strong> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 3, k = 1</span><br><span class="line">输出：[1, 2, 3]</span><br><span class="line">解释：[1, 2, 3] 包含 3 个范围在 1-3 的不同整数，并且 [1, 1] 中有且仅有 1 个不同整数：1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 3, k = 2</span><br><span class="line">输出：[1, 3, 2]</span><br><span class="line">解释：[1, 3, 2] 包含 3 个范围在 1-3 的不同整数，并且 [2, 1] 中有且仅有 2 个不同整数：1 和 2</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= k &lt; n &lt;= 104</code></li>
+</ul>
+<p> <strong>解析：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] constructArray(<span class="keyword">int</span> n, <span class="keyword">int</span> k) &#123;</span><br><span class="line">        <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        res[<span class="number">0</span>] = <span class="number">1</span> ;</span><br><span class="line">        <span class="comment">//让前k+1个元素构造出 k 个不同的差值 ，序列为 1,k+1,2,k,3,k-1,...,k/2,k/2+1</span></span><br><span class="line">        <span class="comment">//比如这里n=6，k=3 那么前4个元素构造成3个不同的差值  即前四个元素为 1 4 2 3  差值为 3 2 1</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i  =<span class="number">1</span> ,val = k;i&lt;=k;i++,val--)&#123;</span><br><span class="line">            res[i] = i%<span class="number">2</span>==<span class="number">1</span> ? res[i-<span class="number">1</span>] + val : res[i-<span class="number">1</span>] - val;</span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">        <span class="comment">//构造后面n-(k+1)个元素 这里接着上面的  1 4 2 3 添加 5 6  构造成 1 4 2 3 5 6</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = k+<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">            res[i] = i+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;<span class="comment">//返回数组   这道题感觉是一个找规律的题  找不出来不必纠结</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h4 id="697-数组的度"><a href="#697-数组的度" class="headerlink" title="697. 数组的度"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/degree-of-an-array/">697. 数组的度</a></h4><p>难度：简单</p>
+<p>给定一个非空且只包含非负数的整数数组 <code>nums</code>，数组的度的定义是指数组里任一元素出现频数的最大值。</p>
+<p>你的任务是在 <code>nums</code> 中找到与 <code>nums</code> 拥有相同大小的度的最短连续子数组，返回其长度。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：[1, 2, 2, 3, 1]</span><br><span class="line">输出：2</span><br><span class="line">解释：</span><br><span class="line">输入数组的度是2，因为元素1和2的出现频数最大，均为2.</span><br><span class="line">连续子数组里面拥有相同度的有如下所示:</span><br><span class="line">[1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2], [2, 2, 3], [2, 2]</span><br><span class="line">最短连续子数组[2, 2]的长度为2，所以返回2.</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：[1,2,2,3,1,4,2]</span><br><span class="line">输出：6</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>nums.length</code> 在1到 50,000 区间范围内。</li>
+<li><code>nums[i]</code> 是一个在 0 到 49,999 范围内的整数。</li>
+</ul>
+<p><strong>解析</strong>：</p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/degree-of-an-array/solution/yi-ci-shu-zu-bian-li-ha-xi-biao-by-dong-d9lvg/">一次数组遍历 + 哈希表 - 数组的度 - 力扣（LeetCode） (leetcode-cn.com)</a> 方法二</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findShortestSubArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = nums.length,maxCount = <span class="number">0</span>,minWindow = <span class="number">0</span>;</span><br><span class="line">        Map&lt;Integer,<span class="keyword">int</span>[]&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ;i &lt; len;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span>[] pair = map.get(nums[i]);<span class="comment">// pair数组 表示 pair[0]记录每个元素第一次出现的位置，pair[1]表示当前出现了几次</span></span><br><span class="line">            <span class="keyword">if</span>(pair == <span class="keyword">null</span>)&#123;</span><br><span class="line">                pair = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i,<span class="number">1</span>&#125;;<span class="comment">//i 即当前出现的位置， 1表示出现次数</span></span><br><span class="line">                map.put(nums[i],pair);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                pair[<span class="number">1</span>]++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(pair[<span class="number">1</span>] &gt; maxCount)&#123;</span><br><span class="line">                maxCount = pair[<span class="number">1</span>];</span><br><span class="line">                minWindow = i - pair[<span class="number">0</span>] + <span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(pair[<span class="number">1</span>] == maxCount)&#123;</span><br><span class="line">                minWindow = Math.min(minWindow,i-pair[<span class="number">0</span>]+<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> minWindow;               </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="766-托普利茨矩阵"><a href="#766-托普利茨矩阵" class="headerlink" title="766. 托普利茨矩阵"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/toeplitz-matrix/">766. 托普利茨矩阵</a></h4><p>难度：简单</p>
+<p>给你一个 <code>m x n</code> 的矩阵 <code>matrix</code> 。如果这个矩阵是托普利茨矩阵，返回 <code>true</code> ；否则，返回 <code>false</code> <em>。</em></p>
+<p>如果矩阵上每一条由左上到右下的对角线上的元素都相同，那么这个矩阵是 <strong>托普利茨矩阵</strong> 。</p>
+<p><strong>示例 1：</strong></p>
+<img src="/post/undefined/ex1.jpg" class="" title="img">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：matrix = [[1,2,3,4],[5,1,2,3],[9,5,1,2]]</span><br><span class="line">输出：true</span><br><span class="line">解释：</span><br><span class="line">在上述矩阵中, 其对角线为: </span><br><span class="line">&quot;[9]&quot;, &quot;[5, 5]&quot;, &quot;[1, 1, 1]&quot;, &quot;[2, 2, 2]&quot;, &quot;[3, 3]&quot;, &quot;[4]&quot;。 </span><br><span class="line">各条对角线上的所有元素均相同, 因此答案是 True 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<img src="/post/undefined/ex2.jpg" class="" title="img">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：matrix = [[1,2],[2,2]]</span><br><span class="line">输出：false</span><br><span class="line">解释：</span><br><span class="line">对角线 &quot;[1, 2]&quot; 上的元素不同。</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>m == matrix.length</code></li>
+<li><code>n == matrix[i].length</code></li>
+<li><code>1 &lt;= m, n &lt;= 20</code></li>
+<li><code>0 &lt;= matrix[i][j] &lt;= 99</code></li>
+</ul>
+<p><strong>进阶：</strong></p>
+<ul>
+<li>如果矩阵存储在磁盘上，并且内存有限，以至于一次最多只能将矩阵的一行加载到内存中，该怎么办？</li>
+<li>如果矩阵太大，以至于一次只能将不完整的一行加载到内存中，该怎么办？</li>
+</ul>
+<p><strong>解析</strong>:</p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/toeplitz-matrix/solution/cong-ci-pan-du-qu-cheng-ben-fen-xi-liang-f20w/">从磁盘读取成本分析两种 100% 遍历思路：按格子遍历 &amp; 按线遍历 - 托普利茨矩阵 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isToeplitzMatrix</span><span class="params">(<span class="keyword">int</span>[][] matrix)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = matrix.length,n = matrix[<span class="number">0</span>].length;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">1</span>; i &lt; m ; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j&lt;n;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(matrix[i][j] != matrix[i-<span class="number">1</span>][j-<span class="number">1</span>]) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对解析来源中的第二种方法进行修改</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isToeplitzMatrix</span><span class="params">(<span class="keyword">int</span>[][] matrix)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = matrix.length, n = matrix[<span class="number">0</span>].length;</span><br><span class="line">        <span class="keyword">int</span> row = m, col = n;</span><br><span class="line">        <span class="keyword">while</span> (col-- &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, j = col, val = matrix[i++][j++]; i &lt; m &amp;&amp; j &lt; n; i++, j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (matrix[i][j] != val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (--row &gt; <span class="number">0</span>) &#123;<span class="comment">//while循环改成--row好一点，如果是row-- 就会对题目中的示例1中 1 1 1 这条对角线访问两次</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = row, j = <span class="number">0</span>, val = matrix[i++][j++]; i &lt; m &amp;&amp; j &lt; n; i++, j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (matrix[i][j] != val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="565-数组嵌套"><a href="#565-数组嵌套" class="headerlink" title="565. 数组嵌套"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/array-nesting/">565. 数组嵌套</a></h4><p>难度：中等</p>
+<p>索引从<code>0</code>开始长度为<code>N</code>的数组<code>A</code>，包含<code>0</code>到<code>N - 1</code>的所有整数。找到最大的集合<code>S</code>并返回其大小，其中 <code>S[i] = &#123;A[i], A[A[i]], A[A[A[i]]], ... &#125;</code>且遵守以下的规则。</p>
+<p>假设选择索引为<code>i</code>的元素<code>A[i]</code>为<code>S</code>的第一个元素，<code>S</code>的下一个元素应该是<code>A[A[i]]</code>，之后是<code>A[A[A[i]]]...</code> 以此类推，不断添加直到<code>S</code>出现重复的元素。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入: A = [5,4,0,3,1,6,2]</span><br><span class="line">输出: 4</span><br><span class="line">解释: </span><br><span class="line">A[0] = 5, A[1] = 4, A[2] = 0, A[3] = 3, A[4] = 1, A[5] = 6, A[6] = 2.</span><br><span class="line"></span><br><span class="line">其中一种最长的 S[K]:</span><br><span class="line">S[0] = &#123;A[0], A[5], A[6], A[2]&#125; = &#123;5, 6, 2, 0&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ol>
+<li><code>N</code>是<code>[1, 20,000]</code>之间的整数。</li>
+<li><code>A</code>中不含有重复的元素。</li>
+<li><code>A</code>中的元素大小在<code>[0, N-1]</code>之间</li>
+</ol>
+<p><strong>解析：</strong></p>
+<p>来源链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/array-nesting/solution/javaqiu-jie-de-si-kao-yu-gai-jin-by-zackqf/">Java求解方法的思考与改进 - 数组嵌套 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">arrayNesting</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> count =<span class="number">0</span> ,k = i;</span><br><span class="line">            <span class="keyword">while</span>(nums[k] != -<span class="number">1</span>)&#123;<span class="comment">//知道访问到-1 说明重复访问</span></span><br><span class="line">                count++;</span><br><span class="line">                <span class="keyword">int</span> temp = nums[k];</span><br><span class="line">                nums[k] = -<span class="number">1</span>;<span class="comment">//访问过的数用-1标记</span></span><br><span class="line">                k = temp;</span><br><span class="line">            &#125;</span><br><span class="line">            res  = Math.max(res,count);</span><br><span class="line">        &#125;        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="769-最多能完成排序的块"><a href="#769-最多能完成排序的块" class="headerlink" title="769. 最多能完成排序的块"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/max-chunks-to-make-sorted/">769. 最多能完成排序的块</a></h4><p>难度：中等</p>
+<p>数组<code>arr</code>是<code>[0, 1, ..., arr.length - 1]</code>的一种排列，我们将这个数组分割成几个“块”，并将这些块分别进行排序。之后再连接起来，使得连接的结果和按升序排序后的原数组相同。</p>
+<p>我们最多能将数组分成多少块？</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入: arr = [4,3,2,1,0]</span><br><span class="line">输出: 1</span><br><span class="line">解释:</span><br><span class="line">将数组分成2块或者更多块，都无法得到所需的结果。</span><br><span class="line">例如，分成 [4, 3], [2, 1, 0] 的结果是 [3, 4, 0, 1, 2]，这不是有序的数组。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入: arr = [1,0,2,3,4]</span><br><span class="line">输出: 4</span><br><span class="line">解释:</span><br><span class="line">我们可以把它分成两块，例如 [1, 0], [2, 3, 4]。</span><br><span class="line">然而，分成 [1, 0], [2], [3], [4] 可以得到最多的块数。</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意:</strong></p>
+<ul>
+<li><code>arr</code> 的长度在 <code>[1, 10]</code> 之间。</li>
+<li><code>arr[i]</code>是 <code>[0, 1, ..., arr.length - 1]</code>的一种排列。</li>
+</ul>
+<p><strong>解析</strong>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxChunksToSorted</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line"><span class="comment">// 从前往后遍历，和排序后的数组对比，决定可分割位置的是各个无序子序列的最大元素，若子序列排序后最大元素==下标idx值，由于所有元素都在子序列范围内唯一，代表排序后子序列元素能和下标一一对应，</span></span><br><span class="line">        <span class="keyword">if</span>(arr == <span class="keyword">null</span> ) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>,max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt; arr.length;i++)&#123;</span><br><span class="line">            max = Math.max(max,arr[i]);</span><br><span class="line">            <span class="keyword">if</span>(max == i) res++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/fc81fbfd.html" rel="prev" title="字符串">
+      <i class="fa fa-chevron-left"></i> 字符串
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/ee040603.html" rel="next" title="图">
+      图 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#283-%E7%A7%BB%E5%8A%A8%E9%9B%B6"><span class="nav-number">1.</span> <span class="nav-text">283. 移动零</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#566-%E9%87%8D%E5%A1%91%E7%9F%A9%E9%98%B5"><span class="nav-number">2.</span> <span class="nav-text">566. 重塑矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#485-%E6%9C%80%E5%A4%A7%E8%BF%9E%E7%BB%AD-1-%E7%9A%84%E4%B8%AA%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">485. 最大连续 1 的个数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#240-%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5-II"><span class="nav-number">4.</span> <span class="nav-text">240. 搜索二维矩阵 II</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#378-%E6%9C%89%E5%BA%8F%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%AC%AC-K-%E5%B0%8F%E7%9A%84%E5%85%83%E7%B4%A0"><span class="nav-number">5.</span> <span class="nav-text">378. 有序矩阵中第 K 小的元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#645-%E9%94%99%E8%AF%AF%E7%9A%84%E9%9B%86%E5%90%88"><span class="nav-number">6.</span> <span class="nav-text">645. 错误的集合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#287-%E5%AF%BB%E6%89%BE%E9%87%8D%E5%A4%8D%E6%95%B0"><span class="nav-number">7.</span> <span class="nav-text">287. 寻找重复数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#667-%E4%BC%98%E7%BE%8E%E7%9A%84%E6%8E%92%E5%88%97-II"><span class="nav-number">8.</span> <span class="nav-text">667. 优美的排列 II</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#697-%E6%95%B0%E7%BB%84%E7%9A%84%E5%BA%A6"><span class="nav-number">9.</span> <span class="nav-text">697. 数组的度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#766-%E6%89%98%E6%99%AE%E5%88%A9%E8%8C%A8%E7%9F%A9%E9%98%B5"><span class="nav-number">10.</span> <span class="nav-text">766. 托普利茨矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#565-%E6%95%B0%E7%BB%84%E5%B5%8C%E5%A5%97"><span class="nav-number">11.</span> <span class="nav-text">565. 数组嵌套</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#769-%E6%9C%80%E5%A4%9A%E8%83%BD%E5%AE%8C%E6%88%90%E6%8E%92%E5%BA%8F%E7%9A%84%E5%9D%97"><span class="nav-number">12.</span> <span class="nav-text">769. 最多能完成排序的块</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CodeRoad"
+      src="/images/1.jpg">
+  <p class="site-author-name" itemprop="name">CodeRoad</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/LoverDXL" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;LoverDXL" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+      
+
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+        <h3 class="widget-title">Tag Cloud</h3>
+        <div id="myCanvasContainer" class="widget tagcloud">
+            <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li></ul>
+            </canvas>
+        </div>
+      </div>
+      
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CodeRoad</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">126k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:55</span>
+</div>
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/6/2021 12:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = " Runing "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + "小 时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共50.2k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <span class="site-uv" title="总访客量">
+    我的第<span id="busuanzi_value_site_uv"></span>位朋友, 
+  </span>
+
+  <span class="site-pv" title="总访问量">
+    经过<span id="busuanzi_value_site_pv"></span>次回眸与你相遇
+  </span>
+</div>
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+ 
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/assets/hibiki.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":true}});</script></body>
+</html>
