@@ -1199,7 +1199,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #905ef2;
+  background: #fff796;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2731,4 +2731,19 @@ code {
   background-image: url("/images/log-small.png");
   background-size: 100% 100%;
   opacity: 0.9;
+}
+.post-body p a {
+  color: #0593d3;
+  border-bottom: none;
+}
+.post-body p a:hover {
+  color: #ff106c;
+}
+a,
+span.exturl {
+  border-bottom: none;
+}
+a:hover,
+span.exturl:hover {
+  color: #ff106c;
 }
