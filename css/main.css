@@ -1199,7 +1199,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ffeec6;
+  background: #9eadff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2726,4 +2726,9 @@ code {
   padding: 25px;
   -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
   -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
+}
+.site-brand-container {
+  background-image: url("/images/log-small.png");
+  background-size: 100% 100%;
+  opacity: 0.9;
 }
