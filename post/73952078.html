@@ -30,13 +30,13 @@
 <meta property="og:site_name" content="对的，坚持；错的，放弃！">
 <meta property="og:description" content="摘要：Leetcode题解 关于贪心思想的题的集合">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/post/undefined/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f65363935333764322d613031362d343637362d623136392d3965613137656562393033372e676966">
+<meta property="og:image" content="http://example.com/post/73952078/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f65363935333764322d613031362d343637362d623136392d3965613137656562393033372e676966">
 <meta property="article:published_time" content="2021-08-14T09:10:11.000Z">
-<meta property="article:modified_time" content="2021-08-14T09:15:38.270Z">
+<meta property="article:modified_time" content="2021-08-14T09:21:02.241Z">
 <meta property="article:author" content="CodeRoad">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/post/undefined/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f65363935333764322d613031362d343637362d623136392d3965613137656562393033372e676966">
+<meta name="twitter:image" content="http://example.com/post/73952078/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f65363935333764322d613031362d343637362d623136392d3965613137656562393033372e676966">
 
 <link rel="canonical" href="http://example.com/post/73952078.html">
 
@@ -220,7 +220,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-08-14 17:10:11 / 修改时间：17:15:38" itemprop="dateCreated datePublished" datetime="2021-08-14T17:10:11+08:00">2021-08-14</time>
+              <time title="创建时间：2021-08-14 17:10:11 / 修改时间：17:21:02" itemprop="dateCreated datePublished" datetime="2021-08-14T17:10:11+08:00">2021-08-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -283,7 +283,7 @@
 <li><code>1 &lt;= g[i], s[j] &lt;= 231 - 1</code></li>
 </ul>
 <p><strong>解析：</strong></p>
-<img src="/post/undefined/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f65363935333764322d613031362d343637362d623136392d3965613137656562393033372e676966" class="" title="img">
+<img src="/post/73952078/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f65363935333764322d613031362d343637362d623136392d3965613137656562393033372e676966" class="" title="img">
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findContentChildren</span><span class="params">(<span class="keyword">int</span>[] g, <span class="keyword">int</span>[] s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(g == <span class="keyword">null</span> || s == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        Arrays.sort(g);</span><br><span class="line">        Arrays.sort(s);</span><br><span class="line">        <span class="keyword">int</span> gi = <span class="number">0</span>,si=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(gi &lt; g.length &amp;&amp; si &lt; s.length)&#123;</span><br><span class="line">            <span class="keyword">if</span>(g[gi] &lt;= s[si])&#123;</span><br><span class="line">                gi++;</span><br><span class="line">            &#125;</span><br><span class="line">            si++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> gi;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -318,7 +318,7 @@
 <p>实现 compare() 函数时避免使用 <code>return o1[1] - o2[1];</code> 这种减法操作，防止溢出。</p>
 <h4 id="452-用最少数量的箭引爆气球"><a href="#452-用最少数量的箭引爆气球" class="headerlink" title="452. 用最少数量的箭引爆气球"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-number-of-arrows-to-burst-balloons/">452. 用最少数量的箭引爆气球</a></h4><p>难度：中等</p>
 <p>在二维空间中有许多球形的气球。对于每个气球，提供的输入是水平方向上，气球直径的开始和结束坐标。由于它是水平的，所以纵坐标并不重要，因此只要知道开始和结束的横坐标就足够了。开始坐标总是小于结束坐标。</p>
-<p>一支弓箭可以沿着 x 轴从不同点完全垂直地射出。在坐标 x 处射出一支箭，若有一个气球的直径的开始和结束坐标为 <code>x``start</code>，<code>x``end</code>， 且满足  <code>xstart ≤ x ≤ x``end</code>，则该气球会被引爆。可以射出的弓箭的数量没有限制。 弓箭一旦被射出之后，可以无限地前进。我们想找到使得所有气球全部被引爆，所需的弓箭的最小数量。</p>
+<p>一支弓箭可以沿着 x 轴从不同点完全垂直地射出。在坐标 x 处射出一支箭，若有一个气球的直径的开始和结束坐标为 <code>x</code> <code>start</code>，<code>x</code> <code>end</code>， 且满足  xstart ≤ x ≤ xend，则该气球会被引爆。可以射出的弓箭的数量没有限制。 弓箭一旦被射出之后，可以无限地前进。我们想找到使得所有气球全部被引爆，所需的弓箭的最小数量。</p>
 <p>给你一个数组 <code>points</code> ，其中 <code>points [i] = [xstart,xend]</code> ，返回引爆所有气球所必须射出的最小弓箭数。</p>
 <p><strong>示例 1：</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：points = [[10,16],[2,8],[1,6],[7,12]]</span><br><span class="line">输出：2</span><br><span class="line">解释：对于该样例，x = 6 可以射爆 [2,8],[1,6] 两个气球，以及 x = 11 射爆另外两个气球</span><br></pre></td></tr></table></figure>
