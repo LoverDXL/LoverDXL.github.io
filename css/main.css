@@ -1199,7 +1199,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ffffc7;
+  background: #baffed;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1684,12 +1684,12 @@ pre .javascript .function {
 }
 .post-eof {
   background: #ccc;
-  height: 0px;
+  height: 1px;
   text-align: center;
-  width: 0%;
+  width: 100%;
 }
 .post-block:last-of-type .post-eof {
-  display: block;
+  display: none;
 }
 .content {
   padding-top: 40px;
